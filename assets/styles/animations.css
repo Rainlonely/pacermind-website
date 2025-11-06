@@ -1,0 +1,89 @@
+/* Animation tokens for Pacermind interactions */
+
+.animate {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.parallax {
+    position: relative;
+    will-change: transform;
+}
+
+.parallax[data-depth="1"] {
+    transform: translateY(-12px);
+}
+
+.parallax[data-depth="2"] {
+    transform: translateY(12px);
+}
+
+.floating-lines {
+    animation: floatY 10s ease-in-out infinite alternate;
+}
+
+.pulse {
+    animation: pulse 2.4s ease-in-out infinite;
+}
+
+.delay-1 {
+    transition-delay: 0.12s;
+}
+
+.delay-2 {
+    transition-delay: 0.24s;
+}
+
+.delay-3 {
+    transition-delay: 0.36s;
+}
+
+.delay-4 {
+    transition-delay: 0.48s;
+}
+
+@keyframes floatY {
+    from {
+        transform: translateY(-12px);
+    }
+    to {
+        transform: translateY(12px);
+    }
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 0.4;
+        transform: scaleY(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scaleY(1.4);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+    transform: translateX(-100%);
+    animation: shimmer 3.2s ease-in-out infinite;
+    pointer-events: none;
+}

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pacermind – Run Smarter. Think Deeper.</title>
+    <meta name="description" content="Pacermind transforms running data into on-device insight. Run smarter, understand deeper, and keep your data private.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/main.css">
+    <link rel="stylesheet" href="assets/styles/animations.css">
+</head>
+<body class="page" data-page="home">
+    <header>
+        <div class="container nav">
+            <div class="brand">PACERMIND</div>
+            <div class="nav-group">
+                <nav>
+                    <div id="primary-navigation" class="nav-links" data-nav>
+                        <a href="#hero" data-i18n="nav.home">Home</a>
+                        <a href="#features" data-i18n="nav.features">Features</a>
+                        <a href="#product" data-i18n="nav.product">Product</a>
+                        <a href="#privacy" data-i18n="nav.privacy">Privacy</a>
+                        <a href="support.html" data-i18n="nav.support">Support</a>
+                    </div>
+                </nav>
+                <div class="nav-right">
+                    <div class="language-switch" data-language-switch>
+                        <button type="button" class="is-active" data-lang-btn data-lang="en" aria-pressed="true">EN</button>
+                        <button type="button" data-lang-btn data-lang="zh" aria-pressed="false">中文</button>
+                    </div>
+                    <button class="mobile-toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation">☰</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="section">
+            <div class="container hero">
+                <div class="hero-content animate is-visible">
+                    <span class="badge" data-i18n="hero.badge">New • AI Run Insight</span>
+                    <h1 class="hero-title" data-i18n="hero.title">Pacermind</h1>
+                    <p class="hero-subtitle" data-i18n="hero.subtitle">Run Smarter. Think Deeper.</p>
+                    <p class="hero-text" data-i18n="hero.body">Every run tells a story. Pacermind decodes your pace, cadence, and heart rate to reveal what your training truly means.</p>
+                    <div class="actions">
+                        <a class="btn btn-primary" href="https://apps.apple.com" target="_blank" rel="noopener" data-i18n="hero.ctaPrimary">Download on App Store</a>
+                        <a class="btn btn-secondary" href="#features" data-i18n="hero.ctaSecondary">Learn More</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-background floating-lines"></div>
+                    <div class="iphone-frame animate delay-2 is-visible">
+                        <div class="data-lines"></div>
+                        <img src="assets/images/iphone-mockup.png" alt="Pacermind app preview">
+                    </div>
+                    <div class="scroll-indicator">
+                        <span></span>
+                        <small data-i18n="hero.scroll">Scroll</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="values" class="section">
+            <div class="container surface">
+                <div class="section-header animate">
+                    <span class="section-eyebrow" data-i18n="values.eyebrow">Core Value</span>
+                    <h2 class="section-title" data-i18n="values.title">Data. Insight. Progress.</h2>
+                    <p class="section-subtitle" data-i18n="values.subtitle">Three pillars that power Pacermind—transforming numbers into meaningful, on-device understanding.</p>
+                </div>
+                <div class="cards-grid">
+                    <article class="card animate delay-1">
+                        <div class="card-icon" aria-hidden="true">🧠</div>
+                        <h3 class="card-title" data-i18n="values.card1.title">Data-Driven Insight</h3>
+                        <p class="card-text" data-i18n="values.card1.text">We transform running metrics into real context—not just numbers.</p>
+                    </article>
+                    <article class="card animate delay-2">
+                        <div class="card-icon" aria-hidden="true">⚙️</div>
+                        <h3 class="card-title" data-i18n="values.card2.title">AI Personal Analysis</h3>
+                        <p class="card-text" data-i18n="values.card2.text">Personalized feedback built from pace, cadence, and heart rate.</p>
+                    </article>
+                    <article class="card animate delay-3">
+                        <div class="card-icon" aria-hidden="true">🔒</div>
+                        <h3 class="card-title" data-i18n="values.card3.title">On-Device Privacy</h3>
+                        <p class="card-text" data-i18n="values.card3.text">Every analysis stays on your device with nothing uploaded.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="section">
+            <div class="container">
+                <div class="section-header animate">
+                    <span class="section-eyebrow" data-i18n="features.eyebrow">Features</span>
+                    <h2 class="section-title" data-i18n="features.title">Understand Your Run in Four Dimensions</h2>
+                    <p class="section-subtitle" data-i18n="features.subtitle">Smart analysis, seamless sync, rich history, and intentional limits—every detail crafted for thoughtful runners.</p>
+                </div>
+                <div class="features-grid">
+                    <article class="feature-card animate delay-1">
+                        <h3 class="feature-title gradient-text" data-i18n="features.card1.title">AI Insight Engine</h3>
+                        <p class="feature-text" data-i18n="features.card1.text">Automatically analyze pace, cadence, and heart rate to reveal training status. Understand fatigue, readiness, and progression—automatically.</p>
+                    </article>
+                    <article class="feature-card animate delay-2">
+                        <h3 class="feature-title gradient-text" data-i18n="features.card2.title">Multi-source Sync</h3>
+                        <p class="feature-text" data-i18n="features.card2.text">Sync seamlessly with Apple Health and Strava, keeping data current with a constant sense of motion.</p>
+                    </article>
+                    <article class="feature-card animate delay-3">
+                        <h3 class="feature-title gradient-text" data-i18n="features.card3.title">Training History &amp; Trends</h3>
+                        <p class="feature-text" data-i18n="features.card3.text">Calendar views and charts showcase training trends. See your growth in data, not guesswork.</p>
+                    </article>
+                    <article class="feature-card animate delay-4">
+                        <h3 class="feature-title gradient-text" data-i18n="features.card4.title">Daily Insight Limit</h3>
+                        <p class="feature-text" data-i18n="features.card4.text">We cap daily analyses so every insight stays focused and high quality. Precision over quantity.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="product" class="section">
+            <div class="container">
+                <div class="surface product-showcase animate">
+                    <div class="section-header">
+                        <span class="section-eyebrow" data-i18n="product.eyebrow">Product Showcase</span>
+                        <h2 class="section-title" data-i18n="product.title">Everything you do in motion, understood in context.</h2>
+                    </div>
+                    <div class="product-track">
+                        <figure class="mockup animate delay-1">
+                            <img src="assets/images/iphone-mockup.png" alt="Pacermind home dashboard">
+                            <figcaption class="muted" data-i18n="product.fig1">Home · Today’s training data</figcaption>
+                        </figure>
+                        <figure class="mockup animate delay-2">
+                            <img src="assets/images/iphone-mockup.png" alt="Pacermind AI insight view">
+                            <figcaption class="muted" data-i18n="product.fig2">Insight view · AI interpretation</figcaption>
+                        </figure>
+                        <figure class="mockup animate delay-3">
+                            <img src="assets/images/iphone-mockup.png" alt="Pacermind history calendar">
+                            <figcaption class="muted" data-i18n="product.fig3">History view · Calendar overview</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="use-cases" class="section">
+            <div class="container">
+                <div class="section-header animate">
+                    <span class="section-eyebrow" data-i18n="usecases.eyebrow">Use Cases</span>
+                    <h2 class="section-title" data-i18n="usecases.title">Tailored for Every Runner</h2>
+                    <p class="section-subtitle" data-i18n="usecases.subtitle">From marathon cycles to everyday mileage, Pacermind adapts to your habits and goals.</p>
+                </div>
+                <div class="use-cases">
+                    <article class="use-case-card animate delay-1">
+                        <img class="use-case-image" src="assets/images/run-scenes/city-night.svg" alt="City night run skyline">
+                        <div class="use-case-overlay">
+                            <h3 data-i18n="usecases.card1.title">For Marathoners</h3>
+                            <p data-i18n="usecases.card1.text">Explore fatigue and breakthroughs across every training block.</p>
+                        </div>
+                    </article>
+                    <article class="use-case-card animate delay-2">
+                        <img class="use-case-image" src="assets/images/run-scenes/mountain-trail.svg" alt="Mountain trail running">
+                        <div class="use-case-overlay">
+                            <h3 data-i18n="usecases.card2.title">For Everyday Runners</h3>
+                            <p data-i18n="usecases.card2.text">Stay in tune with recovery rhythms and train more effectively.</p>
+                        </div>
+                    </article>
+                    <article class="use-case-card animate delay-3">
+                        <img class="use-case-image" src="assets/images/run-scenes/indoor-track.svg" alt="Indoor track running lanes">
+                        <div class="use-case-overlay">
+                            <h3 data-i18n="usecases.card3.title">For Data Lovers</h3>
+                            <p data-i18n="usecases.card3.text">Let your numbers speak with clarity and context.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="privacy" class="section">
+            <div class="container">
+                <div class="trust animate">
+                    <div class="trust-icon" aria-hidden="true">
+                        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 3L6 7.5V17.5C6 24.64 11.2 31.25 18 33C24.8 31.25 30 24.64 30 17.5V7.5L18 3Z" stroke="url(#shieldGradient)" stroke-width="2" fill="rgba(0, 179, 255, 0.08)"/>
+                            <path d="M12.5 18L16.5 22L23.5 15" stroke="url(#shieldGradient)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <defs>
+                                <linearGradient id="shieldGradient" x1="8" y1="6" x2="28" y2="30" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#00B3FF"/>
+                                    <stop offset="1" stop-color="#3DD6FF"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h2 data-i18n="trust.title">Pacermind runs entirely on your device.</h2>
+                    <p class="trust-copy" data-i18n="trust.copy">No servers. No uploads. No tracking. Just your data, your run, your mind.</p>
+                    <div class="actions" style="justify-content: center; margin-top: 2rem;">
+                        <a class="btn btn-secondary" href="privacy.html" data-i18n="trust.cta1">Read Privacy Policy</a>
+                        <a class="btn btn-secondary" href="support.html" data-i18n="trust.cta2">Visit Support</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="footer-cta">
+            <div class="container animate">
+                <h2 data-i18n="cta.title">Ready to understand your run?</h2>
+                <p data-i18n="cta.subtitle">Start your journey of insight today.</p>
+                <div class="actions" style="justify-content: center;">
+                    <a class="btn btn-primary" href="https://apps.apple.com" target="_blank" rel="noopener" data-i18n="cta.primary">Download Pacermind</a>
+                    <a class="btn btn-secondary" href="privacy.html" data-i18n="cta.secondary">Privacy Policy</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <span>© 2025 Rainlonely Studio</span>
+            <div class="footer-links">
+                <a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
+                <a href="support.html" data-i18n="footer.support">Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/scroll-effects.js" defer></script>
+</body>
+</html>

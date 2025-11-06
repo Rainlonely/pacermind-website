@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pacermind Support</title>
+    <meta name="description" content="Find answers, troubleshooting tips, and contact options for Pacermind.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/main.css">
+    <link rel="stylesheet" href="assets/styles/animations.css">
+</head>
+<body class="page" data-page="support">
+    <header>
+        <div class="container nav">
+            <div class="brand">PACERMIND</div>
+            <div class="nav-group">
+                <nav>
+                    <div id="primary-navigation" class="nav-links" data-nav>
+                        <a href="index.html#hero" data-i18n="nav.home">Home</a>
+                        <a href="index.html#features" data-i18n="nav.features">Features</a>
+                        <a href="index.html#product" data-i18n="nav.product">Product</a>
+                        <a href="privacy.html" data-i18n="nav.privacy">Privacy</a>
+                        <a href="support.html" data-i18n="nav.support">Support</a>
+                    </div>
+                </nav>
+                <div class="nav-right">
+                    <div class="language-switch" data-language-switch>
+                        <button type="button" class="is-active" data-lang-btn data-lang="en" aria-pressed="true">EN</button>
+                        <button type="button" data-lang-btn data-lang="zh" aria-pressed="false">中文</button>
+                    </div>
+                    <button class="mobile-toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation">☰</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="container">
+                <div class="surface animate is-visible">
+                    <div class="section-header">
+                        <span class="section-eyebrow" data-i18n="support.eyebrow">Support Center</span>
+                        <h1 class="section-title" data-i18n="support.title">We are here to keep you moving.</h1>
+                        <p class="section-subtitle" data-i18n="support.subtitle">Quick answers, step-by-step guidance, and direct contact with the Pacermind team.</p>
+                    </div>
+                    <div class="cards-grid">
+                        <article class="card">
+                            <h2 class="card-title" data-i18n="support.faq.title">FAQs</h2>
+                            <ul class="muted">
+                                <li data-i18n="support.faq.item1"><strong>How do I sync Apple Health?</strong> Open Pacermind → Settings → Health Access. Enable the workout metrics you want synced.</li>
+                                <li data-i18n="support.faq.item2"><strong>Where can I view my insights?</strong> Insights are generated after each eligible run and listed on the Home tab. Tap any insight to see AI commentary.</li>
+                                <li data-i18n="support.faq.item3"><strong>Why is my daily insight limit reached?</strong> Pacermind intentionally caps insights to preserve quality. The limit resets at midnight local time.</li>
+                            </ul>
+                        </article>
+                        <article class="card">
+                            <h2 class="card-title" data-i18n="support.troubleshooting.title">Troubleshooting</h2>
+                            <ul class="muted">
+                                <li data-i18n="support.troubleshooting.item1"><strong>No data shown:</strong> Confirm Pacermind has Health permissions and that new workouts exist within Apple Health.</li>
+                                <li data-i18n="support.troubleshooting.item2"><strong>Strava sync delay:</strong> Strava may take a few minutes to post workouts. Pull down on Pacermind Home to refresh once the activity appears on Strava.</li>
+                                <li data-i18n="support.troubleshooting.item3"><strong>Reset insights:</strong> Tap Settings → Clear Insights to rebuild your history from Health and Strava.</li>
+                            </ul>
+                        </article>
+                        <article class="card">
+                            <h2 class="card-title" data-i18n="support.contact.title">Contact</h2>
+                            <p class="muted" data-i18n="support.contact.email">Email: <a href="mailto:support@pacermind.app">support@pacermind.app</a></p>
+                            <p class="muted" data-i18n="support.contact.response">Response time: within 2 business days.</p>
+                            <p class="muted" data-i18n="support.contact.language">Language: English · 简体中文</p>
+                        </article>
+                    </div>
+                    <div class="surface" style="margin-top: 2rem;">
+                        <h2 data-i18n="support.checklist.title">Manual Smoke Checklist</h2>
+                        <p class="muted" data-i18n="support.checklist.subtitle">Run these steps after updating Pacermind to confirm core flows:</p>
+                        <ol class="muted">
+                            <li data-i18n="support.checklist.item1">Launch Pacermind and verify home metrics refresh.</li>
+                            <li data-i18n="support.checklist.item2">Import a recent Apple Health workout and confirm an insight is generated.</li>
+                            <li data-i18n="support.checklist.item3">Connect Strava and ensure new activities synchronize within 10 minutes.</li>
+                            <li data-i18n="support.checklist.item4">Trigger the daily insight limit and confirm the UI displays “Precision over quantity”.</li>
+                            <li data-i18n="support.checklist.item5">Open the Privacy Policy link and confirm it loads successfully.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <span>© 2025 Rainlonely Studio</span>
+            <div class="footer-links">
+                <a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
+                <a href="support.html" data-i18n="footer.support">Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/scroll-effects.js" defer></script>
+</body>
+</html>

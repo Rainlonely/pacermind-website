@@ -1,0 +1,11 @@
+{
+  "accessToken": "pk.your_mapbox_public_token_here",
+  "style": "mapbox://styles/mapbox/streets-v12",
+  "center": [121.48, 31.235],
+  "zoom": 12.6,
+  "bearing": 0,
+  "pitch": 0,
+  "routeCoordinateSystem": "wgs84",
+  "journeyBounds": [121.385, 31.145, 121.565, 31.31],
+  "interactiveJourneyMap": true
+}

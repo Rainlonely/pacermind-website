@@ -3,28 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pacermind – Run Smarter. Think Deeper.</title>
-    <meta name="description" content="Pacermind transforms running data into on-device insight. Run smarter, understand deeper, and keep your data private.">
+    <title>PacerMind - Every Run Leaves a Mark.</title>
+    <meta name="description" content="PacerMind is a running companion for city heatmaps, workout notes, weekly journals, training rhythm, and long-term running memory.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/images/logo.png">
+    <link rel="stylesheet" href="assets/styles/main.css?v=20260609-14">
     <link rel="stylesheet" href="assets/styles/animations.css">
 </head>
 <body class="page" data-page="home">
     <header>
         <div class="container nav">
-            <div class="brand">
-                <img class="brand-logo" src="assets/images/logo.png" alt="Pacermind logo">
-                <span>PACERMIND</span>
-            </div>
+            <a class="brand" href="#hero" aria-label="PacerMind home">
+                <img class="brand-logo" src="assets/images/logo.png" alt="PacerMind logo">
+                <span>PacerMind</span>
+            </a>
             <div class="nav-group">
-                <nav>
+                <nav aria-label="Primary navigation">
                     <div id="primary-navigation" class="nav-links" data-nav>
                         <a href="#hero" data-i18n="nav.home">Home</a>
-                        <a href="#features" data-i18n="nav.features">Features</a>
+                        <a href="#journey" data-i18n="nav.journey">Journey</a>
                         <a href="#product" data-i18n="nav.product">Product</a>
-                        <a href="#privacy" data-i18n="nav.privacy">Privacy</a>
+                        <a href="#download" data-i18n="nav.download">Download</a>
+                        <a href="privacy.html" data-i18n="nav.privacy">Privacy</a>
                         <a href="support.html" data-i18n="nav.support">Support</a>
                     </div>
                 </nav>
@@ -33,199 +35,171 @@
                         <button type="button" class="is-active" data-lang-btn data-lang="en" aria-pressed="true">EN</button>
                         <button type="button" data-lang-btn data-lang="zh" aria-pressed="false">中文</button>
                     </div>
-                    <button class="mobile-toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation">☰</button>
+                    <button class="mobile-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation">☰</button>
                 </div>
             </div>
         </div>
     </header>
 
     <main>
-        <section id="hero" class="section">
+        <section id="hero" class="hero-section" aria-labelledby="hero-title">
+            <div class="map-stage" data-heatmap-stage>
+                <div class="mapbox-live-map" data-mapbox-map="hero" aria-hidden="true"></div>
+                <div class="map-paper" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <svg class="route-map hero-route-map" data-hero-map viewBox="0 0 1000 680" role="img" aria-label="Animated recent running routes"></svg>
+                <div class="memory-bubbles" data-memory-bubbles aria-live="polite"></div>
+            </div>
             <div class="container hero">
                 <div class="hero-content animate is-visible">
-                    <span class="badge" data-i18n="hero.badge">New • AI Run Insight</span>
-                    <h1 class="hero-title" data-i18n="hero.title">Pacermind</h1>
-                    <p class="hero-subtitle" data-i18n="hero.subtitle">Run Smarter. Train Intelligently. Understand Every Run.</p>
-                    <p class="hero-text" data-i18n="hero.body">Every run tells a story — Pacermind decodes your pace, cadence, and heart rate into meaningful strides.</p>
+                    <span class="eyebrow" data-i18n="hero.eyebrow">PacerMind 2.0</span>
+                    <h1 id="hero-title" class="hero-title" data-i18n="hero.title">Light Up Your City.</h1>
+                    <p class="hero-subtitle" data-i18n="hero.subtitle">This is my journey. What's yours?</p>
+                    <p class="hero-text" data-i18n="hero.body">PacerMind turns years of routes, notes, plans, and small decisions into a living map of why you keep running.</p>
                     <div class="actions">
-                        <a class="btn btn-primary" href="https://apps.apple.com/us/app/pacermind/id6754869376" target="_blank" rel="noopener" data-i18n="hero.ctaPrimary">Download on App Store</a>
-                        <a class="btn btn-secondary" href="#features" data-i18n="hero.ctaSecondary">Learn More</a>
+                        <div class="app-store-badges" aria-label="Download PacerMind on the App Store">
+                            <a class="app-store-badge app-store-badge-us" href="https://apps.apple.com/us/app/pacermind/id6754869376" target="_blank" rel="noopener" aria-label="Download PacerMind on the App Store in the United States">
+                                <img src="assets/images/app-store/app-store-us.svg" alt="Download on the App Store">
+                            </a>
+                            <a class="app-store-badge app-store-badge-cn" href="https://apps.apple.com/cn/app/pacermind/id6754869376" target="_blank" rel="noopener" aria-label="在中国大陆 App Store 下载 PacerMind">
+                                <img src="assets/images/app-store/app-store-cn.svg" alt="在 App Store 下载">
+                            </a>
+                        </div>
+                        <a class="btn btn-secondary" href="#journey" data-i18n="hero.ctaSecondary">View Journey</a>
                     </div>
                 </div>
-                <div class="hero-visual">
-                    <div class="hero-background floating-lines"></div>
-                    <div class="iphone-frame animate delay-2 is-visible">
-                        <div class="data-lines"></div>
-                        <img src="assets/images/dashboard.png" alt="Pacermind dashboard overview">
+            </div>
+            <a class="scroll-indicator" href="#journey" aria-label="Scroll to journey">
+                <span></span>
+                <small data-i18n="hero.scroll">Scroll</small>
+            </a>
+        </section>
+
+        <section id="journey" class="section journey-section" aria-labelledby="journey-title">
+            <div class="container">
+                <div class="section-header align-left animate">
+                    <span class="eyebrow" data-i18n="journey.eyebrow">My Journey</span>
+                    <h2 id="journey-title" class="section-title" data-i18n="journey.title">A city slowly lit by ordinary days.</h2>
+                    <p class="section-subtitle" data-i18n="journey.subtitle">Not every run is a breakthrough. Some just make the map a little warmer.</p>
+                </div>
+
+                <div class="stats-strip animate delay-1">
+                    <div>
+                        <strong data-stat-runs>2,132</strong>
+                        <span data-i18n="journey.stats.runs">Runs</span>
                     </div>
-                    <div class="scroll-indicator">
-                        <span></span>
-                        <small data-i18n="hero.scroll">Scroll</small>
+                    <div>
+                        <strong data-stat-distance>19,623</strong>
+                        <span data-i18n="journey.stats.distance">Kilometers</span>
+                    </div>
+                    <div class="stat-years">
+                        <strong data-stat-years>16</strong>
+                        <span data-i18n="journey.stats.years">Years</span>
+                    </div>
+                    <div>
+                        <strong data-stat-pace>5'19"</strong>
+                        <span data-i18n="journey.stats.pace">Avg Pace</span>
+                    </div>
+                    <div class="stat-time">
+                        <strong data-stat-time>1,736h</strong>
+                        <span data-i18n="journey.stats.time">Total Time</span>
+                    </div>
+                </div>
+
+                <div class="journey-layout">
+                    <div class="journey-map animate delay-2">
+                        <div class="mapbox-live-map" data-mapbox-map="journey" aria-hidden="true"></div>
+                        <div class="map-paper map-paper-quiet" aria-hidden="true">
+                            <span></span><span></span><span></span><span></span><span></span>
+                            <span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                        <svg class="route-map" data-journey-map viewBox="0 0 1000 680" role="img" aria-label="Recent running heatmap"></svg>
+                    </div>
+                    <div class="run-journal animate delay-3">
+                        <div class="journal-heading">
+                            <span class="eyebrow" data-i18n="journey.recent">Recent 10 Runs</span>
+                            <span data-updated-at>Updated today</span>
+                        </div>
+                        <div class="run-list" data-run-list></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="values" class="section">
-            <div class="container surface">
-                <div class="section-header animate">
-                    <span class="section-eyebrow" data-i18n="values.eyebrow">Core Value</span>
-                    <h2 class="section-title" data-i18n="values.title">Better Training Plans • AI Insight Engine • On-Device Privacy</h2>
-                    <p class="section-subtitle" data-i18n="values.subtitle">Transform your running data into a clear path forward.</p>
-                </div>
-                <div class="cards-grid">
-                    <article class="card animate delay-1">
-                        <div class="card-icon" aria-hidden="true">🧠</div>
-                        <h3 class="card-title" data-i18n="values.card1.title">Better Training Plans</h3>
-                        <p class="card-text" data-i18n="values.card1.text">Transform data into actionable training steps.</p>
-                    </article>
-                    <article class="card animate delay-2">
-                        <div class="card-icon" aria-hidden="true">⚙️</div>
-                        <h3 class="card-title" data-i18n="values.card2.title">AI Insight Engine</h3>
-                        <p class="card-text" data-i18n="values.card2.text">Harness AI insight and trends.</p>
-                    </article>
-                    <article class="card animate delay-3">
-                        <div class="card-icon" aria-hidden="true">🔒</div>
-                        <h3 class="card-title" data-i18n="values.card3.title">On-Device Privacy</h3>
-                        <p class="card-text" data-i18n="values.card3.text">Designed for privacy-first, on-device analysis.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section id="features" class="section">
+        <section id="product" class="section product-section" aria-labelledby="product-title">
             <div class="container">
                 <div class="section-header animate">
-                    <span class="section-eyebrow" data-i18n="features.eyebrow">Features</span>
-                    <h2 class="section-title" data-i18n="features.title">Understand Your Run in Four Dimensions</h2>
-                    <p class="section-subtitle" data-i18n="features.subtitle">Smart analysis, seamless sync, rich history, and intentional limits—every detail crafted for thoughtful runners.</p>
+                    <span class="eyebrow" data-i18n="product.eyebrow">PacerMind 2.0</span>
+                    <h2 id="product-title" class="section-title" data-i18n="product.title">A different kind of running app.</h2>
+                    <p class="section-subtitle" data-i18n="product.subtitle">Not just to make you faster. To help you keep going ten years from now.</p>
                 </div>
-                <div class="features-grid">
+
+                <div class="product-grid">
                     <article class="feature-card animate delay-1">
-                        <h3 class="feature-title gradient-text" data-i18n="features.card1.title">AI Insight Engine</h3>
-                        <p class="feature-text" data-i18n="features.card1.text">Receive concise, actionable feedback after every run.</p>
+                        <span>01</span>
+                        <h3 data-i18n="product.card1.title">Light Up Your City</h3>
+                        <p data-i18n="product.card1.text">City heatmaps make consistency visible, turning scattered routes into a living memory.</p>
                     </article>
                     <article class="feature-card animate delay-2">
-                        <h3 class="feature-title gradient-text" data-i18n="features.card2.title">Smart Training Plans</h3>
-                        <p class="feature-text" data-i18n="features.card2.text">Dynamic weekly plans tailored to your goal, schedule, and ability.</p>
+                        <span>02</span>
+                        <h3 data-i18n="product.card2.title">Reflect Every Run</h3>
+                        <p data-i18n="product.card2.text">Workout notes and weekly journals keep the feeling of each block, not just the numbers.</p>
                     </article>
                     <article class="feature-card animate delay-3">
-                        <h3 class="feature-title gradient-text" data-i18n="features.card3.title">Multi-source Sync</h3>
-                        <p class="feature-text" data-i18n="features.card3.text">Seamless sync with Apple Health, Strava, and Apple Watch.</p>
+                        <span>03</span>
+                        <h3 data-i18n="product.card3.title">Train With Rhythm</h3>
+                        <p data-i18n="product.card3.text">Import plans, link workouts, and follow the week without turning training into homework.</p>
                     </article>
                     <article class="feature-card animate delay-4">
-                        <h3 class="feature-title gradient-text" data-i18n="features.card4.title">Weekly Journal</h3>
-                        <p class="feature-text" data-i18n="features.card4.text">Weekly training recaps to reflect, learn, and improve.</p>
+                        <span>04</span>
+                        <h3 data-i18n="product.card4.title">Stay Close to the Run</h3>
+                        <p data-i18n="product.card4.text">Apple Watch, widgets, weather, and gentle reminders keep the next step within reach.</p>
                     </article>
-                    <article class="feature-card animate delay-5">
-                        <h3 class="feature-title gradient-text" data-i18n="features.card5.title">Training History &amp; Trends</h3>
-                        <p class="feature-text" data-i18n="features.card5.text">Calendar views and charts showcase training trends. See your growth in data, not guesswork.</p>
-                    </article>
-                    <article class="feature-card animate delay-6">
-                        <h3 class="feature-title gradient-text" data-i18n="features.card6.title">Daily Insight Limit</h3>
-                        <p class="feature-text" data-i18n="features.card6.text">We cap daily insights to keep every analysis focused and high-quality.</p>
-                    </article>
+                </div>
+
+                <div class="showcase animate">
+                    <figure>
+                        <img src="assets/images/pacermind-2/today-1.png" alt="PacerMind 2.0 Today overview screen">
+                        <figcaption data-i18n="product.fig1">Today · Run rhythm</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="assets/images/pacermind-2/today-2.png" alt="PacerMind 2.0 Today training detail screen">
+                        <figcaption data-i18n="product.fig2">Today · Training focus</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="assets/images/pacermind-2/journey.png" alt="PacerMind 2.0 Journey screen with city heatmap">
+                        <figcaption data-i18n="product.fig3">Journey · City heatmap</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="assets/images/pacermind-2/workout-history.png" alt="PacerMind 2.0 workout history screen">
+                        <figcaption data-i18n="product.fig4">History · Running journal</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="assets/images/pacermind-2/plan.png" alt="PacerMind 2.0 training plan screen">
+                        <figcaption data-i18n="product.fig5">Plan · Weekly rhythm</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="assets/images/pacermind-2/widget.png" alt="PacerMind 2.0 widget screen">
+                        <figcaption data-i18n="product.fig6">Widget · Next run</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="assets/images/pacermind-2/profile.png" alt="PacerMind 2.0 profile screen">
+                        <figcaption data-i18n="product.fig7">Profile · Long-term record</figcaption>
+                    </figure>
                 </div>
             </div>
         </section>
 
-        <section id="product" class="section">
-            <div class="container">
-                <div class="surface product-showcase animate">
-                    <div class="section-header">
-                        <span class="section-eyebrow" data-i18n="product.eyebrow">Product Showcase</span>
-                        <h2 class="section-title" data-i18n="product.title">Everything you do in motion, understood in context.</h2>
-                    </div>
-                    <div class="product-track">
-                        <figure class="mockup animate delay-1">
-                            <img src="assets/images/dashboard.png" alt="Pacermind home dashboard">
-                            <figcaption class="muted" data-i18n="product.fig1">Home · Today’s training data</figcaption>
-                        </figure>
-                        <figure class="mockup animate delay-2">
-                            <img src="assets/images/workoutDetails.png" alt="Pacermind AI insight view">
-                            <figcaption class="muted" data-i18n="product.fig2">Insight view · AI interpretation</figcaption>
-                        </figure>
-                        <figure class="mockup animate delay-3">
-                            <img src="assets/images/train calendar.png" alt="Pacermind training calendar">
-                            <figcaption class="muted" data-i18n="product.fig3">History view · Calendar overview</figcaption>
-                        </figure>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="use-cases" class="section">
-            <div class="container">
-                <div class="section-header animate">
-                    <span class="section-eyebrow" data-i18n="usecases.eyebrow">Use Cases</span>
-                    <h2 class="section-title" data-i18n="usecases.title">Tailored for Every Runner</h2>
-                    <p class="section-subtitle" data-i18n="usecases.subtitle">For goal-oriented runners, consistency seekers, data lovers, and Apple Watch enthusiasts.</p>
-                </div>
-                <div class="use-cases">
-                    <article class="use-case-card animate delay-1">
-                        <img class="use-case-image" src="assets/images/run-scenes/city-night.svg" alt="City night run skyline">
-                        <div class="use-case-overlay">
-                            <h3 data-i18n="usecases.card1.title">Goal-oriented runners</h3>
-                            <p data-i18n="usecases.card1.text">Build race-ready blocks with clear targets and milestones.</p>
-                        </div>
-                    </article>
-                    <article class="use-case-card animate delay-2">
-                        <img class="use-case-image" src="assets/images/run-scenes/mountain-trail.svg" alt="Mountain trail running">
-                        <div class="use-case-overlay">
-                            <h3 data-i18n="usecases.card2.title">Consistency seekers</h3>
-                            <p data-i18n="usecases.card2.text">Create habits with steady weekly structure and guidance.</p>
-                        </div>
-                    </article>
-                    <article class="use-case-card animate delay-3">
-                        <img class="use-case-image" src="assets/images/run-scenes/indoor-track.svg" alt="Indoor track running lanes">
-                        <div class="use-case-overlay">
-                            <h3 data-i18n="usecases.card3.title">Tech-savvy runners</h3>
-                            <p data-i18n="usecases.card3.text">Track trends and metrics with clear AI commentary.</p>
-                        </div>
-                    </article>
-                    <article class="use-case-card animate delay-4">
-                        <img class="use-case-image" src="assets/images/run-scenes/city-night.svg" alt="City night run skyline">
-                        <div class="use-case-overlay">
-                            <h3 data-i18n="usecases.card4.title">Apple Watch focused</h3>
-                            <p data-i18n="usecases.card4.text">Maximize Watch guidance with real-time pace and phase cues.</p>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section id="privacy" class="section">
-            <div class="container">
-                <div class="trust animate">
-                    <div class="trust-icon" aria-hidden="true">
-                        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M18 3L6 7.5V17.5C6 24.64 11.2 31.25 18 33C24.8 31.25 30 24.64 30 17.5V7.5L18 3Z" stroke="url(#shieldGradient)" stroke-width="2" fill="rgba(0, 179, 255, 0.08)"/>
-                            <path d="M12.5 18L16.5 22L23.5 15" stroke="url(#shieldGradient)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <defs>
-                                <linearGradient id="shieldGradient" x1="8" y1="6" x2="28" y2="30" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#00B3FF"/>
-                                    <stop offset="1" stop-color="#3DD6FF"/>
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                    </div>
-                    <h2 data-i18n="trust.title">Pacermind runs entirely on your device.</h2>
-                    <p class="trust-copy" data-i18n="trust.copy">No servers. No uploads. No tracking. Just your data, your run, your mind.</p>
-                    <div class="actions" style="justify-content: center; margin-top: 2rem;">
-                        <a class="btn btn-secondary" href="privacy.html" data-i18n="trust.cta1">Read Privacy Policy</a>
-                        <a class="btn btn-secondary" href="support.html" data-i18n="trust.cta2">Visit Support</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="footer-cta">
-            <div class="container animate">
-                <h2 data-i18n="cta.title">Ready to understand your run?</h2>
-                <p data-i18n="cta.subtitle">Start your journey of insight today.</p>
-                <div class="actions" style="justify-content: center;">
-                    <a class="btn btn-primary" href="https://apps.apple.com/us/app/pacermind/id6754869376" target="_blank" rel="noopener" data-i18n="cta.primary">Download Pacermind</a>
-                    <a class="btn btn-secondary" href="privacy.html" data-i18n="cta.secondary">Privacy Policy</a>
+        <section id="download" class="download-section" aria-labelledby="download-title">
+            <div class="container download-inner animate">
+                <span class="eyebrow" data-i18n="download.eyebrow">Start Your Map</span>
+                <h2 id="download-title" data-i18n="download.title">Run long enough, and the city starts to answer back.</h2>
+                <p data-i18n="download.subtitle">PacerMind remembers the routes, the notes, the plan, and the quiet reasons you came back.</p>
+                <div class="actions">
+                    <a class="btn btn-primary" href="https://apps.apple.com/us/app/pacermind/id6754869376" target="_blank" rel="noopener" data-i18n="download.ctaPrimary">Download PacerMind</a>
+                    <a class="btn btn-secondary" href="privacy.html" data-i18n="download.ctaSecondary">Privacy Policy</a>
                 </div>
             </div>
         </section>
@@ -233,7 +207,7 @@
 
     <footer>
         <div class="container footer-content">
-            <span>© 2025 Rainlonely Studio</span>
+            <span>© 2026 Rainlonely Studio</span>
             <div class="footer-links">
                 <a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
                 <a href="support.html" data-i18n="footer.support">Support</a>
@@ -241,6 +215,6 @@
         </div>
     </footer>
 
-    <script src="scripts/scroll-effects.js" defer></script>
+    <script src="scripts/scroll-effects.js?v=20260609-14" defer></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 {
-  "accessToken": "pk.your_mapbox_public_token_here",
+  "accessToken": "pk.eyJ1IjoicmFpbmxvbmVseSIsImEiOiJjbXE2bzM5YmIwM2Q3MnhxYmYydnQybTBwIn0.BaAoNT8RwinD6MElYPAoWw",
   "style": "mapbox://styles/mapbox/streets-v12",
   "center": [121.48, 31.235],
   "zoom": 12.6,

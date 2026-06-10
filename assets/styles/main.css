@@ -1,6 +1,7 @@
 /* PacerMind Website - Journey Landing Page */
 
 :root {
+    color-scheme: light dark;
     --color-ink: #10261b;
     --color-ink-soft: rgba(16, 38, 27, 0.72);
     --color-paper: #f5f1e6;
@@ -11,6 +12,8 @@
     --color-mint: #d9ead7;
     --color-dark: #0f1f18;
     --color-white: #fffaf0;
+    --color-surface: #fffaf0;
+    --color-button-ink: #10261b;
     --max-width: 1160px;
     --section-spacing: clamp(4.5rem, 8vw, 8rem);
     --border-radius: 8px;
@@ -18,6 +21,24 @@
     --font-sans: "Inter", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
     --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
     --transition: 220ms ease;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-ink: #edf7ee;
+        --color-ink-soft: rgba(237, 247, 238, 0.72);
+        --color-paper: #0c1511;
+        --color-paper-warm: #15231c;
+        --color-line: rgba(237, 247, 238, 0.15);
+        --color-route: #ff8a4a;
+        --color-route-soft: rgba(255, 138, 74, 0.22);
+        --color-mint: #224031;
+        --color-dark: #06100c;
+        --color-white: #f8f1e3;
+        --color-surface: #14231c;
+        --color-button-ink: #10261b;
+        --shadow-soft: 0 24px 70px rgba(0, 0, 0, 0.46);
+    }
 }
 
 *,
@@ -35,8 +56,8 @@ body {
     font-family: var(--font-sans);
     color: var(--color-ink);
     background:
-        linear-gradient(90deg, rgba(16, 38, 27, 0.025) 1px, transparent 1px),
-        linear-gradient(180deg, rgba(16, 38, 27, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in srgb, var(--color-ink) 2.5%, transparent) 1px, transparent 1px),
+        linear-gradient(180deg, color-mix(in srgb, var(--color-ink) 2.5%, transparent) 1px, transparent 1px),
         var(--color-paper);
     background-size: 24px 24px;
     line-height: 1.6;
@@ -72,7 +93,7 @@ header {
     top: 0;
     z-index: 50;
     border-bottom: 1px solid var(--color-line);
-    background: rgba(245, 241, 230, 0.82);
+    background: color-mix(in srgb, var(--color-paper) 82%, transparent);
     backdrop-filter: blur(18px);
 }
 
@@ -155,7 +176,7 @@ header {
     padding: 0.25rem;
     border: 1px solid var(--color-line);
     border-radius: 999px;
-    background: rgba(255, 250, 240, 0.72);
+    background: color-mix(in srgb, var(--color-surface) 72%, transparent);
 }
 
 .language-switch button {
@@ -170,7 +191,7 @@ header {
 }
 
 .language-switch button.is-active {
-    color: var(--color-white);
+    color: var(--color-button-ink);
     background: var(--color-ink);
 }
 
@@ -183,7 +204,7 @@ header {
     border: 1px solid var(--color-line);
     border-radius: 999px;
     color: var(--color-ink);
-    background: rgba(255, 250, 240, 0.8);
+    background: color-mix(in srgb, var(--color-surface) 80%, transparent);
     cursor: pointer;
 }
 
@@ -208,8 +229,8 @@ header {
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(90deg, rgba(245, 241, 230, 0.94), rgba(245, 241, 230, 0.58) 46%, rgba(245, 241, 230, 0.74)),
-        linear-gradient(180deg, rgba(245, 241, 230, 0.14), rgba(245, 241, 230, 0.92));
+        linear-gradient(90deg, color-mix(in srgb, var(--color-paper) 94%, transparent), color-mix(in srgb, var(--color-paper) 58%, transparent) 46%, color-mix(in srgb, var(--color-paper) 74%, transparent)),
+        linear-gradient(180deg, color-mix(in srgb, var(--color-paper) 14%, transparent), color-mix(in srgb, var(--color-paper) 92%, transparent));
     pointer-events: none;
 }
 
@@ -218,16 +239,16 @@ header {
     inset: -8% -4%;
     z-index: 0;
     background:
-        linear-gradient(90deg, rgba(16, 38, 27, 0.07) 1px, transparent 1px),
-        linear-gradient(180deg, rgba(16, 38, 27, 0.07) 1px, transparent 1px),
-        radial-gradient(circle at 72% 42%, rgba(217, 234, 215, 0.62), transparent 26%);
+        linear-gradient(90deg, color-mix(in srgb, var(--color-ink) 7%, transparent) 1px, transparent 1px),
+        linear-gradient(180deg, color-mix(in srgb, var(--color-ink) 7%, transparent) 1px, transparent 1px),
+        radial-gradient(circle at 72% 42%, color-mix(in srgb, var(--color-mint) 62%, transparent), transparent 26%);
     background-size: 54px 54px, 54px 54px, auto;
 }
 
 .map-paper span {
     position: absolute;
     border-radius: 999px;
-    background: rgba(16, 38, 27, 0.12);
+    background: color-mix(in srgb, var(--color-ink) 12%, transparent);
 }
 
 .map-paper span:nth-child(1) { width: 46%; height: 2px; top: 22%; left: 9%; transform: rotate(-19deg); }
@@ -311,8 +332,8 @@ header {
 .map-stage.has-live-map::after {
     z-index: 1;
     background:
-        linear-gradient(90deg, rgba(245, 241, 230, 0.8), rgba(245, 241, 230, 0.26) 48%, rgba(245, 241, 230, 0.5)),
-        linear-gradient(180deg, rgba(245, 241, 230, 0.06), rgba(245, 241, 230, 0.78));
+        linear-gradient(90deg, color-mix(in srgb, var(--color-paper) 80%, transparent), color-mix(in srgb, var(--color-paper) 26%, transparent) 48%, color-mix(in srgb, var(--color-paper) 50%, transparent)),
+        linear-gradient(180deg, color-mix(in srgb, var(--color-paper) 6%, transparent), color-mix(in srgb, var(--color-paper) 78%, transparent));
 }
 
 .mapboxgl-ctrl-logo,
@@ -321,16 +342,16 @@ header {
 }
 
 .water-shape {
-    fill: rgba(116, 174, 177, 0.18);
+    fill: color-mix(in srgb, #74aeb1 18%, transparent);
 }
 
 .park-shape {
-    fill: rgba(86, 136, 88, 0.13);
+    fill: color-mix(in srgb, var(--color-mint) 26%, transparent);
 }
 
 .base-road {
     fill: none;
-    stroke: rgba(16, 38, 27, 0.18);
+    stroke: color-mix(in srgb, var(--color-ink) 18%, transparent);
     stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
@@ -338,7 +359,7 @@ header {
 
 .base-road-major {
     fill: none;
-    stroke: rgba(16, 38, 27, 0.28);
+    stroke: color-mix(in srgb, var(--color-ink) 28%, transparent);
     stroke-width: 4;
     stroke-linecap: round;
     stroke-linejoin: round;
@@ -346,14 +367,14 @@ header {
 
 .base-road-ring {
     fill: none;
-    stroke: rgba(16, 38, 27, 0.18);
+    stroke: color-mix(in srgb, var(--color-ink) 18%, transparent);
     stroke-width: 7;
     stroke-linecap: round;
     stroke-linejoin: round;
 }
 
 .base-label {
-    fill: rgba(16, 38, 27, 0.42);
+    fill: color-mix(in srgb, var(--color-ink) 42%, transparent);
     font-size: 18px;
     font-weight: 800;
     letter-spacing: 0.14em;
@@ -361,7 +382,7 @@ header {
 }
 
 .base-label-small {
-    fill: rgba(16, 38, 27, 0.3);
+    fill: color-mix(in srgb, var(--color-ink) 30%, transparent);
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.1em;
@@ -417,10 +438,10 @@ header {
     position: absolute;
     width: min(280px, 44vw);
     padding: 1rem 1.05rem;
-    border: 1px solid rgba(16, 38, 27, 0.16);
+    border: 1px solid var(--color-line);
     border-radius: var(--border-radius);
     color: var(--color-ink);
-    background: rgba(255, 250, 240, 0.88);
+    background: color-mix(in srgb, var(--color-surface) 88%, transparent);
     box-shadow: var(--shadow-soft);
     opacity: 0;
     transform: translateY(10px);
@@ -449,10 +470,10 @@ header {
     z-index: 3;
     width: min(320px, 42vw);
     padding: 1rem 1.05rem;
-    border: 1px solid rgba(16, 38, 27, 0.14);
+    border: 1px solid var(--color-line);
     border-radius: var(--border-radius);
     color: var(--color-ink);
-    background: rgba(255, 250, 240, 0.84);
+    background: color-mix(in srgb, var(--color-surface) 84%, transparent);
     box-shadow: var(--shadow-soft);
     opacity: 0;
     transform: translateY(calc(-100% + 10px));
@@ -581,7 +602,7 @@ html[lang="zh-Hans"] .app-store-badge-cn {
 .app-store-badge:hover,
 .app-store-badge:focus-visible {
     transform: translateY(-2px);
-    filter: drop-shadow(0 14px 22px rgba(16, 38, 27, 0.18));
+    filter: drop-shadow(0 14px 22px color-mix(in srgb, var(--color-ink) 18%, transparent));
 }
 
 .app-store-badge img {
@@ -615,8 +636,8 @@ html[lang="zh-Hans"] .app-store-badge-cn {
 
 .btn-secondary {
     color: var(--color-ink);
-    border-color: rgba(16, 38, 27, 0.18);
-    background: rgba(255, 250, 240, 0.72);
+    border-color: var(--color-line);
+    background: color-mix(in srgb, var(--color-surface) 72%, transparent);
 }
 
 .btn-secondary:hover,
@@ -710,7 +731,7 @@ figcaption {
 .card {
     border: 1px solid var(--color-line);
     border-radius: var(--border-radius);
-    background: rgba(255, 250, 240, 0.78);
+    background: color-mix(in srgb, var(--color-surface) 78%, transparent);
     box-shadow: var(--shadow-soft);
 }
 
@@ -776,7 +797,7 @@ figcaption {
     border: 1px solid var(--color-line);
     border-radius: var(--border-radius);
     color: var(--color-ink);
-    background: rgba(255, 250, 240, 0.76);
+    background: color-mix(in srgb, var(--color-surface) 76%, transparent);
     transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
 }
 
@@ -808,11 +829,11 @@ figcaption {
 }
 
 .support-channel-red {
-    background: linear-gradient(180deg, rgba(255, 36, 66, 0.12), rgba(255, 250, 240, 0.78));
+    background: linear-gradient(180deg, rgba(255, 36, 66, 0.16), color-mix(in srgb, var(--color-surface) 78%, transparent));
 }
 
 .support-channel-discord {
-    background: linear-gradient(180deg, rgba(88, 101, 242, 0.13), rgba(255, 250, 240, 0.78));
+    background: linear-gradient(180deg, rgba(88, 101, 242, 0.18), color-mix(in srgb, var(--color-surface) 78%, transparent));
 }
 
 .support-channel img {
@@ -832,8 +853,8 @@ figcaption {
 .journey-section {
     border-top: 1px solid var(--color-line);
     background:
-        radial-gradient(circle at 16% 16%, rgba(255, 106, 34, 0.12), transparent 22%),
-        rgba(235, 226, 207, 0.45);
+        radial-gradient(circle at 16% 16%, var(--color-route-soft), transparent 22%),
+        color-mix(in srgb, var(--color-paper-warm) 45%, transparent);
 }
 
 .stats-strip {
@@ -847,7 +868,7 @@ figcaption {
 
 .stats-strip div {
     padding: clamp(1rem, 3vw, 1.8rem);
-    background: rgba(255, 250, 240, 0.74);
+    background: color-mix(in srgb, var(--color-surface) 74%, transparent);
 }
 
 .stats-strip strong {
@@ -887,7 +908,7 @@ figcaption {
 .download-inner {
     border: 1px solid var(--color-line);
     border-radius: var(--border-radius);
-    background: rgba(255, 250, 240, 0.78);
+    background: color-mix(in srgb, var(--color-surface) 78%, transparent);
     box-shadow: var(--shadow-soft);
 }
 
@@ -1051,7 +1072,7 @@ figcaption {
 .download-section {
     padding-block: var(--section-spacing);
     background:
-        linear-gradient(180deg, rgba(16, 38, 27, 0.92), rgba(16, 38, 27, 0.96)),
+        linear-gradient(180deg, color-mix(in srgb, var(--color-dark) 92%, transparent), color-mix(in srgb, var(--color-dark) 96%, transparent)),
         radial-gradient(circle at 65% 35%, rgba(255, 106, 34, 0.5), transparent 26%);
     color: var(--color-white);
 }
@@ -1066,7 +1087,7 @@ figcaption {
 
 .download-inner .eyebrow,
 .download-inner p {
-    color: rgba(255, 250, 240, 0.74);
+    color: color-mix(in srgb, var(--color-white) 74%, transparent);
 }
 
 .download-inner h2 {
@@ -1081,14 +1102,14 @@ figcaption {
 }
 
 .download-inner .btn-primary {
-    color: var(--color-ink);
+    color: var(--color-button-ink);
     background: var(--color-white);
 }
 
 .download-inner .btn-secondary {
     color: var(--color-white);
-    border-color: rgba(255, 250, 240, 0.22);
-    background: rgba(255, 250, 240, 0.08);
+    border-color: color-mix(in srgb, var(--color-white) 22%, transparent);
+    background: color-mix(in srgb, var(--color-white) 8%, transparent);
 }
 
 footer {
@@ -1172,7 +1193,7 @@ footer {
         padding: 0.8rem;
         border: 1px solid var(--color-line);
         border-radius: var(--border-radius);
-        background: rgba(255, 250, 240, 0.96);
+        background: color-mix(in srgb, var(--color-surface) 96%, transparent);
         box-shadow: var(--shadow-soft);
         transform: translateY(-140%);
         transition: transform var(--transition);

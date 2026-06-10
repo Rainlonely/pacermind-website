@@ -911,6 +911,15 @@ document.addEventListener("DOMContentLoaded", () => {
         return normalized.replace("mapbox://styles/", "");
     };
 
+    const prefersDarkMode = () => window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    const mapStyleForScheme = config => {
+        if (prefersDarkMode()) {
+            return config.darkStyle || "mapbox://styles/mapbox/dark-v11";
+        }
+        return config.style || "mapbox://styles/mapbox/streets-v12";
+    };
+
     const staticMapUrl = ({ stylePath, token, center, zoom, bearing, pitch }) => {
         const encodedToken = encodeURIComponent(token);
         return `https://api.mapbox.com/styles/v1/${stylePath}/static/${center[0]},${center[1]},${zoom},${bearing},${pitch}/1280x840@2x?access_token=${encodedToken}`;
@@ -922,7 +931,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const stylePath = staticStylePath(config.style);
+        const stylePath = staticStylePath(mapStyleForScheme(config));
         const center = Array.isArray(config.center) ? config.center : [121.48, 31.235];
         const zoom = Number(config.zoom || 12);
         const bearing = Number(config.bearing || 0);
@@ -1030,7 +1039,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const map = new window.mapboxgl.Map({
             accessToken: config.accessToken,
             container,
-            style: config.style || "mapbox://styles/mapbox/streets-v12",
+            style: mapStyleForScheme(config),
             center: config.center || [121.48, 31.235],
             zoom: Number(config.zoom || 12),
             bearing: Number(config.bearing || 0),

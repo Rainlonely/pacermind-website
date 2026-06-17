@@ -9,6 +9,7 @@ DEVICE="${PACERMIND_JOURNEY_DEVICE:-Rain’s Air}"
 REMOTE="${PACERMIND_JOURNEY_REMOTE:-origin}"
 BRANCH="${PACERMIND_JOURNEY_BRANCH:-main}"
 PUSH=1
+WAIT_DEVICE_SECONDS="${PACERMIND_JOURNEY_WAIT_DEVICE_SECONDS:-60}"
 
 DEVELOPER_DIR_DEFAULT="/Applications/Xcode-beta.app/Contents/Developer"
 if [[ -z "${DEVELOPER_DIR:-}" && -d "$DEVELOPER_DIR_DEFAULT" ]]; then
@@ -24,12 +25,14 @@ Sync PacerMind journey data from Rain's Air, verify it, commit it, and push.
 Options:
   --year YEAR       Data year to export. Defaults to current Asia/Shanghai year.
   --device NAME     Device name. Defaults to Rain’s Air.
+  --wait SECONDS    Wait for the device to become connected. Defaults to 60.
   --no-push         Commit locally but do not push.
   -h, --help        Show this help.
 
 Environment overrides:
   PACERMIND_JOURNEY_YEAR, PACERMIND_JOURNEY_DEVICE,
-  PACERMIND_JOURNEY_REMOTE, PACERMIND_JOURNEY_BRANCH, DEVELOPER_DIR
+  PACERMIND_JOURNEY_REMOTE, PACERMIND_JOURNEY_BRANCH,
+  PACERMIND_JOURNEY_WAIT_DEVICE_SECONDS, DEVELOPER_DIR
 EOF
 }
 
@@ -41,6 +44,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     --device)
       DEVICE="${2:?missing value for --device}"
+      shift 2
+      ;;
+    --wait)
+      WAIT_DEVICE_SECONDS="${2:?missing value for --wait}"
       shift 2
       ;;
     --no-push)
@@ -79,12 +86,29 @@ git fetch "$REMOTE" "$BRANCH"
 git rebase "$REMOTE/$BRANCH"
 
 say "Checking device: $DEVICE"
-DEVICE_LIST="$(xcrun devicectl list devices)"
-printf '%s\n' "$DEVICE_LIST"
-if ! printf '%s\n' "$DEVICE_LIST" | grep -F "$DEVICE" | grep -q "connected"; then
-  echo "error: $DEVICE is not connected. Unlock it and check trust / Developer Mode." >&2
-  exit 1
-fi
+deadline=$((SECONDS + WAIT_DEVICE_SECONDS))
+while :; do
+  DEVICE_LIST="$(xcrun devicectl list devices)"
+  printf '%s\n' "$DEVICE_LIST"
+  DEVICE_LINE="$(printf '%s\n' "$DEVICE_LIST" | grep -F "$DEVICE" || true)"
+  if printf '%s\n' "$DEVICE_LINE" | grep -q "connected"; then
+    break
+  fi
+
+  if (( SECONDS >= deadline )); then
+    if [[ -n "$DEVICE_LINE" ]]; then
+      echo "error: $DEVICE is visible but not connected:" >&2
+      echo "$DEVICE_LINE" >&2
+    else
+      echo "error: $DEVICE was not found by devicectl." >&2
+    fi
+    echo "Unlock the phone, keep it awake, connect USB if needed, and check trust / Developer Mode." >&2
+    exit 1
+  fi
+
+  echo "waiting for $DEVICE to become connected..." >&2
+  sleep 5
+done
 
 say "Syncing journey data for $YEAR"
 scripts/sync-journey-from-device.py --year "$YEAR" --device "$DEVICE"

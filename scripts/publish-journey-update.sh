@@ -5,7 +5,8 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
 YEAR="${PACERMIND_JOURNEY_YEAR:-$(TZ=Asia/Shanghai date +%Y)}"
-DEVICE="${PACERMIND_JOURNEY_DEVICE:-Rain’s Air}"
+DEVICE="${PACERMIND_JOURNEY_DEVICE:-84449D9F-DA19-5759-8022-44A41B9F40A6}"
+DEVICE_NAME="${PACERMIND_JOURNEY_DEVICE_NAME:-Rain’s Air}"
 REMOTE="${PACERMIND_JOURNEY_REMOTE:-origin}"
 BRANCH="${PACERMIND_JOURNEY_BRANCH:-main}"
 PUSH=1
@@ -24,14 +25,14 @@ Sync PacerMind journey data from Rain's Air, verify it, commit it, and push.
 
 Options:
   --year YEAR       Data year to export. Defaults to current Asia/Shanghai year.
-  --device NAME     Device name. Defaults to Rain’s Air.
+  --device ID       Device identifier/name. Defaults to Rain’s Air identifier.
   --wait SECONDS    Wait for the device to become connected. Defaults to 60.
   --no-push         Commit locally but do not push.
   -h, --help        Show this help.
 
 Environment overrides:
   PACERMIND_JOURNEY_YEAR, PACERMIND_JOURNEY_DEVICE,
-  PACERMIND_JOURNEY_REMOTE, PACERMIND_JOURNEY_BRANCH,
+  PACERMIND_JOURNEY_DEVICE_NAME, PACERMIND_JOURNEY_REMOTE, PACERMIND_JOURNEY_BRANCH,
   PACERMIND_JOURNEY_WAIT_DEVICE_SECONDS, DEVELOPER_DIR
 EOF
 }
@@ -85,28 +86,28 @@ say "Updating local $BRANCH from $REMOTE/$BRANCH"
 git fetch "$REMOTE" "$BRANCH"
 git rebase "$REMOTE/$BRANCH"
 
-say "Checking device: $DEVICE"
+say "Checking device: $DEVICE_NAME ($DEVICE)"
 deadline=$((SECONDS + WAIT_DEVICE_SECONDS))
 while :; do
   DEVICE_LIST="$(xcrun devicectl list devices)"
   printf '%s\n' "$DEVICE_LIST"
-  DEVICE_LINE="$(printf '%s\n' "$DEVICE_LIST" | grep -F "$DEVICE" || true)"
-  if printf '%s\n' "$DEVICE_LINE" | grep -q "connected"; then
+  if xcrun devicectl device info details --device "$DEVICE" >/dev/null 2>&1; then
     break
   fi
 
   if (( SECONDS >= deadline )); then
+    DEVICE_LINE="$(printf '%s\n' "$DEVICE_LIST" | grep -F "$DEVICE_NAME" || true)"
     if [[ -n "$DEVICE_LINE" ]]; then
-      echo "error: $DEVICE is visible but not connected:" >&2
+      echo "error: $DEVICE_NAME is visible but devicectl cannot open a usable device tunnel:" >&2
       echo "$DEVICE_LINE" >&2
     else
-      echo "error: $DEVICE was not found by devicectl." >&2
+      echo "error: $DEVICE_NAME was not found by devicectl." >&2
     fi
     echo "Unlock the phone, keep it awake, connect USB if needed, and check trust / Developer Mode." >&2
     exit 1
   fi
 
-  echo "waiting for $DEVICE to become connected..." >&2
+  echo "waiting for $DEVICE_NAME device tunnel..." >&2
   sleep 5
 done
 

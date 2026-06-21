@@ -1233,7 +1233,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            const response = await fetch("assets/data/journey.json", { cache: "no-store" });
+            const journeyUrl = new URL("assets/data/journey.json", window.location.href);
+            journeyUrl.searchParams.set("v", Date.now().toString());
+            const response = await fetch(journeyUrl, { cache: "no-store" });
             if (!response.ok) {
                 throw new Error(`Journey data failed: ${response.status}`);
             }

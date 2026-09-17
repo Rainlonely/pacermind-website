@@ -1175,3 +1175,11 @@ html[lang^="zh"] .map-caption strong {
     letter-spacing: 0.06em;
   }
 }
+/* Mapbox CSS arrives asynchronously and declares position:relative. Keep our
+   explicit stage geometry regardless of stylesheet arrival order. */
+.live-map.mapboxgl-map {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}

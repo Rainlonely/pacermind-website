@@ -1,145 +1,348 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="color-scheme" content="light dark">
-    <meta name="theme-color" content="#f5f1e6" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#0c1511" media="(prefers-color-scheme: dark)">
-    <meta name="apple-itunes-app" content="app-id=6754869376, app-argument=https://pacermind.xyz/privacy.html">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="theme-color"
+      content="#F6F1EC"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#11100F"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="apple-itunes-app"
+      content="app-id=6754869376, app-argument=https://pacermind.xyz/privacy.html"
+    />
     <title>PacerMind Privacy Policy - Local-First Running Data</title>
-    <meta name="description" content="Learn how PacerMind handles running data, Apple Health access, AI features, optional anonymous analytics, local storage, retention, and privacy controls.">
-    <link rel="canonical" href="https://pacermind.xyz/privacy.html">
-    <meta property="og:site_name" content="PacerMind">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="PacerMind Privacy Policy - Local-First Running Data">
-    <meta property="og:description" content="How PacerMind handles running data, AI consent, optional anonymous analytics, local storage, and user controls.">
-    <meta property="og:url" content="https://pacermind.xyz/privacy.html">
-    <meta property="og:image" content="https://pacermind.xyz/assets/images/dashboard.png">
-    <meta property="og:image:alt" content="PacerMind running dashboard and workout insights">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="PacerMind Privacy Policy - Local-First Running Data">
-    <meta name="twitter:description" content="PacerMind privacy details for running data, AI consent, optional anonymous analytics, local storage, and deletion controls.">
-    <meta name="twitter:image" content="https://pacermind.xyz/assets/images/dashboard.png">
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="016b051d-1066-4fc4-be8f-7a3b78553e0a"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="stylesheet" href="assets/styles/main.css?v=20260609-15">
-    <link rel="stylesheet" href="assets/styles/animations.css">
-</head>
-<body class="page" data-page="privacy">
+    <meta
+      name="description"
+      content="Learn how PacerMind handles running data, Apple Health access, AI features, optional anonymous analytics, local storage, retention, and privacy controls."
+    />
+    <link rel="canonical" href="https://pacermind.xyz/privacy.html" />
+    <meta property="og:site_name" content="PacerMind" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="PacerMind Privacy Policy - Local-First Running Data"
+    />
+    <meta
+      property="og:description"
+      content="How PacerMind handles running data, AI consent, optional anonymous analytics, local storage, and user controls."
+    />
+    <meta property="og:url" content="https://pacermind.xyz/privacy.html" />
+    <meta
+      property="og:image"
+      content="https://pacermind.xyz/assets/images/web/social-preview.jpg"
+    />
+    <meta
+      property="og:image:alt"
+      content="PacerMind running dashboard and workout insights"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="PacerMind Privacy Policy - Local-First Running Data"
+    />
+    <meta
+      name="twitter:description"
+      content="PacerMind privacy details for running data, AI consent, optional anonymous analytics, local storage, and deletion controls."
+    />
+    <meta
+      name="twitter:image"
+      content="https://pacermind.xyz/assets/images/web/social-preview.jpg"
+    />
+    <script
+      defer
+      src="https://cloud.umami.is/script.js"
+      data-website-id="016b051d-1066-4fc4-be8f-7a3b78553e0a"
+    ></script>
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="stylesheet" href="assets/styles/main.css?v=20260918" />
+    <link rel="stylesheet" href="assets/styles/website.css?v=20260918" />
+  </head>
+  <body class="page" data-page="privacy">
     <header>
-        <div class="container nav">
-            <a class="brand" href="/#hero" aria-label="PacerMind home">
-                <img class="brand-logo" src="assets/images/logo.png" alt="PacerMind logo">
-                <span>PacerMind</span>
-            </a>
-            <div class="nav-group">
-                <nav>
-                    <div id="primary-navigation" class="nav-links" data-nav>
-                        <a href="/#hero" data-i18n="nav.home">Home</a>
-                        <a href="/#journey" data-i18n="nav.journey">Journey</a>
-                        <a href="/#product" data-i18n="nav.product">Product</a>
-                        <a href="/#download" data-i18n="nav.download">Download</a>
-                        <a href="/privacy.html" data-i18n="nav.privacy">Privacy</a>
-                        <a href="/support.html" data-i18n="nav.support">Support</a>
-                    </div>
-                </nav>
-                <div class="nav-right">
-                    <div class="language-switch" data-language-switch>
-                        <button type="button" class="is-active" data-lang-btn data-lang="en" aria-pressed="true">EN</button>
-                        <button type="button" data-lang-btn data-lang="zh" aria-pressed="false">中文</button>
-                    </div>
-                    <button class="mobile-toggle" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation">☰</button>
-                </div>
+      <div class="container nav">
+        <a class="brand" href="/#hero" aria-label="PacerMind home">
+          <img
+            class="brand-logo"
+            src="assets/images/logo.png"
+            alt="PacerMind logo"
+          />
+          <span>PacerMind</span>
+        </a>
+        <div class="nav-group">
+          <nav>
+            <div id="primary-navigation" class="nav-links" data-nav>
+              <a href="/#hero" data-i18n="nav.home">Home</a>
+              <a href="/#journey" data-i18n="nav.journey">Journey</a>
+              <a href="/#product" data-i18n="nav.product">Product</a>
+              <a href="/#download" data-i18n="nav.download">Download</a>
+              <a href="/privacy.html" data-i18n="nav.privacy">Privacy</a>
+              <a href="/support.html" data-i18n="nav.support">Support</a>
             </div>
+          </nav>
+          <div class="nav-right">
+            <div class="language-switch" data-language-switch>
+              <button
+                type="button"
+                class="is-active"
+                data-lang-btn
+                data-lang="en"
+                aria-pressed="true"
+              >
+                EN
+              </button>
+              <button
+                type="button"
+                data-lang-btn
+                data-lang="zh"
+                aria-pressed="false"
+              >
+                中文
+              </button>
+            </div>
+            <button
+              class="mobile-toggle"
+              data-nav-toggle
+              aria-expanded="false"
+              aria-controls="primary-navigation"
+            >
+              ☰
+            </button>
+          </div>
         </div>
+      </div>
     </header>
 
     <main>
-        <section class="section">
-            <div class="container surface animate is-visible">
-                <div class="section-header">
-                    <span class="section-eyebrow" data-i18n="privacy.eyebrow">Privacy Policy</span>
-                    <h1 class="section-title" data-i18n="privacy.title">Your run, your data, your mind.</h1>
-                    <p class="section-subtitle" data-i18n="privacy.subtitle">This policy explains what data PacerMind collects, how AI features use it, who receives it, and how you control consent.</p>
-                </div>
-                <article>
-                    <h2 data-i18n="privacy.section1.title">1. Data Controller</h2>
-                    <p class="muted" data-i18n="privacy.section1.text">PacerMind is developed and operated by Rainlonely Studio (“we”, “us”, “our”). For any privacy questions, contact <a href="mailto:rainlonely@me.com">rainlonely@me.com</a>.</p>
-                </article>
-                <article>
-                    <h2 data-i18n="privacy.section2.title">2. Local-First App</h2>
-                    <p class="muted" data-i18n="privacy.section2.text">PacerMind is designed as a standalone app. Workout records, notes, plans, journals, route data, and generated history are stored locally on your device. We do not maintain user accounts, cloud profiles, or a PacerMind server database that receives or stores your personal running data.</p>
-                </article>
-                <article>
-                    <h2 data-i18n="privacy.section3.title">3. Data the App Accesses on Your Device</h2>
-                    <ul class="muted">
-                        <li data-i18n="privacy.section3.item1">Workout and health metrics you authorize from Apple Health, such as distance, duration, pace, cadence, heart rate, route, and related training data.</li>
-                        <li data-i18n="privacy.section3.item2">Workout data you choose to import from Strava, if you connect Strava.</li>
-                        <li data-i18n="privacy.section3.item3">Notes, plans, preferences, and app settings you create inside PacerMind.</li>
-                        <li data-i18n="privacy.section3.item4">Basic device context, such as system language and app version, used to render the app and provide support.</li>
-                    </ul>
-                    <p class="muted" data-i18n="privacy.section3.text">This access is performed by the PacerMind app installed on your device. Rainlonely Studio does not remotely access this data. The app uses it to provide local features, unless you choose to use an AI feature or connect a third-party service as described below.</p>
-                </article>
-                <article>
-                    <h2 data-i18n="privacy.section4.title">4. AI Features, Sharing &amp; Consent</h2>
-                    <p class="muted" data-i18n="privacy.section4.text">Some PacerMind features use third-party large language model providers to generate training feedback, summaries, plans, or insights. Currently, AI services in mainland China are provided through Qwen, and AI services outside mainland China are provided through OpenAI GPT models. When you use an AI feature, the necessary workout context, health and fitness metrics, derived training summaries, notes, or prompt content may be sent to Rainlonely Studio infrastructure and the relevant provider solely to generate the requested response. We request your permission in-app before this AI transfer occurs, and you can decline or revoke consent later in Settings.</p>
-                    <p class="muted" data-i18n="privacy.section4.extra">We may change model providers, model versions, or routing logic from time to time, including for quality, reliability, availability, compliance, or cost reasons. These changes may occur without prior notice, but our purpose remains to provide the best practical feedback experience for users while applying the protections described in this policy.</p>
-                </article>
-                <article>
-                    <h2 data-i18n="privacy.section5.title">5. Optional Anonymous Product Analytics</h2>
-                    <p class="muted" data-i18n="privacy.section5.text">Only after you explicitly opt in, PacerMind uses PostHog Cloud in the United States to understand feature adoption and improve the product. We send basic app lifecycle events and a limited set of product milestones, such as completing onboarding, connecting a workout source, completing a first import, opening workout or plan details, generating an insight or plan, and completing a share. Event properties are restricted to coarse categories such as source, insight type, plan context, and share format. PostHog may also process a randomly generated anonymous identifier and technical context such as app version, device model, operating-system version, locale, time zone, and network information necessarily received with a request. PacerMind marks every analytics event to disable GeoIP location enrichment.</p>
-                    <p class="muted" data-i18n="privacy.section5.extra">We do not send names, email addresses, account identifiers, workout or health values, routes, precise location, notes, AI prompts, or AI responses to PostHog. Session replay, automatic interaction and screen capture, crash reporting, advertising, cross-app tracking, and identified person profiles are disabled. You can decline analytics or turn it off later in PacerMind Settings. Turning it off stops future analytics collection. Anonymous analytics already received may be retained only as reasonably necessary for product analytics and according to our PostHog project controls. See <a href="https://posthog.com/privacy" rel="noopener noreferrer">PostHog’s privacy information</a>.</p>
-                </article>
-                <article>
-                    <h2 data-i18n="privacy.section6.title">6. Strava Connection</h2>
-                    <p class="muted" data-i18n="privacy.section6.text">If you connect Strava, Strava authentication is handled by Strava. Workout data may pass through our relay interface only so it can be delivered from Strava to your device. We do not store Strava access data, workout data, route data, or imported training history on our servers after relay delivery.</p>
-                </article>
-                <article>
-                    <h2 data-i18n="privacy.section7.title">7. Website Analytics</h2>
-                    <p class="muted" data-i18n="privacy.section7.text">The PacerMind website uses Umami Cloud for privacy-focused aggregate traffic measurement. It may process page views, referrers, browser and operating-system type, device type, language, and approximate country or region. Our website configuration does not use cookies, cross-site advertising tracking, or session replay. See <a href="https://umami.is/privacy" rel="noopener noreferrer">Umami’s privacy information</a>. Website analytics is separate from the optional in-app PostHog analytics.</p>
-                </article>
-                <article>
-                    <h2 data-i18n="privacy.section8.title">8. Data Storage &amp; Retention</h2>
-                    <p class="muted" data-i18n="privacy.section8.text">Your personal PacerMind content is primarily stored locally in the app container on your device. For AI features, selected data may pass through Rainlonely Studio infrastructure only to relay and process your request to the relevant provider; we do not use that path as long-term storage for your workout history or profile. Optional anonymous app analytics is processed by PostHog, and aggregate website analytics is processed by Umami, as described above. Deleting the app deletes local app data managed by iOS, but does not by itself delete anonymous analytics already received by those services.</p>
-                </article>
-                <article>
-                    <h2 data-i18n="privacy.section9.title">9. User Controls</h2>
-                    <ul class="muted">
-                        <li data-i18n="privacy.section9.item1">Revoke Apple Health permissions at any time in iOS Settings → Health → Data Access &amp; Devices.</li>
-                        <li data-i18n="privacy.section9.item2">Disconnect Strava from PacerMind or revoke access from your Strava account settings.</li>
-                        <li data-i18n="privacy.section9.item3">Decline or disable Anonymous Product Analytics at any time in PacerMind Settings.</li>
-                        <li data-i18n="privacy.section9.item4">Delete local app data by using in-app deletion controls where available or by deleting PacerMind from your device.</li>
-                    </ul>
-                </article>
-                <article>
-                    <h2 data-i18n="privacy.section10.title">10. Children’s Privacy</h2>
-                    <p class="muted" data-i18n="privacy.section10.text">PacerMind is intended for users aged 16 and above. We do not knowingly collect or process personal data from children under that age.</p>
-                </article>
-                <article>
-                    <h2 data-i18n="privacy.section11.title">11. Policy Updates</h2>
-                    <p class="muted" data-i18n="privacy.section11.text">We may update this policy as PacerMind changes. Material changes will be reflected on this page, together with the latest revision date below.</p>
-                </article>
-                <p class="muted" data-i18n="privacy.lastUpdated">Last updated: August 25, 2026</p>
-            </div>
-        </section>
+      <section class="section">
+        <div class="container surface animate is-visible">
+          <div class="section-header">
+            <span class="section-eyebrow" data-i18n="privacy.eyebrow"
+              >Privacy Policy</span
+            >
+            <h1 class="section-title" data-i18n="privacy.title">
+              Your run, your data, your mind.
+            </h1>
+            <p class="section-subtitle" data-i18n="privacy.subtitle">
+              This policy explains what data PacerMind collects, how AI features
+              use it, who receives it, and how you control consent.
+            </p>
+          </div>
+          <article>
+            <h2 data-i18n="privacy.section1.title">1. Data Controller</h2>
+            <p class="muted" data-i18n="privacy.section1.text">
+              PacerMind is developed and operated by Rainlonely Studio (“we”,
+              “us”, “our”). For any privacy questions, contact
+              <a href="mailto:rainlonely@me.com">rainlonely@me.com</a>.
+            </p>
+          </article>
+          <article>
+            <h2 data-i18n="privacy.section2.title">2. Local-First App</h2>
+            <p class="muted" data-i18n="privacy.section2.text">
+              PacerMind is designed as a standalone app. Workout records, notes,
+              plans, journals, route data, and generated history are stored
+              locally on your device. We do not maintain user accounts, cloud
+              profiles, or a PacerMind server database that receives or stores
+              your personal running data.
+            </p>
+          </article>
+          <article>
+            <h2 data-i18n="privacy.section3.title">
+              3. Data the App Accesses on Your Device
+            </h2>
+            <ul class="muted">
+              <li data-i18n="privacy.section3.item1">
+                Workout and health metrics you authorize from Apple Health, such
+                as distance, duration, pace, cadence, heart rate, route, and
+                related training data.
+              </li>
+              <li data-i18n="privacy.section3.item2">
+                Workout data you choose to import from Strava, if you connect
+                Strava.
+              </li>
+              <li data-i18n="privacy.section3.item3">
+                Notes, plans, preferences, and app settings you create inside
+                PacerMind.
+              </li>
+              <li data-i18n="privacy.section3.item4">
+                Basic device context, such as system language and app version,
+                used to render the app and provide support.
+              </li>
+            </ul>
+            <p class="muted" data-i18n="privacy.section3.text">
+              This access is performed by the PacerMind app installed on your
+              device. Rainlonely Studio does not remotely access this data. The
+              app uses it to provide local features, unless you choose to use an
+              AI feature or connect a third-party service as described below.
+            </p>
+          </article>
+          <article>
+            <h2 data-i18n="privacy.section4.title">
+              4. AI Features, Sharing &amp; Consent
+            </h2>
+            <p class="muted" data-i18n="privacy.section4.text">
+              Some PacerMind features use third-party large language model
+              providers to generate training feedback, summaries, plans, or
+              insights. Currently, AI services in mainland China are provided
+              through Qwen, and AI services outside mainland China are provided
+              through OpenAI GPT models. When you use an AI feature, the
+              necessary workout context, health and fitness metrics, derived
+              training summaries, notes, or prompt content may be sent to
+              Rainlonely Studio infrastructure and the relevant provider solely
+              to generate the requested response. We request your permission
+              in-app before this AI transfer occurs, and you can decline or
+              revoke consent later in Settings.
+            </p>
+            <p class="muted" data-i18n="privacy.section4.extra">
+              We may change model providers, model versions, or routing logic
+              from time to time, including for quality, reliability,
+              availability, compliance, or cost reasons. These changes may occur
+              without prior notice, but our purpose remains to provide the best
+              practical feedback experience for users while applying the
+              protections described in this policy.
+            </p>
+          </article>
+          <article>
+            <h2 data-i18n="privacy.section5.title">
+              5. Optional Anonymous Product Analytics
+            </h2>
+            <p class="muted" data-i18n="privacy.section5.text">
+              Only after you explicitly opt in, PacerMind uses PostHog Cloud in
+              the United States to understand feature adoption and improve the
+              product. We send basic app lifecycle events and a limited set of
+              product milestones, such as completing onboarding, connecting a
+              workout source, completing a first import, opening workout or plan
+              details, generating an insight or plan, and completing a share.
+              Event properties are restricted to coarse categories such as
+              source, insight type, plan context, and share format. PostHog may
+              also process a randomly generated anonymous identifier and
+              technical context such as app version, device model,
+              operating-system version, locale, time zone, and network
+              information necessarily received with a request. PacerMind marks
+              every analytics event to disable GeoIP location enrichment.
+            </p>
+            <p class="muted" data-i18n="privacy.section5.extra">
+              We do not send names, email addresses, account identifiers,
+              workout or health values, routes, precise location, notes, AI
+              prompts, or AI responses to PostHog. Session replay, automatic
+              interaction and screen capture, crash reporting, advertising,
+              cross-app tracking, and identified person profiles are disabled.
+              You can decline analytics or turn it off later in PacerMind
+              Settings. Turning it off stops future analytics collection.
+              Anonymous analytics already received may be retained only as
+              reasonably necessary for product analytics and according to our
+              PostHog project controls. See
+              <a href="https://posthog.com/privacy" rel="noopener noreferrer"
+                >PostHog’s privacy information</a
+              >.
+            </p>
+          </article>
+          <article>
+            <h2 data-i18n="privacy.section6.title">6. Strava Connection</h2>
+            <p class="muted" data-i18n="privacy.section6.text">
+              If you connect Strava, Strava authentication is handled by Strava.
+              Workout data may pass through our relay interface only so it can
+              be delivered from Strava to your device. We do not store Strava
+              access data, workout data, route data, or imported training
+              history on our servers after relay delivery.
+            </p>
+          </article>
+          <article>
+            <h2 data-i18n="privacy.section7.title">7. Website Analytics</h2>
+            <p class="muted" data-i18n="privacy.section7.text">
+              The PacerMind website uses Umami Cloud for privacy-focused
+              aggregate traffic measurement. It may process page views,
+              referrers, browser and operating-system type, device type,
+              language, and approximate country or region. Our website
+              configuration does not use cookies, cross-site advertising
+              tracking, or session replay. See
+              <a href="https://umami.is/privacy" rel="noopener noreferrer"
+                >Umami’s privacy information</a
+              >. Website analytics is separate from the optional in-app PostHog
+              analytics.
+            </p>
+          </article>
+          <article>
+            <h2 data-i18n="privacy.section8.title">
+              8. Data Storage &amp; Retention
+            </h2>
+            <p class="muted" data-i18n="privacy.section8.text">
+              Your personal PacerMind content is primarily stored locally in the
+              app container on your device. For AI features, selected data may
+              pass through Rainlonely Studio infrastructure only to relay and
+              process your request to the relevant provider; we do not use that
+              path as long-term storage for your workout history or profile.
+              Optional anonymous app analytics is processed by PostHog, and
+              aggregate website analytics is processed by Umami, as described
+              above. Deleting the app deletes local app data managed by iOS, but
+              does not by itself delete anonymous analytics already received by
+              those services.
+            </p>
+          </article>
+          <article>
+            <h2 data-i18n="privacy.section9.title">9. User Controls</h2>
+            <ul class="muted">
+              <li data-i18n="privacy.section9.item1">
+                Revoke Apple Health permissions at any time in iOS Settings →
+                Health → Data Access &amp; Devices.
+              </li>
+              <li data-i18n="privacy.section9.item2">
+                Disconnect Strava from PacerMind or revoke access from your
+                Strava account settings.
+              </li>
+              <li data-i18n="privacy.section9.item3">
+                Decline or disable Anonymous Product Analytics at any time in
+                PacerMind Settings.
+              </li>
+              <li data-i18n="privacy.section9.item4">
+                Delete local app data by using in-app deletion controls where
+                available or by deleting PacerMind from your device.
+              </li>
+            </ul>
+          </article>
+          <article>
+            <h2 data-i18n="privacy.section10.title">10. Children’s Privacy</h2>
+            <p class="muted" data-i18n="privacy.section10.text">
+              PacerMind is intended for users aged 16 and above. We do not
+              knowingly collect or process personal data from children under
+              that age.
+            </p>
+          </article>
+          <article>
+            <h2 data-i18n="privacy.section11.title">11. Policy Updates</h2>
+            <p class="muted" data-i18n="privacy.section11.text">
+              We may update this policy as PacerMind changes. Material changes
+              will be reflected on this page, together with the latest revision
+              date below.
+            </p>
+          </article>
+          <p class="muted" data-i18n="privacy.lastUpdated">
+            Last updated: August 25, 2026
+          </p>
+        </div>
+      </section>
     </main>
 
     <footer>
-        <div class="container footer-content">
-            <span>© 2026 Rainlonely Studio</span>
-            <div class="footer-links">
-                <a href="/privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
-                <a href="/support.html" data-i18n="footer.support">Support</a>
-            </div>
+      <div class="container footer-content">
+        <span>© 2026 Rainlonely Studio</span>
+        <div class="footer-links">
+          <a href="/privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
+          <a href="/support.html" data-i18n="footer.support">Support</a>
         </div>
+      </div>
     </footer>
 
-    <script src="scripts/scroll-effects.js?v=20260621-1" defer></script>
-</body>
+    <script src="scripts/translations.js?v=20260918" defer></script>
+    <script src="scripts/site.js?v=20260918" defer></script>
+  </body>
 </html>

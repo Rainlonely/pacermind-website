@@ -1,239 +1,648 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="color-scheme" content="light dark">
-    <meta name="theme-color" content="#f5f1e6" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#0c1511" media="(prefers-color-scheme: dark)">
-    <meta name="apple-itunes-app" content="app-id=6754869376, app-argument=https://pacermind.xyz/">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="theme-color"
+      content="#F6F1EC"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#11100F"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="apple-itunes-app"
+      content="app-id=6754869376, app-argument=https://pacermind.xyz/"
+    />
     <title>PacerMind - AI Running Journal, Heatmaps, and Training Plans</title>
-    <meta name="description" content="PacerMind is an AI running app for Apple Watch runners, with city heatmaps, workout notes, weekly journals, training plans, and long-term running memory.">
-    <link rel="canonical" href="https://pacermind.xyz/">
-    <meta property="og:site_name" content="PacerMind">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="PacerMind - AI Running Journal, Heatmaps, and Training Plans">
-    <meta property="og:description" content="Turn runs, routes, notes, and plans into a living map of why you keep running.">
-    <meta property="og:url" content="https://pacermind.xyz/">
-    <meta property="og:image" content="https://pacermind.xyz/assets/images/dashboard.png">
-    <meta property="og:image:alt" content="PacerMind running dashboard and workout insights">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="PacerMind - AI Running Journal, Heatmaps, and Training Plans">
-    <meta name="twitter:description" content="An AI running companion for city heatmaps, workout notes, weekly journals, and training rhythm.">
-    <meta name="twitter:image" content="https://pacermind.xyz/assets/images/dashboard.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="016b051d-1066-4fc4-be8f-7a3b78553e0a"></script>
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="stylesheet" href="assets/styles/main.css?v=20260609-15">
-    <link rel="stylesheet" href="assets/styles/animations.css">
-</head>
-<body class="page" data-page="home">
+    <meta
+      name="description"
+      content="PacerMind is an AI running app for Apple Watch runners, with city heatmaps, workout notes, weekly journals, training plans, and long-term running memory."
+    />
+    <link rel="canonical" href="https://pacermind.xyz/" />
+    <meta property="og:site_name" content="PacerMind" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="PacerMind - AI Running Journal, Heatmaps, and Training Plans"
+    />
+    <meta
+      property="og:description"
+      content="Turn runs, routes, notes, and plans into a living map of why you keep running."
+    />
+    <meta property="og:url" content="https://pacermind.xyz/" />
+    <meta
+      property="og:image"
+      content="https://pacermind.xyz/assets/images/web/social-preview.jpg"
+    />
+    <meta property="og:image:alt" content="PacerMind — Light up your city" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="PacerMind - AI Running Journal, Heatmaps, and Training Plans"
+    />
+    <meta
+      name="twitter:description"
+      content="An AI running companion for city heatmaps, workout notes, weekly journals, and training rhythm."
+    />
+    <meta
+      name="twitter:image"
+      content="https://pacermind.xyz/assets/images/web/social-preview.jpg"
+    />
+    <script
+      defer
+      src="https://cloud.umami.is/script.js"
+      data-website-id="016b051d-1066-4fc4-be8f-7a3b78553e0a"
+    ></script>
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="stylesheet" href="assets/styles/main.css?v=20260918" />
+    <link rel="stylesheet" href="assets/styles/website.css?v=20260918" />
+    <link
+      rel="preload"
+      href="assets/fonts/BarlowCondensed-Bold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+  </head>
+  <body class="page" data-page="home">
+    <a class="skip-link" href="#main">Skip to content</a>
     <header>
-        <div class="container nav">
-            <a class="brand" href="#hero" aria-label="PacerMind home">
-                <img class="brand-logo" src="assets/images/logo.png" alt="PacerMind logo">
-                <span>PacerMind</span>
-            </a>
-            <div class="nav-group">
-                <nav aria-label="Primary navigation">
-                    <div id="primary-navigation" class="nav-links" data-nav>
-                        <a href="#hero" data-i18n="nav.home">Home</a>
-                        <a href="#journey" data-i18n="nav.journey">Journey</a>
-                        <a href="#product" data-i18n="nav.product">Product</a>
-                        <a href="#download" data-i18n="nav.download">Download</a>
-                        <a href="/privacy.html" data-i18n="nav.privacy">Privacy</a>
-                        <a href="/support.html" data-i18n="nav.support">Support</a>
-                    </div>
-                </nav>
-                <div class="nav-right">
-                    <div class="language-switch" data-language-switch>
-                        <button type="button" class="is-active" data-lang-btn data-lang="en" aria-pressed="true">EN</button>
-                        <button type="button" data-lang-btn data-lang="zh" aria-pressed="false">中文</button>
-                    </div>
-                    <button class="mobile-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation">☰</button>
-                </div>
+      <div class="container nav">
+        <a class="brand" href="#hero" aria-label="PacerMind home">
+          <img
+            class="brand-logo"
+            src="assets/images/logo.png"
+            alt="PacerMind logo"
+          />
+          <span>PacerMind</span>
+        </a>
+        <div class="nav-group">
+          <nav aria-label="Primary navigation">
+            <div id="primary-navigation" class="nav-links" data-nav>
+              <a href="#product" data-i18n="nav.product">Product</a
+              ><a href="#journey" data-i18n="nav.journey">Journey</a>
+              <a href="#download" data-i18n="nav.download">Download</a>
+
+              <a href="/support.html" data-i18n="nav.support">Support</a>
             </div>
+          </nav>
+          <div class="nav-right">
+            <div class="language-switch" data-language-switch>
+              <button
+                type="button"
+                class="is-active"
+                data-lang-btn
+                data-lang="en"
+                aria-pressed="true"
+              >
+                EN
+              </button>
+              <button
+                type="button"
+                data-lang-btn
+                data-lang="zh"
+                aria-pressed="false"
+              >
+                中文
+              </button>
+            </div>
+            <button
+              class="mobile-toggle"
+              type="button"
+              data-nav-toggle
+              aria-expanded="false"
+              aria-controls="primary-navigation"
+              aria-label="Open navigation"
+            >
+              ☰
+            </button>
+          </div>
         </div>
+      </div>
     </header>
 
-    <main>
-        <section id="hero" class="hero-section" aria-labelledby="hero-title">
-            <div class="map-stage" data-heatmap-stage>
-                <div class="mapbox-live-map" data-mapbox-map="hero" aria-hidden="true"></div>
-                <div class="map-paper" aria-hidden="true">
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                </div>
-                <svg class="route-map hero-route-map" data-hero-map viewBox="0 0 1000 680" role="img" aria-label="Animated recent running routes"></svg>
-                <div class="memory-bubbles" data-memory-bubbles aria-live="polite"></div>
+    <main id="main">
+      <section id="hero" class="landing-hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow" data-i18n="hero.eyebrow"
+              >A RUNNING LIFE, CONNECTED</span
+            >
+            <h1 data-i18n="hero.title">Light up<br /><em>your city.</em></h1>
+            <p class="hero-lead" data-i18n="hero.subtitle">
+              Your next run. Your bigger story.
+            </p>
+            <p class="hero-description" data-i18n="hero.body">
+              Know what to run today, reflect on every effort, and watch your
+              everyday routes become a lifelong running story.
+            </p>
+            <div class="actions">
+              <div
+                class="app-store-badges"
+                aria-label="Download PacerMind on the App Store"
+              >
+                <a
+                  class="app-store-badge app-store-badge-us"
+                  href="https://apps.apple.com/us/app/pacermind/id6754869376"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Download PacerMind on the App Store in the United States"
+                >
+                  <img
+                    src="assets/images/app-store/app-store-us.svg"
+                    alt="Download on the App Store"
+                  />
+                </a>
+                <a
+                  class="app-store-badge app-store-badge-cn"
+                  href="https://apps.apple.com/cn/app/pacermind/id6754869376"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="在中国大陆 App Store 下载 PacerMind"
+                >
+                  <img
+                    src="assets/images/app-store/app-store-cn.svg"
+                    alt="在 App Store 下载"
+                  />
+                </a>
+              </div>
+              <a class="text-link" href="#product" data-i18n="hero.ctaSecondary"
+                >Meet PacerMind <span aria-hidden="true">↗</span></a
+              >
             </div>
-            <div class="container hero">
-                <div class="hero-content animate is-visible">
-                    <span class="eyebrow" data-i18n="hero.eyebrow">PacerMind 2.0</span>
-                    <h1 id="hero-title" class="hero-title" data-i18n="hero.title">Light Up Your City.</h1>
-                    <p class="hero-subtitle" data-i18n="hero.subtitle">This is my journey. What's yours?</p>
-                    <p class="hero-text" data-i18n="hero.body">PacerMind turns years of routes, notes, plans, and small decisions into a living map of why you keep running.</p>
-                    <div class="actions">
-                        <div class="app-store-badges" aria-label="Download PacerMind on the App Store">
-                            <a class="app-store-badge app-store-badge-us" href="https://apps.apple.com/us/app/pacermind/id6754869376" target="_blank" rel="noopener" aria-label="Download PacerMind on the App Store in the United States">
-                                <img src="assets/images/app-store/app-store-us.svg" alt="Download on the App Store">
-                            </a>
-                            <a class="app-store-badge app-store-badge-cn" href="https://apps.apple.com/cn/app/pacermind/id6754869376" target="_blank" rel="noopener" aria-label="在中国大陆 App Store 下载 PacerMind">
-                                <img src="assets/images/app-store/app-store-cn.svg" alt="在 App Store 下载">
-                            </a>
-                        </div>
-                        <a class="btn btn-secondary" href="#journey" data-i18n="hero.ctaSecondary">View Journey</a>
-                    </div>
-                </div>
+            <p class="platform-note" data-i18n="hero.platform">
+              Made for iPhone, iPad &amp; Apple Watch
+            </p>
+          </div>
+          <div class="hero-visual" data-intro-stage>
+            <picture class="city-poster"
+              ><source
+                media="(prefers-color-scheme: dark)"
+                srcset="assets/images/web/city-dark.webp" />
+              <img
+                src="assets/images/web/city-light.webp"
+                width="1280"
+                height="900"
+                alt="Real PacerMind running routes across Shanghai"
+                fetchpriority="high"
+            /></picture>
+            <div id="hero-map" class="live-map" aria-hidden="true" inert></div>
+            <div class="map-topline">
+              <span class="map-location">SHANGHAI · 31.23° N / 121.48° E</span
+              ><button
+                class="map-replay"
+                type="button"
+                data-replay
+                data-i18n="intro.replay"
+              >
+                ↻ Replay journey</button
+              ><button
+                class="map-replay"
+                type="button"
+                data-skip
+                hidden
+                data-i18n="intro.skip"
+              >
+                Skip animation
+              </button>
             </div>
-            <a class="scroll-indicator" href="#journey" aria-label="Scroll to journey">
-                <span></span>
-                <small data-i18n="hero.scroll">Scroll</small>
-            </a>
-        </section>
-
-        <section id="journey" class="section journey-section" aria-labelledby="journey-title">
-            <div class="container">
-                <div class="section-header align-left animate">
-                    <span class="eyebrow" data-i18n="journey.eyebrow">My Journey</span>
-                    <h2 id="journey-title" class="section-title" data-i18n="journey.title">A city slowly lit by ordinary days.</h2>
-                    <p class="section-subtitle" data-i18n="journey.subtitle">Not every run is a breakthrough. Some just make the map a little warmer.</p>
-                </div>
-
-                <div class="stats-strip animate delay-1">
-                    <div>
-                        <strong data-stat-runs>2,132</strong>
-                        <span data-i18n="journey.stats.runs">Runs</span>
-                    </div>
-                    <div>
-                        <strong data-stat-distance>19,623</strong>
-                        <span data-i18n="journey.stats.distance">Kilometers</span>
-                    </div>
-                    <div class="stat-years">
-                        <strong data-stat-years>16</strong>
-                        <span data-i18n="journey.stats.years">Years</span>
-                    </div>
-                    <div>
-                        <strong data-stat-pace>5'19"</strong>
-                        <span data-i18n="journey.stats.pace">Avg Pace</span>
-                    </div>
-                    <div class="stat-time">
-                        <strong data-stat-time>1,736h</strong>
-                        <span data-i18n="journey.stats.time">Total Time</span>
-                    </div>
-                </div>
-
-                <div class="journey-layout">
-                    <div class="journey-map animate delay-2">
-                        <div class="mapbox-live-map" data-mapbox-map="journey" aria-hidden="true"></div>
-                        <div class="map-paper map-paper-quiet" aria-hidden="true">
-                            <span></span><span></span><span></span><span></span><span></span>
-                            <span></span><span></span><span></span><span></span><span></span>
-                        </div>
-                        <svg class="route-map" data-journey-map viewBox="0 0 1000 680" role="img" aria-label="Recent running heatmap"></svg>
-                    </div>
-                    <div class="run-journal animate delay-3">
-                        <div class="journal-heading">
-                            <span class="eyebrow" data-i18n="journey.recent">Recent 10 Runs</span>
-                            <span data-updated-at>Updated today</span>
-                        </div>
-                        <div class="run-list" data-run-list></div>
-                    </div>
-                </div>
+            <div class="map-caption">
+              <span class="eyebrow" data-i18n="hero.mapLabel"
+                >SMALL STEPS. LASTING TRACES.</span
+              ><strong data-i18n="hero.mapTitle">A city made personal.</strong>
             </div>
-        </section>
-
-        <section id="product" class="section product-section" aria-labelledby="product-title">
-            <div class="container">
-                <div class="section-header animate">
-                    <span class="eyebrow" data-i18n="product.eyebrow">PacerMind 2.0</span>
-                    <h2 id="product-title" class="section-title" data-i18n="product.title">A different kind of running app.</h2>
-                    <p class="section-subtitle" data-i18n="product.subtitle">Not just to make you faster. To help you keep going ten years from now.</p>
-                </div>
-
-                <div class="product-grid">
-                    <article class="feature-card animate delay-1">
-                        <span>01</span>
-                        <h3 data-i18n="product.card1.title">Light Up Your City</h3>
-                        <p data-i18n="product.card1.text">City heatmaps make consistency visible, turning scattered routes into a living memory.</p>
-                    </article>
-                    <article class="feature-card animate delay-2">
-                        <span>02</span>
-                        <h3 data-i18n="product.card2.title">Reflect Every Run</h3>
-                        <p data-i18n="product.card2.text">Workout notes and weekly journals keep the feeling of each block, not just the numbers.</p>
-                    </article>
-                    <article class="feature-card animate delay-3">
-                        <span>03</span>
-                        <h3 data-i18n="product.card3.title">Train With Rhythm</h3>
-                        <p data-i18n="product.card3.text">Import plans, link workouts, and follow the week without turning training into homework.</p>
-                    </article>
-                    <article class="feature-card animate delay-4">
-                        <span>04</span>
-                        <h3 data-i18n="product.card4.title">Stay Close to the Run</h3>
-                        <p data-i18n="product.card4.text">Apple Watch, widgets, weather, and gentle reminders keep the next step within reach.</p>
-                    </article>
-                </div>
-
-                <div class="showcase animate">
-                    <figure>
-                        <img src="assets/images/pacermind-2/today-1.png" alt="PacerMind 2.0 Today overview screen">
-                        <figcaption data-i18n="product.fig1">Today · Run rhythm</figcaption>
-                    </figure>
-                    <figure>
-                        <img src="assets/images/pacermind-2/today-2.png" alt="PacerMind 2.0 Today training detail screen">
-                        <figcaption data-i18n="product.fig2">Today · Training focus</figcaption>
-                    </figure>
-                    <figure>
-                        <img src="assets/images/pacermind-2/journey.png" alt="PacerMind 2.0 Journey screen with city heatmap">
-                        <figcaption data-i18n="product.fig3">Journey · City heatmap</figcaption>
-                    </figure>
-                    <figure>
-                        <img src="assets/images/pacermind-2/workout-history.png" alt="PacerMind 2.0 workout history screen">
-                        <figcaption data-i18n="product.fig4">History · Running journal</figcaption>
-                    </figure>
-                    <figure>
-                        <img src="assets/images/pacermind-2/plan.png" alt="PacerMind 2.0 training plan screen">
-                        <figcaption data-i18n="product.fig5">Plan · Weekly rhythm</figcaption>
-                    </figure>
-                    <figure>
-                        <img src="assets/images/pacermind-2/widget.png" alt="PacerMind 2.0 widget screen">
-                        <figcaption data-i18n="product.fig6">Widget · Next run</figcaption>
-                    </figure>
-                    <figure>
-                        <img src="assets/images/pacermind-2/profile.png" alt="PacerMind 2.0 profile screen">
-                        <figcaption data-i18n="product.fig7">Profile · Long-term record</figcaption>
-                    </figure>
-                </div>
+            <figure class="phone hero-phone">
+              <img
+                src="assets/images/web/today-1-450.webp"
+                width="450"
+                height="974"
+                alt="PacerMind Today on iPhone"
+                decoding="async"
+                data-hero-screen
+              />
+            </figure>
+            <span class="map-status" role="status" data-map-status></span>
+            <div class="map-credit">
+              <a
+                href="https://www.mapbox.com/about/maps/"
+                target="_blank"
+                rel="noopener"
+                >© Mapbox</a
+              >
+              ·
+              <a
+                href="https://www.openstreetmap.org/copyright"
+                target="_blank"
+                rel="noopener"
+                >© OpenStreetMap</a
+              >
             </div>
-        </section>
-
-        <section id="download" class="download-section" aria-labelledby="download-title">
-            <div class="container download-inner animate">
-                <span class="eyebrow" data-i18n="download.eyebrow">Start Your Map</span>
-                <h2 id="download-title" data-i18n="download.title">Run long enough, and the city starts to answer back.</h2>
-                <p data-i18n="download.subtitle">PacerMind remembers the routes, the notes, the plan, and the quiet reasons you came back.</p>
-                <div class="actions">
-                    <a class="btn btn-primary" href="https://apps.apple.com/us/app/pacermind/id6754869376" target="_blank" rel="noopener" data-i18n="download.ctaPrimary">Download PacerMind</a>
-                    <a class="btn btn-secondary" href="/privacy.html" data-i18n="download.ctaSecondary">Privacy Policy</a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container footer-content">
-            <span>© 2026 Rainlonely Studio</span>
-            <div class="footer-links">
-                <a href="/privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
-                <a href="/support.html" data-i18n="footer.support">Support</a>
-            </div>
+          </div>
         </div>
+        <div class="container hero-bottom">
+          <span data-i18n="hero.bottom">EVERY RUN LEAVES SOMETHING.</span
+          ><a href="#product" data-i18n="hero.scroll">Explore the app ↓</a>
+        </div>
+      </section>
+      <section id="product" class="product-stories section">
+        <div class="container">
+          <div class="section-heading">
+            <span class="eyebrow" data-i18n="product.eyebrow"
+              >THE RHYTHM OF YOUR RUN</span
+            >
+            <h2 data-i18n="product.title">
+              Today’s effort.<br />Tomorrow’s perspective.
+            </h2>
+            <p data-i18n="product.subtitle">
+              A little direction before your run. A little understanding after
+              it. A record that grows with you.
+            </p>
+          </div>
+          <article class="story-row">
+            <div class="story-copy">
+              <span class="chapter">01 / TODAY</span>
+              <h3 data-i18n="story.today.title">Find your rhythm.</h3>
+              <p data-i18n="story.today.body">
+                Your training state, the weather, and today’s plan come
+                together. Head out with a clearer sense of what this run is for.
+              </p>
+              <ul class="feature-list">
+                <li data-i18n="story.today.a">
+                  Your training state, in context
+                </li>
+                <li data-i18n="story.today.b">Today’s plan within reach</li>
+                <li data-i18n="story.today.c">Weather for the run ahead</li>
+              </ul>
+            </div>
+            <div class="screen-stage today-stage">
+              <span class="stage-word" aria-hidden="true">TODAY</span>
+              <figure class="phone">
+                <img
+                  src="assets/images/web/today-1-450.webp"
+                  srcset="
+                    assets/images/web/today-1-450.webp 450w,
+                    assets/images/web/today-1-750.webp 750w
+                  "
+                  sizes="(max-width: 700px) 65vw, 300px"
+                  width="450"
+                  height="974"
+                  alt="PacerMind Today: training state, running routes and today’s plan"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+              <span class="screen-label" data-i18n="story.screen"
+                >REAL APP · REAL RUNS</span
+              >
+            </div>
+          </article>
+          <article class="story-row reverse">
+            <div class="story-copy">
+              <span class="chapter">02 / PLAN &amp; REFLECT</span>
+              <h3 data-i18n="story.plan.title">
+                Make every effort<br />mean something.
+              </h3>
+              <p data-i18n="story.plan.body">
+                Follow a plan, connect the workout, and reflect on how it felt.
+                Training becomes a conversation with yourself, week after week.
+              </p>
+              <ul class="feature-list">
+                <li data-i18n="story.plan.a">
+                  Import plans and follow your week
+                </li>
+                <li data-i18n="story.plan.b">
+                  Review workouts with AI insights
+                </li>
+                <li data-i18n="story.plan.c">
+                  Keep the feeling in notes and weekly journals
+                </li>
+              </ul>
+            </div>
+            <div class="screen-stage duo-stage">
+              <figure class="phone">
+                <img
+                  src="assets/images/web/plan-450.webp"
+                  srcset="
+                    assets/images/web/plan-450.webp 450w,
+                    assets/images/web/plan-750.webp 750w
+                  "
+                  sizes="(max-width: 700px) 65vw, 300px"
+                  width="450"
+                  height="974"
+                  alt="PacerMind weekly training plan"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+              <figure class="phone secondary-phone">
+                <img
+                  src="assets/images/web/workout-history-450.webp"
+                  srcset="
+                    assets/images/web/workout-history-450.webp 450w,
+                    assets/images/web/workout-history-750.webp 750w
+                  "
+                  sizes="(max-width: 700px) 65vw, 300px"
+                  width="450"
+                  height="974"
+                  alt="PacerMind workout history and running journal"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            </div>
+          </article>
+          <article class="story-row">
+            <div class="story-copy">
+              <span class="chapter">03 / JOURNEY</span>
+              <h3 data-i18n="story.journey.title">
+                See how far<br />you’ve come.
+              </h3>
+              <p data-i18n="story.journey.body">
+                Not every run is a breakthrough. Together, they become a map of
+                the places, the seasons, and the person you’re becoming.
+              </p>
+              <ul class="feature-list">
+                <li data-i18n="story.journey.a">
+                  Your city, traced in real routes
+                </li>
+                <li data-i18n="story.journey.b">
+                  A long-term view of your running
+                </li>
+                <li data-i18n="story.journey.c">
+                  Memories beyond the finish line
+                </li>
+              </ul>
+            </div>
+            <div class="screen-stage journey-stage">
+              <span class="stage-word" aria-hidden="true">KEEP GOING</span>
+              <figure class="phone">
+                <img
+                  src="assets/images/web/journey-450.webp"
+                  srcset="
+                    assets/images/web/journey-450.webp 450w,
+                    assets/images/web/journey-750.webp 750w
+                  "
+                  sizes="(max-width: 700px) 65vw, 300px"
+                  width="450"
+                  height="974"
+                  alt="PacerMind Journey city heatmap and long-term running record"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+              <span class="screen-label" data-i18n="story.journey.label"
+                >YOUR RUNS ADD UP.</span
+              >
+            </div>
+          </article>
+        </div>
+      </section>
+      <section id="journey" class="section personal-journey">
+        <div class="container">
+          <div class="section-heading align-left">
+            <span class="eyebrow" data-i18n="journey.eyebrow"
+              >FROM THE MAKER’S RUNNING JOURNAL</span
+            >
+            <h2 data-i18n="journey.title">
+              This is my journey.<br />What will yours look like?
+            </h2>
+            <p data-i18n="journey.subtitle">
+              I’m Rain, the runner building PacerMind. These are my real routes
+              and notes. Ordinary days, slowly adding up.
+            </p>
+          </div>
+          <div class="stats-strip">
+            <div>
+              <strong data-stat-runs>2,226</strong
+              ><span data-i18n="journey.stats.runs">Runs</span>
+            </div>
+            <div>
+              <strong data-stat-distance>20,543</strong
+              ><span data-i18n="journey.stats.distance">Kilometers</span>
+            </div>
+            <div>
+              <strong data-stat-years>16</strong
+              ><span data-i18n="journey.stats.years">Years of running</span>
+            </div>
+          </div>
+          <div class="journey-layout">
+            <div class="journey-map-panel">
+              <picture class="city-poster"
+                ><source
+                  media="(prefers-color-scheme: dark)"
+                  srcset="assets/images/web/city-dark.webp" />
+                <img
+                  src="assets/images/web/city-light.webp"
+                  width="1280"
+                  height="900"
+                  alt="Real PacerMind running routes across Shanghai"
+                  loading="lazy"
+                  decoding="async"
+              /></picture>
+              <div
+                id="journey-map"
+                class="live-map"
+                aria-label="Interactive running map of Shanghai"
+              ></div>
+              <button
+                type="button"
+                class="map-activate"
+                data-explore-map
+                data-i18n="journey.explore"
+              >
+                Explore the map ↗</button
+              ><span class="journey-map-status" role="status"></span>
+              <div class="map-credit">
+                <a href="https://www.mapbox.com/about/maps/">© Mapbox</a> ·
+                <a href="https://www.openstreetmap.org/copyright"
+                  >© OpenStreetMap</a
+                >
+              </div>
+            </div>
+            <div class="journal-panel">
+              <div class="journal-heading">
+                <span class="eyebrow" data-i18n="journey.recent"
+                  >RECENT RUNS</span
+                ><span data-updated-at></span>
+              </div>
+              <p class="journal-original" data-i18n="journey.original">
+                Notes in the runner’s original language.
+              </p>
+              <div data-run-list>
+                <p data-i18n="journey.loading">
+                  The routes tell the story. Recent notes will appear here.
+                </p>
+              </div>
+              <button
+                type="button"
+                class="text-link"
+                data-more-runs
+                hidden
+                data-i18n="journey.more"
+              >
+                Show more runs ↓
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section companions">
+        <div class="container">
+          <div class="section-heading">
+            <span class="eyebrow" data-i18n="companion.eyebrow"
+              >CLOSE TO THE RUN</span
+            >
+            <h2 data-i18n="companion.title">Ready when you are.</h2>
+          </div>
+          <div class="companion-grid">
+            <article>
+              <span class="companion-symbol" aria-hidden="true">↗</span>
+              <h3>Apple Watch</h3>
+              <p data-i18n="companion.watch">
+                Take your training to your wrist, and bring the workout back
+                into your story.
+              </p>
+            </article>
+            <article>
+              <span class="companion-symbol" aria-hidden="true">◫</span>
+              <h3 data-i18n="companion.widgetTitle">At a glance</h3>
+              <p data-i18n="companion.widget">
+                Widgets keep your running rhythm close, even before you open the
+                app.
+              </p>
+            </article>
+            <article>
+              <span class="companion-symbol" aria-hidden="true">⇄</span>
+              <h3>Apple Health &amp; Strava</h3>
+              <p data-i18n="companion.sync">
+                Connect the sources you use and give your running history a
+                place to come together.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section faq-section">
+        <div class="container faq-layout">
+          <div>
+            <span class="eyebrow" data-i18n="faq.eyebrow"
+              >BEFORE YOU HEAD OUT</span
+            >
+            <h2 data-i18n="faq.title">A few things<br />to know.</h2>
+          </div>
+          <div class="faq-list">
+            <details>
+              <summary data-i18n="faq.devices.q">
+                Where can I use PacerMind?
+              </summary>
+              <p data-i18n="faq.devices.a">
+                PacerMind is available for iPhone, iPad and Apple Watch. Check
+                the App Store listing for current device and OS requirements.
+              </p>
+            </details>
+            <details>
+              <summary data-i18n="faq.start.q">
+                Can I bring my existing runs?
+              </summary>
+              <p data-i18n="faq.start.a">
+                Yes. Authorize Apple Health, or connect Strava, to bring
+                supported workouts into PacerMind.
+              </p>
+            </details>
+            <details>
+              <summary data-i18n="faq.ai.q">
+                Is AI required to keep a running journal?
+              </summary>
+              <p data-i18n="faq.ai.a">
+                Your records, notes and routes are local-first. AI features are
+                optional and ask for your consent before sharing the context
+                needed for a request.
+              </p>
+            </details>
+            <details>
+              <summary data-i18n="faq.price.q">
+                Where can I find current pricing?
+              </summary>
+              <p data-i18n="faq.price.a">
+                The App Store and the app show current pricing and any available
+                in-app purchases. You can also contact the maker if you have
+                questions.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+      <section id="download" class="download-section">
+        <div class="container download-inner">
+          <span class="eyebrow" data-i18n="download.eyebrow"
+            >ONE RUN IS A START.</span
+          >
+          <h2 data-i18n="download.title">Make it<br />your journey.</h2>
+          <p data-i18n="download.subtitle">
+            The next chapter starts when you step outside.
+          </p>
+          <div class="actions">
+            <div
+              class="app-store-badges"
+              aria-label="Download PacerMind on the App Store"
+            >
+              <a
+                class="app-store-badge app-store-badge-us"
+                href="https://apps.apple.com/us/app/pacermind/id6754869376"
+                target="_blank"
+                rel="noopener"
+                aria-label="Download PacerMind on the App Store in the United States"
+              >
+                <img
+                  src="assets/images/app-store/app-store-us.svg"
+                  alt="Download on the App Store"
+                />
+              </a>
+              <a
+                class="app-store-badge app-store-badge-cn"
+                href="https://apps.apple.com/cn/app/pacermind/id6754869376"
+                target="_blank"
+                rel="noopener"
+                aria-label="在中国大陆 App Store 下载 PacerMind"
+              >
+                <img
+                  src="assets/images/app-store/app-store-cn.svg"
+                  alt="在 App Store 下载"
+                />
+              </a>
+            </div>
+          </div>
+          <a class="text-link" href="/privacy.html" data-i18n="download.privacy"
+            >Your data &amp; privacy ↗</a
+          >
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="container footer-content">
+        <a class="brand" href="#hero"
+          ><img
+            class="brand-logo"
+            src="assets/images/logo.png"
+            width="30"
+            height="30"
+            alt=""
+          />PacerMind</a
+        ><span>© 2026 Rainlonely Studio</span>
+        <div class="footer-links">
+          <a href="/privacy.html" data-i18n="footer.privacy">Privacy Policy</a
+          ><a href="/support.html" data-i18n="footer.support">Support</a>
+        </div>
+      </div>
     </footer>
-
-    <script src="scripts/scroll-effects.js?v=20260621-1" defer></script>
-</body>
+    <script src="scripts/translations.js?v=20260918" defer></script>
+    <script src="scripts/site.js?v=20260918" defer></script>
+  </body>
 </html>

@@ -114,8 +114,12 @@ done
 say "Syncing journey data for $YEAR"
 scripts/sync-journey-from-device.py --year "$YEAR" --device "$DEVICE"
 
+say "Preparing lightweight website data and maps"
+python3 scripts/build-web-assets.py
+
 say "Verifying generated files"
-node --check scripts/scroll-effects.js
+node --check scripts/site.js
+python3 scripts/tests/check-site.py
 node -e "JSON.parse(require('fs').readFileSync('assets/data/journey.json','utf8')); console.log('journey json ok')"
 
 SUMMARY="$(node - <<'NODE'
@@ -156,7 +160,7 @@ NODE
 )"
 
 say "Committing journey data for $COMMIT_DATE"
-git add assets/data/journey.json
+git add index.html assets/data/journey.json assets/data/journey-summary.json assets/data/journey-routes.json assets/images/web/city-light.webp assets/images/web/city-dark.webp
 git commit -m "update journey data for $COMMIT_DATE"
 
 say "Rebasing once more before push"

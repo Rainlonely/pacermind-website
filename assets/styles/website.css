@@ -102,9 +102,11 @@ html {
   font-size: 22px;
 }
 .brand-logo {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
+  width: clamp(160px, 18vw, 220px);
+  height: auto;
+  flex-shrink: 0;
+  border-radius: 0;
+  filter: brightness(0);
 }
 .nav {
   min-height: 80px;
@@ -1264,4 +1266,19 @@ html[lang^="zh"] .map-caption strong {
   inset: 0;
   width: 100%;
   height: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  .brand-logo {
+    filter: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .brand-logo {
+    width: 140px;
+  }
+  .language-switch button {
+    white-space: nowrap;
+  }
 }

@@ -156,6 +156,8 @@
       lang = button.dataset.lang;
       store.set("pacermind-lang", lang);
       applyLanguage();
+      if (heroMap && heroData && heroMap.getSource("pm-place-cities"))
+        window.PMHeroLandmarks.language(heroMap, heroData, lang);
     }),
   );
   toggle?.addEventListener("click", () => {
@@ -289,6 +291,8 @@
   const status = document.querySelector("[data-map-status]");
   let libraryPromise,
     resourcesPromise,
+    heroData,
+    heroResourcesPromise,
     heroMap,
     journeyMap,
     generation = 0,
@@ -304,6 +308,15 @@
         throw error;
       });
     return resourcesPromise;
+  }
+  function heroResources() {
+    return (heroResourcesPromise ||= Promise.all([
+      json("assets/data/mapbox-config.json"),
+      json("assets/data/hero-heatmap.json?v=20260918"),
+    ]).catch((error) => {
+      heroResourcesPromise = null;
+      throw error;
+    }));
   }
   function library() {
     if (window.mapboxgl) return Promise.resolve();
@@ -368,11 +381,19 @@
       id: "route-glow",
       type: "line",
       source: "running-routes",
-      minzoom: 8,
+      minzoom: 7.4,
       paint: {
         "line-color": "#FF6A1A",
         "line-width": 7,
-        "line-opacity": 0.18,
+        "line-opacity": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          7.4,
+          0,
+          8.4,
+          0.18,
+        ],
         "line-blur": 4,
       },
     });
@@ -380,11 +401,19 @@
       id: "route-line",
       type: "line",
       source: "running-routes",
-      minzoom: 8,
+      minzoom: 7.4,
       paint: {
         "line-color": "#FF6A1A",
         "line-width": 1.7,
-        "line-opacity": 0.72,
+        "line-opacity": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          7.4,
+          0,
+          8.4,
+          0.72,
+        ],
       },
     });
   }
@@ -431,7 +460,10 @@
       }
     }, 12000);
     try {
-      const [[config, routes]] = await Promise.all([resources(), library()]);
+      const [[config, data]] = await Promise.all([heroResources(), library()]);
+      heroData = data;
+      // Fetch geometry during the globe flight; optional failure never blocks the intro.
+      const routeLoad = json(data.routesUrl + "?v=20260918").catch(() => null);
       if (run !== generation) return;
       if (heroMap) {
         heroMap.remove();
@@ -442,7 +474,10 @@
       await ready(heroMap);
       if (run !== generation) return;
       clearTimeout(introTimer);
-      addRoutes(heroMap, routes);
+      window.PMHeroLandmarks.add(heroMap, data, darkMode.matches, lang);
+      routeLoad.then((routes) => {
+        if (routes && run === generation && heroMap) addRoutes(heroMap, routes);
+      });
       heroMap.setFog({
         color: darkMode.matches ? "#28231f" : "#ede5dd",
         "high-color": darkMode.matches ? "#11100f" : "#f6f1ec",

@@ -47,3 +47,22 @@ The script reads the **already published** `assets/data/journey.json` and genera
 ## Release
 
 Run checks and visually verify light/dark desktop and mobile, both languages, navigation, FAQs, first-visit/replay/skip, return visits, reduced motion, map failure, image loading and legal pages. Commit to `main` and push `origin main`; check the Pages build and deployed asset hashes. No separate host or deployment credentials are used.
+
+## Export the independent Hero heatmap
+
+With the trusted iPhone connected, run `python3 scripts/export-hero-heatmap.py`.
+This reads the current committed iOS heatmap generation and cached place names,
+without exporting workouts, identifiers, dates, notes or health metrics. Raw caches
+stay in a temporary directory outside Git. The output is intended for the public website.
+Use `--device NAME` for another phone or `--cache-dir PATH` for a saved cache/places pair.
+
+- `hero-heatmap.json`: archive-wide occupied-region lights and localized country/city signs.
+- `hero-heatmap-routes.json`: every cached route, simplified with disconnected GPS segments preserved, converted from GCJ-02 to WGS84.
+
+Hero loads the small landmark file first and fetches geometry during the globe flight.
+The Journey section and its daily publishing data remain independent. Camera landing
+stays in Shanghai to match the homepage; the globe shows the full exported footprint.
+Landmark zoom thresholds and sign styling mirror the iOS renderer (countries 0–2,
+cities 1.4–9.4, lights fade at 7.4–8.4). Missing English cache entries use translated
+names from the same cached Chinese location. Update URL versions in site.js when
+publishing another export. Never check raw device caches into this repository.

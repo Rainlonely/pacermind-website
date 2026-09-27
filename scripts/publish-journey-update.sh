@@ -73,9 +73,19 @@ say() {
 
 require_clean_worktree() {
   if [[ -n "$(git status --porcelain)" ]]; then
-    echo "error: working tree is not clean. Commit or stash local changes first." >&2
-    git status --short >&2
-    exit 1
+    if [[ "$PUSH" -eq 0 ]]; then
+      echo "error: --no-push requires a clean working tree so its commit remains on the current branch." >&2
+      git status --short >&2
+      exit 1
+    fi
+
+    ISOLATED_DIR="$(mktemp -d "${TMPDIR:-/tmp}/pacermind-journey-publish.XXXXXX")"
+    git worktree add --detach "$ISOLATED_DIR" HEAD
+    # The isolated checkout contains only generated data; leave the caller's edits untouched.
+    trap 'git worktree remove --force "$ISOLATED_DIR"' EXIT
+    say "Publishing from an isolated checkout; existing local edits stay in place"
+    (cd "$ISOLATED_DIR" && scripts/publish-journey-update.sh --year "$YEAR" --device "$DEVICE" --wait "$WAIT_DEVICE_SECONDS")
+    exit 0
   fi
 }
 
@@ -141,12 +151,28 @@ NODE
 )"
 printf '%s\n' "$SUMMARY"
 
+JOURNEY_CHANGED=1
 if git diff --quiet -- assets/data/journey.json; then
-  say "No journey data changes to commit"
-  exit 0
+  JOURNEY_CHANGED=0
+elif python3 - <<'PY'
+import json
+import subprocess
+
+with open("assets/data/journey.json", encoding="utf-8") as f:
+    current = json.load(f)
+previous = json.loads(subprocess.check_output(["git", "show", "HEAD:assets/data/journey.json"]))
+current.pop("updatedAt", None)
+previous.pop("updatedAt", None)
+raise SystemExit(0 if current == previous else 1)
+PY
+then
+  git show HEAD:assets/data/journey.json > assets/data/journey.json
+  git show HEAD:assets/data/journey-summary.json > assets/data/journey-summary.json
+  JOURNEY_CHANGED=0
 fi
 
-COMMIT_DATE="$(node - <<'NODE'
+if [[ "$JOURNEY_CHANGED" -eq 1 ]]; then
+  COMMIT_DATE="$(node - <<'NODE'
 const fs = require("fs");
 const data = JSON.parse(fs.readFileSync("assets/data/journey.json", "utf8"));
 const latest = data.runs && data.runs[0];
@@ -159,16 +185,24 @@ console.log(`${month} ${date.getDate()}`);
 NODE
 )"
 
-say "Committing journey data for $COMMIT_DATE"
-git add index.html assets/data/journey.json assets/data/journey-summary.json assets/data/journey-routes.json assets/images/web/city-light.webp assets/images/web/city-dark.webp
-git commit -m "update journey data for $COMMIT_DATE"
+  say "Committing journey data for $COMMIT_DATE"
+  git add index.html assets/data/journey.json assets/data/journey-summary.json assets/data/journey-routes.json assets/images/web/city-light.webp assets/images/web/city-dark.webp
+  git commit -m "update journey data for $COMMIT_DATE"
+else
+  say "No new journey data; checking for unpublished commits"
+fi
+
+# build-web-assets.py also re-encodes screenshots, which are outside this publication.
+# They started clean (or came from the isolated checkout), so discard those outputs.
+git restore -- assets/images/web
 
 say "Rebasing once more before push"
-git pull --rebase "$REMOTE" "$BRANCH"
+git fetch "$REMOTE" "$BRANCH"
+git rebase "$REMOTE/$BRANCH"
 
 if [[ "$PUSH" -eq 1 ]]; then
-  say "Pushing to $REMOTE $BRANCH"
-  git push "$REMOTE" "$BRANCH"
+  say "Pushing HEAD to $REMOTE/$BRANCH"
+  git push "$REMOTE" "HEAD:$BRANCH"
 else
   say "Skipping push because --no-push was set"
 fi

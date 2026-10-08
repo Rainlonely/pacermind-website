@@ -105,7 +105,9 @@ async function checkFields(page, selector, zoom) {
               return { visible: el.matches(':focus-visible'), width: s.outlineWidth, style: s.outlineStyle };
             });
             assert.ok(focused.visible);
-            assert.equal(focused.width, '3px');
+            // WebKit includes CSS zoom in the computed outline width; Chromium
+            // reports the unscaled CSS value. Both must retain a visible ring.
+            assert.ok([3, 3 * zoom].includes(parseFloat(focused.width)), `Visible focus ring: ${focused.width}`);
             assert.equal(focused.style, 'solid');
             if (screenshots && zoom === 1) {
               fs.mkdirSync(screenshots, { recursive: true });
@@ -135,7 +137,7 @@ async function checkFields(page, selector, zoom) {
             measurements.push({ engine, width, lang, colorScheme, zoom, heights: [...new Set(fields.map(f => f.height))] });
             count++;
           } catch (err) {
-            err.message = `${engine} ${width}px ${lang} ${colorScheme} ${zoom * 100}%: ${err.message}`;
+            console.error(`Form case: ${engine} ${width}px ${lang} ${colorScheme} ${zoom * 100}%`);
             throw err;
           } finally {
             await context.close();

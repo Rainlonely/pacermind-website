@@ -125,6 +125,8 @@ const key = 'pacermind-plan-draft-v1';
     mimeType: 'application/json',
     buffer: Buffer.from('{bad')
   });
+  // File.text() completes asynchronously after setInputFiles returns.
+  await page.waitForFunction(() => document.querySelector('#editor-status').textContent.includes('Backup is invalid'));
   assert.equal(await page.locator('[name="title"]').inputValue(), fixture.title);
   assert.ok((await page.locator('#editor-status').innerText()).includes('Backup is invalid'));
   checks++;

@@ -41,7 +41,16 @@ async function checkFields(page, selector, zoom) {
       }
     }
   }
-  if (zoom === 1) assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'No horizontal page overflow');
+  if (zoom === 1) {
+    const pageBounds = await page.evaluate(() => ({
+      width: innerWidth, scrollWidth: document.documentElement.scrollWidth,
+      overflowing: [...document.querySelectorAll('body *')]
+        .filter(el => el.getBoundingClientRect().right > innerWidth + 1)
+        .slice(0, 8).map(el => ({ tag: el.tagName, name: el.name, class: el.className,
+          right: el.getBoundingClientRect().right }))
+    }));
+    assert.ok(pageBounds.scrollWidth <= pageBounds.width + 1, `No horizontal page overflow: ${JSON.stringify(pageBounds)}`);
+  }
   return groups.flat();
 }
 
@@ -125,10 +134,14 @@ async function checkFields(page, selector, zoom) {
             await page.keyboard.press('Escape');
             measurements.push({ engine, width, lang, colorScheme, zoom, heights: [...new Set(fields.map(f => f.height))] });
             count++;
+          } catch (err) {
+            err.message = `${engine} ${width}px ${lang} ${colorScheme} ${zoom * 100}%: ${err.message}`;
+            throw err;
           } finally {
             await context.close();
           }
         }
+      console.log(`PASS: ${engine} form-control matrix (24 cases)`);
       // High-contrast mode falls back to the operating system's select arrow.
       if (engine === 'chromium') {
         const context = await browser.newContext({ forcedColors: 'active' });

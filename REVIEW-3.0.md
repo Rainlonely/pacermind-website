@@ -58,13 +58,18 @@ The Python contract check uses `jsonschema`. Browser checks use an installed Pla
 
 ```sh
 PACERMIND_CHROMIUM=/path/to/chromium node scripts/tests/browser-tests.cjs
+PACERMIND_CHROMIUM=/path/to/chromium node scripts/tests/form-controls.cjs
 ```
 
 If Playwright is installed outside Node's usual module resolution, set `PACERMIND_PLAYWRIGHT_MODULE` to its installed module path. `PACERMIND_PREVIEW_URL` can set another local preview URL. `PACERMIND_SCREENSHOTS` optionally saves website screenshots to a chosen output folder. All external browser requests are blocked during these checks; tests use synthetic plans. Product analytics remains confined to the existing homepage/legal pages; the editor and notes page load no analytics or remote fonts.
 
 These checks exercise schema and browser behavior. **No Xcode, Simulator or actual App import was run in this Linux environment.** The read-only iOS fixture was validated in place; only independently constructed synthetic fixtures were added to this public website.
 
-The pull-request-only workflow in `.github/workflows/website-review.yml` runs the same public checks and 23 browser scenarios against a local static server. It uses read-only repository permissions, pinned action commits, Node 24, Python 3.12, `jsonschema` 4.26.0 and Playwright 1.57.0. Dependencies and browser binaries are installed in the ephemeral CI runner. The private/read-only sibling iOS checkout is not needed by CI. There is no deployment, public preview, secret access, production request or artifact publishing step.
+The pull-request-only workflow in `.github/workflows/website-review.yml` runs the same public checks and 23 browser scenarios against a local static server. It also runs 48 form-control rendering cases in Chromium and Linux WebKit: 375/768/1440 px, English/Chinese, light/dark, 100/200% CSS zoom, long selected options, setup/phase/workout fields, keyboard focus, disabled/error styling and checkbox sizing. Single-line inputs and selects share a 44 px border box, 16 px font, 24 px line height and 9 px vertical padding; selects reserve separate arrow space. Optional `PACERMIND_CONTROL_SCREENSHOTS` saves screenshots and measurements, and `PACERMIND_FORM_BROWSERS=chromium,webkit` selects both installed engines. CSS zoom coverage and Linux WebKit are not a substitute for real Safari or iPhone testing.
+
+At 200% CSS zoom the form checks cover control height and containment within each form row. Existing narrow-layout header/week-toolbar overflow is outside this control styling fix. At 100% the tests also assert no horizontal page overflow at all three widths.
+
+CI uses read-only repository permissions, pinned action commits, Node 24, Python 3.12, `jsonschema` 4.26.0 and Playwright 1.57.0. Dependencies and browser binaries are installed in the ephemeral CI runner. The private/read-only sibling iOS checkout is not needed by CI. There is no deployment, public preview, secret access, production request or artifact publishing step.
 
 ## Release follow-up
 

@@ -28,7 +28,7 @@ jobs:
         run: |
           python -m pip install jsonschema==4.26.0
           npm install --prefix "$RUNNER_TEMP/pacermind-ci" --no-audit --no-fund playwright@1.57.0
-          "$RUNNER_TEMP/pacermind-ci/node_modules/.bin/playwright" install --with-deps chromium
+          "$RUNNER_TEMP/pacermind-ci/node_modules/.bin/playwright" install --with-deps chromium webkit
       - name: Syntax, core, schema and static checks
         run: |
           node --check scripts/site.js
@@ -59,3 +59,4 @@ jobs:
               raise SystemExit('Local preview did not start')
           PY
           PACERMIND_PLAYWRIGHT_MODULE="$RUNNER_TEMP/pacermind-ci/node_modules/playwright" node scripts/tests/browser-tests.cjs
+          PACERMIND_PLAYWRIGHT_MODULE="$RUNNER_TEMP/pacermind-ci/node_modules/playwright" PACERMIND_FORM_BROWSERS=chromium,webkit node scripts/tests/form-controls.cjs

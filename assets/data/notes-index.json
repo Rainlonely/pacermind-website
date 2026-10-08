@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "running": {"source": "assets/data/journey-summary.json", "status": "published", "language": "original", "limit": 10},
+  "development": []
+}

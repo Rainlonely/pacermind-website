@@ -14,7 +14,7 @@ class Page(HTMLParser):
             if k in a:self.refs.append(a[k])
         if 'srcset' in a:self.refs.extend(x.strip().split()[0] for x in a['srcset'].split(','))
         if tag=='img':self.images.append(a)
-for name in ['index.html','privacy.html','support.html']:
+for name in ['index.html','privacy.html','support.html','planner.html','notes.html']:
     p=Page(); p.feed((ROOT/name).read_text())
     assert len(p.ids)==len(set(p.ids)),f'Duplicate ID in {name}'
     for ref in p.refs:

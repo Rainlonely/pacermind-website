@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "title": "合成测试 · 我的跑步安排",
+  "goal": "合成测试：由用户填写数值，周一休息，周二距离跑，周三按时长，周四间歇；其余由用户确认。",
+  "notes": "",
+  "weekStart": "monday",
+  "startDate": "2026-10-05",
+  "mode": "race",
+  "race": {
+    "name": "合成测试比赛",
+    "date": "2026-11-01",
+    "distance": "hm",
+    "goalTimeSec": ""
+  },
+  "stages": [
+    {
+      "phase": "base",
+      "role": "establish",
+      "weeks": 2,
+      "focus": "用户填写的基础阶段方向 · 合成测试"
+    },
+    {
+      "phase": "taper",
+      "role": "taper",
+      "weeks": 1,
+      "focus": "用户填写的减量方向，未安排具体训练"
+    },
+    {
+      "phase": "race",
+      "role": "race",
+      "weeks": 1,
+      "focus": "用户设定的比赛周方向"
+    }
+  ],
+  "days": {
+    "0": {
+      "rest": true
+    },
+    "1": {
+      "workout": {
+        "type": "easy",
+        "title": "合成测试 · 5 km",
+        "description": "",
+        "environment": "",
+        "startTime": "",
+        "warmup": null,
+        "cooldown": null,
+        "blocks": [
+          {
+            "repeat": "1",
+            "label": "",
+            "segments": [
+              {
+                "kind": "work",
+                "metric": "distance",
+                "value": "5",
+                "unit": "km",
+                "paceMin": "5:30",
+                "paceMax": "6:00",
+                "paceUnit": "km",
+                "rpe": "",
+                "hrZone": ""
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "2": {
+      "workout": {
+        "type": "easy",
+        "title": "合成测试 · 30 分钟",
+        "description": "",
+        "environment": "",
+        "startTime": "",
+        "warmup": null,
+        "cooldown": null,
+        "blocks": [
+          {
+            "repeat": "1",
+            "label": "",
+            "segments": [
+              {
+                "kind": "work",
+                "metric": "time",
+                "value": "30",
+                "unit": "min",
+                "paceMin": "",
+                "paceMax": "",
+                "paceUnit": "km",
+                "rpe": "",
+                "hrZone": ""
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "3": {
+      "workout": {
+        "type": "intervals",
+        "title": "合成测试 · 3 × 400 m",
+        "description": "",
+        "environment": "",
+        "startTime": "",
+        "warmup": null,
+        "cooldown": null,
+        "blocks": [
+          {
+            "repeat": "3",
+            "label": "",
+            "segments": [
+              {
+                "kind": "work",
+                "metric": "distance",
+                "value": "400",
+                "unit": "m",
+                "paceMin": "",
+                "paceMax": "",
+                "paceUnit": "km",
+                "rpe": "",
+                "hrZone": ""
+              },
+              {
+                "kind": "rest",
+                "metric": "time",
+                "value": "90",
+                "unit": "s",
+                "paceMin": "",
+                "paceMax": "",
+                "paceUnit": "km",
+                "rpe": "",
+                "hrZone": ""
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "4": {
+      "rest": true
+    },
+    "5": {
+      "rest": true
+    },
+    "6": {
+      "rest": true
+    }
+  },
+  "fromWeek": 1,
+  "toWeek": 1,
+  "program": {
+    "id": "synthetic-editor-test-program",
+    "revision": 1,
+    "lastSignature": ""
+  }
+}

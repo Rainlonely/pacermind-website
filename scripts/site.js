@@ -19,13 +19,27 @@
     },
   };
   const zh = {
-    "hero.eyebrow": "每一步，都连着你的跑步生活",
-    "hero.title": "点亮你的<br><em>城市。</em>",
-    "hero.subtitle": "今天的下一跑，人生的下一章。",
+    "edition": "PacerMind 3.0 · 正在准备",
+    "hero.eyebrow": "跑步、路线与那些值得留下的日子",
+    "hero.title": "跑过的路，<br><em>都记得你。</em>",
+    "hero.subtitle": "自己的节奏，值得留下的故事。",
     "hero.body":
-      "知道今天怎么跑，理解每一次付出，让日常的路线，慢慢连成属于你的跑步旅程。",
-    "hero.ctaSecondary": "认识 PacerMind ↗",
+      "用 iPhone 与 Apple Watch 承接你的安排，记下每次跑步的感受，让日常路线连成属于你的旅程。",
+    "hero.ctaSecondary": "打开计划编辑器 ↗",
+    "planner.eyebrow": "你来设定，工具来承接",
+    "planner.title": "安排自己的节奏。<br>留出真实的生活。",
+    "planner.body": "想跑什么、哪天休息、为了什么出发，由你决定。用本地结构模板，把单周安排或长期备赛方向整理成清楚、可修改的计划。",
+    "planner.cta": "开始编辑计划 ↗",
+    "planner.release": "3.0 尚在准备中。网页编辑器为预览版，现有 App 的价格与功能请以商店为准。",
+    "planner.step1.title": "说清你的意图",
+    "planner.step1.body": "记录自己的安排与偏好，选一个结构，再填写距离、时长与目标。首版不自动理解自然语言。",
+    "planner.step2.title": "看见每个待确认",
+    "planner.step2.body": "日期与空白日程需要你确认。预览支持修改，计算明确区分已知、推算和未知。",
+    "planner.step3.title": "交给 PacerMind 承接",
+    "planner.step3.body": "复制通过校验的 JSON，在 App 中从剪贴板导入，核对预览后确认。",
+    "journey.notes": "阅读跑步与开发笔记 ↗",
     "hero.platform": "为 iPhone、iPad 和 Apple Watch 打造",
+    "capture.note": "此页 App 截图为真实 2.0 界面，3.0 截图待更新。",
     "hero.mapLabel": "小小的脚步，长久的印记。",
     "hero.mapTitle": "把城市，跑成自己的故事。",
     "hero.bottom": "每一次跑步，都会留下些什么。",
@@ -42,7 +56,7 @@
     "story.today.a": "结合上下文，理解训练状态",
     "story.today.b": "今天的训练计划，触手可及",
     "story.today.c": "出发之前，看看跑步天气",
-    "story.screen": "真实界面 · 真实跑步",
+    "story.screen": "PacerMind 2.0 真实界面 · 3.0 截图待更新",
     "story.plan.title": "让每一次付出，<br>都有回响。",
     "story.plan.body":
       "跟随计划，关联训练，记下当时的感受。一周又一周，让训练成为与自己的对话。",
@@ -86,9 +100,9 @@
     "faq.ai.q": "记录跑步一定需要使用 AI 吗？",
     "faq.ai.a":
       "你的记录、笔记和路线以本地存储为主。AI 功能是可选的，在发送完成请求所需的上下文之前，会先征得你的同意。",
-    "faq.price.q": "在哪里查看价格？",
+    "faq.price.q": "3.0 的价格计划是什么？",
     "faq.price.a":
-      "App Store 和 App 内会显示当前价格及可用的内购项目。如果有疑问，也可以直接联系开发者。",
+      "3.0 计划免费下载，个人记录导入为一次买断，国区目标价格 ¥15。尚未确认公开发布，最终价格与可用功能请以 App Store 和 App 内为准。",
     "download.eyebrow": "从一跑开始。",
     "download.title": "跑出你的<br>下一段旅程。",
     "download.subtitle": "下一章，从你走出门的那一刻开始。",
@@ -150,13 +164,14 @@
         el.textContent = localized(el.dataset.statusEn, el.dataset.statusZh);
     });
     if (journey) renderJourney();
+    document.dispatchEvent(new CustomEvent("pm:language", { detail: { lang } }));
   }
   buttons.forEach((button) =>
     button.addEventListener("click", () => {
       lang = button.dataset.lang;
       store.set("pacermind-lang", lang);
       applyLanguage();
-      if (heroMap && heroData && heroMap.getSource("pm-place-cities"))
+      if (page === "home" && heroMap && heroData && heroMap.getSource("pm-place-cities"))
         window.PMHeroLandmarks.language(heroMap, heroData, lang);
     }),
   );

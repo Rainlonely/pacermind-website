@@ -1,6 +1,10 @@
 # PacerMind website
 
-Static bilingual website at https://pacermind.xyz. GitHub Pages publishes the root of `main` automatically. No npm build or backend is required.
+Static bilingual website at https://pacermind.xyz. The site runs from ordinary static hosting; no npm build or backend is required. The existing repository previously documented GitHub Pages, but hosting for the 3.0 release is still undecided.
+
+## PacerMind 3.0 review branch
+
+The 3.0 preparation homepage, browser-local plan editor and published-notes entrance are documented in [REVIEW-3.0.md](REVIEW-3.0.md). This implementation has not been published. The new editor needs no backend or build step and sends no plan content to a server.
 
 ## Preview and check
 
@@ -15,11 +19,11 @@ Mapbox's existing public token is restricted by origin. Local previews display t
 
 ## Design
 
-- Match the iOS `DesignTokens.swift`: light `#F6F1EC` / dark `#11100F`, card `#FFFFFF` / `#201D1A`, brand orange `#FF6A1A`.
+- Match the current Atlas tokens in iOS `DesignTokens.swift`: paper `#F5F0E5` / `#101619`, surface `#FBF7EF` / `#1B2528`, ink `#202D29` / `#F5F0E7`, accent `#B8401C` / `#FF762F`.
 - Local Barlow Condensed for Latin display text, Barlow for metrics, system sans-serif for body/Chinese. Font license is in `assets/fonts/OFL.txt`.
 - 18–24 px card radii; motion never gates content, navigation or downloads.
 - Existing real PacerMind 2.0 iPhone captures are responsively encoded, shown at their original aspect ratio. Replace the source PNGs with new release captures when app screens change; never fabricate product UI.
-- `main.css` retains shared support/privacy layout; `website.css` supplies the current cross-site design and home layout.
+- `main.css` and `website.css` retain existing layouts; `atlas.css` supplies the 3.0 palette and homepage, while `planner.css` supplies the editor.
 
 ## First-visit map flight
 
@@ -46,7 +50,7 @@ The script reads the **already published** `assets/data/journey.json` and genera
 
 ## Release
 
-Run checks and visually verify light/dark desktop and mobile, both languages, navigation, FAQs, first-visit/replay/skip, return visits, reduced motion, map failure, image loading and legal pages. Commit to `main` and push `origin main`; check the Pages build and deployed asset hashes. No separate host or deployment credentials are used.
+Review changes on a separate branch and draft pull request. The review workflow only checks syntax, synthetic plan contracts, static assets and browser behavior; it has no deployment step or deployment permissions. Before a separately authorized release, confirm the hosting provider and visually verify light/dark desktop and mobile, both languages, navigation, FAQs, first-visit/replay/skip, return visits, reduced motion, map failure, image loading and legal pages. Do not treat a review PR or successful tests as publication approval.
 
 ## Export the independent Hero heatmap
 

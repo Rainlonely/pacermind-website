@@ -53,7 +53,6 @@ body{
   color:var(--color-route)
 }
 .hero-visual{
-  border:1px solid var(--color-line);
   border-radius:6px
 }
 .hero-grid{

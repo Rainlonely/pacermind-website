@@ -1,0 +1,62 @@
+name: Website review
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  synthetic-review:
+    name: Static site and synthetic plans
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.12'
+      - name: Install test dependencies
+        run: |
+          python -m pip install jsonschema==4.26.0
+          npm install --prefix "$RUNNER_TEMP/pacermind-ci" --no-audit --no-fund playwright@1.57.0
+          "$RUNNER_TEMP/pacermind-ci/node_modules/.bin/playwright" install --with-deps chromium webkit
+      - name: Syntax, core, schema and static checks
+        run: |
+          node --check scripts/site.js
+          node --check scripts/translations.js
+          node --check scripts/planner.mjs
+          node --check scripts/plan-core.mjs
+          node --check scripts/plan-copy.mjs
+          node --check scripts/notes.mjs
+          node --test scripts/tests/plan-core.test.mjs
+          python scripts/tests/check-site.py
+          python scripts/tests/check-plan-contract.py
+          git diff --check
+      - name: Browser review with synthetic data
+        run: |
+          python -m http.server 4173 --bind 127.0.0.1 > "$RUNNER_TEMP/pacermind-preview.log" 2>&1 &
+          pacermind_server_pid=$!
+          trap 'kill "$pacermind_server_pid"' EXIT
+          python - <<'PY'
+          import time
+          import urllib.request
+          for attempt in range(30):
+              try:
+                  urllib.request.urlopen('http://127.0.0.1:4173/planner.html', timeout=1).close()
+                  break
+              except OSError:
+                  time.sleep(0.2)
+          else:
+              raise SystemExit('Local preview did not start')
+          PY
+          PACERMIND_PLAYWRIGHT_MODULE="$RUNNER_TEMP/pacermind-ci/node_modules/playwright" node scripts/tests/browser-tests.cjs
+          PACERMIND_PLAYWRIGHT_MODULE="$RUNNER_TEMP/pacermind-ci/node_modules/playwright" PACERMIND_FORM_BROWSERS=chromium,webkit node scripts/tests/form-controls.cjs

@@ -18,17 +18,17 @@
       name="apple-itunes-app"
       content="app-id=6754869376, app-argument=https://pacermind.xyz/"
     />
-    <title>PacerMind - AI Running Journal, Heatmaps, and Training Plans</title>
+    <title>PacerMind 3.0 — Your running life, connected</title>
     <meta
       name="description"
-      content="PacerMind is an AI running app for Apple Watch runners, with city heatmaps, workout notes, weekly journals, training plans, and long-term running memory."
+      content="PacerMind connects Apple Watch and iPhone running records, routes, notes and your own plans. Explore the 3.0 direction and local plan editor preview."
     />
     <link rel="canonical" href="https://pacermind.xyz/" />
     <meta property="og:site_name" content="PacerMind" />
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
-      content="PacerMind - AI Running Journal, Heatmaps, and Training Plans"
+      content="PacerMind 3.0 — Your running life, connected"
     />
     <meta
       property="og:description"
@@ -39,15 +39,15 @@
       property="og:image"
       content="https://pacermind.xyz/assets/images/web/social-preview.jpg"
     />
-    <meta property="og:image:alt" content="PacerMind — Light up your city" />
+    <meta property="og:image:alt" content="PacerMind — Every route, a little of you" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="PacerMind - AI Running Journal, Heatmaps, and Training Plans"
+      content="PacerMind 3.0 — Your running life, connected"
     />
     <meta
       name="twitter:description"
-      content="An AI running companion for city heatmaps, workout notes, weekly journals, and training rhythm."
+      content="An Apple Watch and iPhone running companion for routes, memories and your own training rhythm."
     />
     <meta
       name="twitter:image"
@@ -58,20 +58,21 @@
       src="https://cloud.umami.is/script.js"
       data-website-id="016b051d-1066-4fc4-be8f-7a3b78553e0a"
     ></script>
-    <link rel="icon" href="/favicon.ico?v=20260918-logo" sizes="any" />
+    <link rel="icon" href="favicon.ico?v=20260918-logo" sizes="any" />
     <link
       rel="icon"
       type="image/png"
       sizes="512x512"
-      href="/favicon.png?v=20260918-logo"
+      href="favicon.png?v=20260918-logo"
     />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
-      href="/apple-touch-icon.png?v=20260918-logo"
+      href="apple-touch-icon.png?v=20260918-logo"
     />
     <link rel="stylesheet" href="assets/styles/main.css?v=20260918" />
     <link rel="stylesheet" href="assets/styles/website.css?v=20260918-5" />
+    <link rel="stylesheet" href="assets/styles/atlas.css" />
     <link
       rel="preload"
       href="assets/fonts/BarlowCondensed-Bold.woff2"
@@ -97,10 +98,11 @@
           <nav aria-label="Primary navigation">
             <div id="primary-navigation" class="nav-links" data-nav>
               <a href="#product" data-i18n="nav.product">Product</a
-              ><a href="#journey" data-i18n="nav.journey">Journey</a>
+              ><a href="planner.html" data-i18n="nav.planner">Plan editor</a>
+              <a href="notes.html" data-i18n="nav.notes">Notes</a>
               <a href="#download" data-i18n="nav.download">Download</a>
 
-              <a href="/support.html" data-i18n="nav.support">Support</a>
+              <a href="support.html" data-i18n="nav.support">Support</a>
             </div>
           </nav>
           <div class="nav-right">
@@ -142,16 +144,17 @@
       <section id="hero" class="landing-hero">
         <div class="container hero-grid">
           <div class="hero-copy">
+            <p class="atlas-edition" data-i18n="edition">PacerMind 3.0 · In preparation</p>
             <span class="eyebrow" data-i18n="hero.eyebrow"
-              >A RUNNING LIFE, CONNECTED</span
+              >RUNS, ROUTES &amp; DAYS WORTH KEEPING</span
             >
-            <h1 data-i18n="hero.title">Light up<br /><em>your city.</em></h1>
+            <h1 data-i18n="hero.title">Every route.<br /><em>A little of you.</em></h1>
             <p class="hero-lead" data-i18n="hero.subtitle">
-              Your next run. Your bigger story.
+              Your own rhythm. A story that stays with you.
             </p>
             <p class="hero-description" data-i18n="hero.body">
-              Know what to run today, reflect on every effort, and watch your
-              everyday routes become a lifelong running story.
+              Bring your own plans to iPhone and Apple Watch. Keep the feeling
+              of each run, and let everyday routes become your running story.
             </p>
             <div class="actions">
               <div
@@ -183,13 +186,14 @@
                   />
                 </a>
               </div>
-              <a class="text-link" href="#product" data-i18n="hero.ctaSecondary"
-                >Meet PacerMind <span aria-hidden="true">↗</span></a
+              <a class="text-link" href="planner.html" data-i18n="hero.ctaSecondary"
+                >Open plan editor <span aria-hidden="true">↗</span></a
               >
             </div>
             <p class="platform-note" data-i18n="hero.platform">
               Made for iPhone, iPad &amp; Apple Watch
             </p>
+            <p class="release-note" data-i18n="capture.note">App captures show the real 2.0 interface. 3.0 captures will follow.</p>
           </div>
           <div class="hero-visual" data-intro-stage>
             <picture class="city-poster"
@@ -233,7 +237,7 @@
                 src="assets/images/web/today-1-450.webp"
                 width="450"
                 height="974"
-                alt="PacerMind Today on iPhone"
+                alt="PacerMind 2.0 Today on iPhone"
                 decoding="async"
                 data-hero-screen
               />
@@ -261,6 +265,7 @@
           ><a href="#product" data-i18n="hero.scroll">Explore the app ↓</a>
         </div>
       </section>
+      <section class="atlas-plan-section" id="your-plan"><div class="container atlas-plan-grid"><div><span class="eyebrow" data-i18n="planner.eyebrow">YOU SET THE DIRECTION. THE TOOL CARRIES IT.</span><h2 data-i18n="planner.title">Make room for your rhythm.<br>And for real life.</h2><p data-i18n="planner.body">What to run, when to rest, and why to go outside are yours to decide. Use local structures to turn one week or a longer race direction into a clear, editable plan.</p><a class="atlas-cta" href="planner.html" data-i18n="planner.cta">Start your plan ↗</a><p class="release-note" data-i18n="planner.release">3.0 is in preparation. The web editor is a preview. Check the App Store for currently available App features and pricing.</p></div><ol class="atlas-route-steps"><li><b>01</b><div><h3 data-i18n="planner.step1.title">Put your intention into words</h3><p data-i18n="planner.step1.body">Keep your preferences, choose a structure, then fill in distance, duration and targets. This first version does not interpret natural language automatically.</p></div></li><li><b>02</b><div><h3 data-i18n="planner.step2.title">See what needs confirmation</h3><p data-i18n="planner.step2.body">Confirm dates and every empty day. Edit the preview and distinguish known, calculated and unknown values.</p></div></li><li><b>03</b><div><h3 data-i18n="planner.step3.title">Let PacerMind carry it</h3><p data-i18n="planner.step3.body">Copy the validated JSON. Import from the clipboard in the App, review the preview, and confirm.</p></div></li></ol></div></section>
       <section id="product" class="product-stories section">
         <div class="container">
           <div class="section-heading">
@@ -309,7 +314,7 @@
                 />
               </figure>
               <span class="screen-label" data-i18n="story.screen"
-                >REAL APP · REAL RUNS</span
+                >REAL PACERMIND 2.0 · 3.0 CAPTURES TO FOLLOW</span
               >
             </div>
           </article>
@@ -417,6 +422,7 @@
       <section id="journey" class="section personal-journey">
         <div class="container">
           <div class="section-heading align-left">
+            <a class="text-link" href="notes.html" data-i18n="journey.notes">Read running &amp; development notes ↗</a>
             <span class="eyebrow" data-i18n="journey.eyebrow"
               >FROM THE MAKER’S RUNNING JOURNAL</span
             >
@@ -578,12 +584,13 @@
             </details>
             <details>
               <summary data-i18n="faq.price.q">
-                Where can I find current pricing?
+                What is the pricing direction for 3.0?
               </summary>
               <p data-i18n="faq.price.a">
-                The App Store and the app show current pricing and any available
-                in-app purchases. You can also contact the maker if you have
-                questions.
+                3.0 is planned as a free download, with personal record importing
+                as a one-time purchase targeting ¥15 in China. Public release
+                has not been confirmed; final availability and pricing are shown
+                in the App Store and the app.
               </p>
             </details>
           </div>
@@ -629,7 +636,7 @@
               </a>
             </div>
           </div>
-          <a class="text-link" href="/privacy.html" data-i18n="download.privacy"
+          <a class="text-link" href="privacy.html" data-i18n="download.privacy"
             >Your data &amp; privacy ↗</a
           >
         </div>
@@ -646,8 +653,8 @@
             alt="PacerMind" /></a
         ><span>© 2026 Rainlonely Studio</span>
         <div class="footer-links">
-          <a href="/privacy.html" data-i18n="footer.privacy">Privacy Policy</a
-          ><a href="/support.html" data-i18n="footer.support">Support</a>
+          <a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a
+          ><a href="support.html" data-i18n="footer.support">Support</a>
         </div>
       </div>
     </footer>

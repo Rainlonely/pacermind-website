@@ -1,0 +1,148 @@
+{
+  "schema_version": "2.0",
+  "title": "合成测试 · 我的跑步安排",
+  "goal": "合成测试：由用户填写数值，周一休息，周二距离跑，周三按时长，周四间歇；其余由用户确认。",
+  "start_date": "2026-10-05",
+  "end_date": "2026-10-11",
+  "days": [
+    {
+      "date": "2026-10-05",
+      "rest": true
+    },
+    {
+      "date": "2026-10-06",
+      "workout": {
+        "type": "easy",
+        "title": "合成测试 · 5 km",
+        "blocks": [
+          {
+            "repeat": 1,
+            "segments": [
+              {
+                "metric": "distance",
+                "value": 5,
+                "kind": "work",
+                "target": {
+                  "pace": {
+                    "min": 5.5,
+                    "max": 6
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-10-07",
+      "workout": {
+        "type": "easy",
+        "title": "合成测试 · 30 分钟",
+        "blocks": [
+          {
+            "repeat": 1,
+            "segments": [
+              {
+                "metric": "time",
+                "value": 30,
+                "kind": "work"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-10-08",
+      "workout": {
+        "type": "intervals",
+        "title": "合成测试 · 3 × 400 m",
+        "blocks": [
+          {
+            "repeat": 3,
+            "segments": [
+              {
+                "metric": "distance",
+                "value": 0.4,
+                "kind": "work"
+              },
+              {
+                "metric": "time",
+                "value": 1.5,
+                "kind": "rest"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-10-09",
+      "rest": true
+    },
+    {
+      "date": "2026-10-10",
+      "rest": true
+    },
+    {
+      "date": "2026-10-11",
+      "rest": true
+    }
+  ],
+  "coachProgram": {
+    "schemaVersion": "coach-program-1",
+    "id": "synthetic-editor-test-program",
+    "revision": 1,
+    "intent": "racePreparation",
+    "startDate": "2026-10-05",
+    "weekStart": "monday",
+    "raceDate": "2026-11-01",
+    "weeks": [
+      {
+        "id": "synthetic-editor-test-program:w1",
+        "index": 1,
+        "blockIndex": 1,
+        "startDate": "2026-10-05",
+        "endDate": "2026-10-11",
+        "phase": "base",
+        "role": "establish",
+        "focus": "用户填写的基础阶段方向 · 合成测试",
+        "reviewRequired": true
+      },
+      {
+        "id": "synthetic-editor-test-program:w2",
+        "index": 2,
+        "blockIndex": 1,
+        "startDate": "2026-10-12",
+        "endDate": "2026-10-18",
+        "phase": "base",
+        "role": "establish",
+        "focus": "用户填写的基础阶段方向 · 合成测试",
+        "reviewRequired": true
+      },
+      {
+        "id": "synthetic-editor-test-program:w3",
+        "index": 3,
+        "blockIndex": 2,
+        "startDate": "2026-10-19",
+        "endDate": "2026-10-25",
+        "phase": "taper",
+        "role": "taper",
+        "focus": "用户填写的减量方向，未安排具体训练",
+        "reviewRequired": true
+      },
+      {
+        "id": "synthetic-editor-test-program:w4",
+        "index": 4,
+        "blockIndex": 3,
+        "startDate": "2026-10-26",
+        "endDate": "2026-11-01",
+        "phase": "race",
+        "role": "race",
+        "focus": "用户设定的比赛周方向",
+        "reviewRequired": true
+      }
+    ]
+  }
+}

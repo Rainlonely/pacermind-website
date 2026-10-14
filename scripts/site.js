@@ -41,7 +41,6 @@
     "planner.step3.body": "复制通过校验的 JSON，在 App 中从剪贴板导入，核对预览后确认。",
     "journey.notes": "阅读跑步与开发笔记 ↗",
     "hero.platform": "为 iPhone、iPad 和 Apple Watch 打造",
-    "capture.note": "此页展示 PacerMind 3.0 的真实 iPhone 界面。",
     "hero.mapLabel": "小小的脚步，长久的印记。",
     "hero.mapTitle": "把城市，跑成自己的故事。",
     "hero.bottom": "每一次跑步，都会留下些什么。",
@@ -288,17 +287,17 @@
     );
     observer.observe(element);
   }
-  near(document.querySelector("#journey"), async () => {
+  async function loadJourney() {
     try {
       journey = await json("assets/data/journey-summary.json");
       renderJourney();
     } catch {
-      document.querySelector("[data-run-list]").textContent = localized(
-        "Recent notes are temporarily unavailable. The city map is still here to explore.",
-        "暂时无法读取最近的笔记，你仍然可以探索这张城市地图。",
-      );
+      const list = document.querySelector("[data-run-list]");
+      list.innerHTML = `<p>${localized("Unable to load recent runs. Please retry.", "暂时无法读取跑步记录，请重试。")}</p><button type="button" class="text-link" data-retry-runs>${localized("Retry", "重新加载")}</button>`;
+      list.querySelector("[data-retry-runs]").addEventListener("click", loadJourney);
     }
-  });
+  }
+  near(document.querySelector("#journey"), loadJourney);
 
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
   const darkMode = matchMedia("(prefers-color-scheme: dark)");
@@ -438,6 +437,7 @@
     if (!introActive) return;
     introActive = false;
     generation++;
+    window.PMGlobeIntro?.stop();
     clearTimeout(introTimer);
     if (heroMap) {
       heroMap.stop();
@@ -452,7 +452,7 @@
   }
   async function playIntro(manual = false) {
     if (introActive) return;
-    if (reduceMotion.matches) {
+    if (reduceMotion.matches && !manual) {
       statusText(
         status,
         "Motion is reduced on your device. Enjoy the city view.",
@@ -476,7 +476,22 @@
         );
       }
     }, 12000);
+    async function offlineFlight() {
+      clearTimeout(introTimer);
+      heroMap?.remove(); heroMap = null;
+      document.querySelector("#hero-map").classList.remove("is-ready");
+      stage.classList.add("is-playing");
+      await window.PMGlobeIntro.play(stage, darkMode.matches, () => run === generation);
+      if (run !== generation) return;
+      store.set("pacermind-intro-seen-v1", "1");
+      introActive = false;
+      stage.classList.remove("is-playing");
+      replay.hidden = false; skip.hidden = true; status.textContent = "";
+    }
     try {
+      if (["127.0.0.1", "localhost", "::1"].includes(location.hostname)) {
+        await offlineFlight(); return;
+      }
       const [[config, data]] = await Promise.all([heroResources(), library()]);
       heroData = data;
       // Fetch geometry during the globe flight; optional failure never blocks the intro.
@@ -541,11 +556,12 @@
         ),
       );
       if (run !== generation) return;
+      try { await offlineFlight(); return; } catch { /* Keep city routes available. */ }
       finishIntro();
       statusText(
         status,
-        "The city view is ready. The animation can be replayed later.",
-        "城市地图已就绪，稍后可以重播动画。",
+        "The city view is available. The animation could not load; select Replay to retry.",
+        "城市路线图已显示。动画未能加载，点击重播可重试。",
       );
     }
   }
@@ -577,6 +593,42 @@
   ) {
     near(stage, () => playIntro(), "0px");
   }
+  const routePanel = document.querySelector(".journey-map-panel");
+  const routePoster = routePanel.querySelector(".city-poster");
+  const routeControls = routePanel.querySelector(".route-view-controls");
+  let routeScale = 1, routeX = 0, routeY = 0, routeDrag;
+  function drawRouteView() {
+    const maxX = routePanel.clientWidth * (routeScale - 1) / 2;
+    const maxY = routePanel.clientHeight * (routeScale - 1) / 2;
+    routeX = Math.max(-maxX, Math.min(maxX, routeX));
+    routeY = Math.max(-maxY, Math.min(maxY, routeY));
+    routePoster.style.transform = `translate(${routeX}px, ${routeY}px) scale(${routeScale})`;
+  }
+  function enableRouteView() {
+    routePanel.classList.add("is-route-view");
+    routeControls.hidden = false;
+  }
+  routeControls.addEventListener("click", e => {
+    const action = e.target.dataset.routeZoom;
+    if (!action) return;
+    routeScale = action === "reset" ? 1 : Math.max(1, Math.min(5, routeScale * (action === "in" ? 1.3 : 1 / 1.3)));
+    if (action === "reset") routeX = routeY = 0;
+    drawRouteView();
+  });
+  routePanel.addEventListener("pointerdown", e => {
+    if (!routePanel.classList.contains("is-route-view") || e.target.closest("button, a")) return;
+    routeDrag = { x:e.clientX, y:e.clientY, left:routeX, top:routeY };
+    routePanel.setPointerCapture(e.pointerId);
+  });
+  routePanel.addEventListener("pointermove", e => {
+    if (!routeDrag) return;
+    routeX = routeDrag.left + e.clientX - routeDrag.x;
+    routeY = routeDrag.top + e.clientY - routeDrag.y;
+    drawRouteView();
+  });
+  for (const event of ["pointerup", "pointercancel", "lostpointercapture"]) routePanel.addEventListener(event, () => routeDrag = null);
+  // Local route-image controls remain available while the online map loads.
+  enableRouteView();
   const explore = document.querySelector("[data-explore-map]");
   explore.addEventListener("click", async () => {
     const feedback = document.querySelector(".journey-map-status");
@@ -584,8 +636,11 @@
     statusText(feedback, "Opening map…", "正在打开地图…");
     try {
       const [[config, routes]] = await Promise.all([resources(), library()]);
+      routePanel.classList.remove("is-route-view");
+      routeControls.hidden = true;
+      routePoster.style.transform = "";
       journeyMap = makeMap("journey-map", config, true, false);
-      journeyMap.scrollZoom.disable();
+      journeyMap.scrollZoom.enable();
       journeyMap.addControl(
         new window.mapboxgl.NavigationControl({ showCompass: false }),
         "bottom-right",
@@ -609,11 +664,10 @@
       journeyMap?.remove();
       journeyMap = null;
       explore.disabled = false;
-      statusText(
-        feedback,
-        "The interactive map is unavailable. Your city view is still here.",
-        "暂时无法打开交互地图，仍可查看城市路线。",
-      );
+      enableRouteView();
+      statusText(feedback,
+        "Route image: drag to move, use + / − to zoom. Online map unavailable.",
+        "路线图：拖动移动，使用 + / − 缩放。在线地图暂不可用。");
     }
   });
   darkMode.addEventListener("change", () => {

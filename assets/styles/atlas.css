@@ -197,3 +197,11 @@ body{
 .download-inner>.text-link{
   border-color:currentColor
 }
+
+/* Complete approved iPhone preview series, preserving each full composition. */
+.iphone-preview-strip { display:flex; gap:18px; overflow-x:auto; padding:0 0 24px; margin:32px 0 0; list-style:none; scroll-snap-type:x proximity; }
+.iphone-preview-strip li { flex:0 0 280px; scroll-snap-align:start; }
+.iphone-preview-strip a { display:block; border-radius:18px; overflow:hidden; }
+.iphone-preview-strip a:focus-visible { outline:3px solid var(--brand, #ff6a1a); outline-offset:4px; }
+.iphone-preview-strip img { display:block; width:100%; height:auto; }
+@media(max-width:700px) { .iphone-preview-strip li { flex-basis:72vw; max-width:300px; } }

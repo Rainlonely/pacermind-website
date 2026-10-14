@@ -22,7 +22,7 @@ Mapbox's existing public token is restricted by origin. Local previews display t
 - Match the current Atlas tokens in iOS `DesignTokens.swift`: paper `#F5F0E5` / `#101619`, surface `#FBF7EF` / `#1B2528`, ink `#202D29` / `#F5F0E7`, accent `#B8401C` / `#FF762F`.
 - Local Barlow Condensed for Latin display text, Barlow for metrics, system sans-serif for body/Chinese. Font license is in `assets/fonts/OFL.txt`.
 - 18–24 px card radii; motion never gates content, navigation or downloads.
-- Existing real PacerMind 2.0 iPhone captures are responsively encoded, shown at their original aspect ratio. Replace the source PNGs with new release captures when app screens change; never fabricate product UI.
+- The homepage uses real PacerMind 3.0 iPhone preview captures and the nine approved App Store cards completed on 2026-10-09. Responsive WebP assets and source hashes are in `assets/images/iphone-20261009/`; all compositions and attribution remain intact. The captures contain Chinese UI in both website languages. Older 2.0 source assets remain archived separately.
 - `main.css` and `website.css` retain existing layouts; `atlas.css` supplies the 3.0 palette and homepage, while `planner.css` supplies the editor.
 
 ## First-visit map flight

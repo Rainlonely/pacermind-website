@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-09",
+  "source": "pacermind-atlas-nine-map-texture",
+  "pages": [
+    {
+      "page": 1,
+      "title": "把城市，跑成自己的样子。",
+      "source": "IMG_4652.PNG",
+      "file": "01-city-map.png",
+      "sha256": "15808ef9f8238954f012fe255a72838eeace0c71f0e699a71dc4b90145fda3fd"
+    },
+    {
+      "page": 2,
+      "title": "今天出发，",
+      "source": "IMG_4659.PNG",
+      "file": "02-today.png",
+      "sha256": "8cd2c4e40f50505905193c28fec79eee6d297370aef170c83c8ea49a00cc0551"
+    },
+    {
+      "page": 3,
+      "title": "也带着昨天的故事。",
+      "source": "IMG_4660.PNG",
+      "file": "03-memory.png",
+      "sha256": "7bec867aa63b0624af055f967873a8bd31d4b585f25a55381791e0ba691c8b5f"
+    },
+    {
+      "page": 4,
+      "title": "下一程，",
+      "source": "IMG_4661.PNG",
+      "file": "04-plan-list.png",
+      "sha256": "47a96810d8737d738b10ff018ec025eb307858c0240fa3588a65e018175a959b"
+    },
+    {
+      "page": 5,
+      "title": "按自己的节奏。",
+      "source": "IMG_4662.PNG",
+      "file": "05-plan-detail.png",
+      "sha256": "88c26509d2229923b4b6ee626389146673741ea01c43d5615d61374d3738d947"
+    },
+    {
+      "page": 6,
+      "title": "每一条路，",
+      "source": "IMG_4663.PNG",
+      "file": "06-journey.png",
+      "sha256": "da3562092fb9471121d19e059b6f726917b45c605c20f8abd692245557f1b0f6"
+    },
+    {
+      "page": 7,
+      "title": "都有值得记住的细节。",
+      "source": "IMG_4664.PNG",
+      "file": "07-workout-detail.png",
+      "sha256": "04e1b85a0381939bb3e3a51f52ee828a6a2b0997441bdb4e1b0c8707068e8165"
+    },
+    {
+      "page": 8,
+      "title": "一路跑来，",
+      "source": "IMG_4665.PNG",
+      "file": "08-profile.png",
+      "sha256": "1e94959a5a3801687f335675139c0bb8ba5926fdc151b645faf7abde8a350a34"
+    },
+    {
+      "page": 9,
+      "title": "成为现在的你。",
+      "source": "IMG_4666.PNG",
+      "file": "09-records.png",
+      "sha256": "e38ba92e745dfe74cfebd9a98d7087db936ef386539fa363eedc53b41fadd2b0"
+    }
+  ]
+}

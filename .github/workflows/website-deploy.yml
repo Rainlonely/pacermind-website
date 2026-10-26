@@ -33,6 +33,11 @@ jobs:
         run: |
           python -m pip install jsonschema==4.26.0
           npm install --prefix "$RUNNER_TEMP/pacermind-ci" --no-audit --no-fund playwright@1.57.0
+          # The regional Azure mirror can stall font/library downloads for minutes.
+          # Keep Ubuntu signature checks and package selections; use its main mirror.
+          if test -f /etc/apt/apt-mirrors.txt; then
+            sudo sed -i 's@azure.archive.ubuntu.com@archive.ubuntu.com@g' /etc/apt/apt-mirrors.txt
+          fi
           "$RUNNER_TEMP/pacermind-ci/node_modules/.bin/playwright" install --with-deps chromium
       - name: Validate website, plans and deployment safety
         run: |

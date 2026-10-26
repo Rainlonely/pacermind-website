@@ -41,10 +41,12 @@ def prepare_journey():
     return geo
 
 def main():
-    parser=argparse.ArgumentParser(); parser.add_argument('--refresh-maps',action='store_true'); args=parser.parse_args()
+    parser=argparse.ArgumentParser(); parser.add_argument('--refresh-maps',action='store_true')
+    parser.add_argument('--journey-only',action='store_true',help='Rebuild journal and maps without re-encoding archived product screenshots')
+    args=parser.parse_args()
     OUT.mkdir(parents=True,exist_ok=True)
     geo=prepare_journey()
-    for p in (ROOT/'assets/images/pacermind-2').glob('*.png'):
+    for p in ([] if args.journey_only else (ROOT/'assets/images/pacermind-2').glob('*.png')):
         im=Image.open(p).convert('RGB')
         for w in [450,750]:
             im.resize((w,round(im.height*w/im.width)),Image.Resampling.LANCZOS).save(OUT/f'{p.stem}-{w}.webp',quality=84,method=6)

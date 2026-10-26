@@ -100,7 +100,7 @@ Normal updates only need a push to the production branch above. The following re
 
 For Nginx changes, back up the website configuration and run `nginx -t` before a graceful `systemctl reload nginx`. Wait for the new worker configuration to become active before evaluating readiness; initial requests immediately after reload can still hit the old virtual-host/certificate configuration. Do not bypass certificate validation. Restore the website configuration and release if readiness checks fail.
 
-The existing journey-publishing script defaults to `main`. It must publish to the production branch above (after reconciling its code) to trigger this workflow; pushes to the older `main` do not replace the live site.
+The journey-publishing script now defaults to the production branch above and uses a disposable checkout fetched from that remote branch. A local scheduled task reads Rain’s Air daily at 12:00 Asia/Shanghai and publishes only meaningful data/note changes. It uses `/Users/brorain/.local/share/pacermind-website-sync/venv/bin/python` with Pillow. Device errors leave the website untouched; raw databases are temporary. Pushes to the older `main` still do not replace the live site.
 
 ## Rollback
 

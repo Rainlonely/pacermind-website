@@ -33,6 +33,17 @@ The Journey map is explicitly activated by the visitor. Its scroll-wheel zoom is
 
 ## Refresh published journey assets
 
+A scheduled task in the owner's local chat runs daily at **12:00 Asia/Shanghai** to read Rain’s Air and publish new or changed running notes/data. The Mac, desktop app and paired phone must be available. Missing-device or validation failures preserve the previous website. Original notes are not rewritten; raw phone databases remain temporary and never enter Git.
+
+The publishing script uses a disposable checkout of the remote production branch, preserving unfinished local edits and unrelated commits. It defaults to `codex/pacermind-3-atlas-editor-review-20261008`; a successful push triggers the website deployment workflow. Timestamp-only changes produce no commit. Its Python environment needs Pillow:
+
+```sh
+PACERMIND_JOURNEY_PYTHON=/Users/brorain/.local/share/pacermind-website-sync/venv/bin/python \
+  scripts/publish-journey-update.sh --device 'Rain’s Air'
+```
+
+This command publishes the existing public journey fields, notes and sampled routes. It reads the phone without modifying it. `--journey-only` on the asset builder skips unrelated archived screenshot re-encoding during daily updates.
+
 Install Pillow into your preferred Python environment, then run:
 
 ```sh

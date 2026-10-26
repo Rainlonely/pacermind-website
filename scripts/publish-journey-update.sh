@@ -8,7 +8,8 @@ YEAR="${PACERMIND_JOURNEY_YEAR:-$(TZ=Asia/Shanghai date +%Y)}"
 DEVICE="${PACERMIND_JOURNEY_DEVICE:-84449D9F-DA19-5759-8022-44A41B9F40A6}"
 DEVICE_NAME="${PACERMIND_JOURNEY_DEVICE_NAME:-Rain’s Air}"
 REMOTE="${PACERMIND_JOURNEY_REMOTE:-origin}"
-BRANCH="${PACERMIND_JOURNEY_BRANCH:-main}"
+BRANCH="${PACERMIND_JOURNEY_BRANCH:-codex/pacermind-3-atlas-editor-review-20261008}"
+JOURNEY_PYTHON="${PACERMIND_JOURNEY_PYTHON:-python3}"
 PUSH=1
 WAIT_DEVICE_SECONDS="${PACERMIND_JOURNEY_WAIT_DEVICE_SECONDS:-60}"
 
@@ -33,7 +34,10 @@ Options:
 Environment overrides:
   PACERMIND_JOURNEY_YEAR, PACERMIND_JOURNEY_DEVICE,
   PACERMIND_JOURNEY_DEVICE_NAME, PACERMIND_JOURNEY_REMOTE, PACERMIND_JOURNEY_BRANCH,
-  PACERMIND_JOURNEY_WAIT_DEVICE_SECONDS, DEVELOPER_DIR
+  PACERMIND_JOURNEY_WAIT_DEVICE_SECONDS, PACERMIND_JOURNEY_PYTHON, DEVELOPER_DIR
+
+Publishing uses a temporary checkout of the remote production branch, preserving
+the caller's branch and local edits. --no-push requires a clean production checkout.
 EOF
 }
 
@@ -71,26 +75,32 @@ say() {
   printf '\n==> %s\n' "$*"
 }
 
-require_clean_worktree() {
-  if [[ -n "$(git status --porcelain)" ]]; then
-    if [[ "$PUSH" -eq 0 ]]; then
-      echo "error: --no-push requires a clean working tree so its commit remains on the current branch." >&2
-      git status --short >&2
-      exit 1
-    fi
+if [[ "$PUSH" -eq 1 && "${PACERMIND_JOURNEY_ISOLATED:-0}" != 1 ]]; then
+  say "Preparing an isolated copy of $REMOTE/$BRANCH"
+  git fetch "$REMOTE" "$BRANCH"
+  ISOLATED_DIR="$(mktemp -d "${TMPDIR:-/tmp}/pacermind-journey-publish.XXXXXX")"
+  git worktree add --detach "$ISOLATED_DIR" "$REMOTE/$BRANCH"
+  trap 'git worktree remove --force "$ISOLATED_DIR"' EXIT
+  (
+    cd "$ISOLATED_DIR"
+    PACERMIND_JOURNEY_ISOLATED=1 scripts/publish-journey-update.sh \
+      --year "$YEAR" --device "$DEVICE" --wait "$WAIT_DEVICE_SECONDS"
+  )
+  exit 0
+fi
 
-    ISOLATED_DIR="$(mktemp -d "${TMPDIR:-/tmp}/pacermind-journey-publish.XXXXXX")"
-    git worktree add --detach "$ISOLATED_DIR" HEAD
-    # The isolated checkout contains only generated data; leave the caller's edits untouched.
-    trap 'git worktree remove --force "$ISOLATED_DIR"' EXIT
-    say "Publishing from an isolated checkout; existing local edits stay in place"
-    (cd "$ISOLATED_DIR" && scripts/publish-journey-update.sh --year "$YEAR" --device "$DEVICE" --wait "$WAIT_DEVICE_SECONDS")
-    exit 0
-  fi
+if [[ -n "$(git status --porcelain)" ]]; then
+  echo "error: sync requires a clean temporary checkout; existing edits were preserved." >&2
+  exit 1
+fi
+if [[ "$PUSH" -eq 0 && "$(git branch --show-current)" != "$BRANCH" ]]; then
+  echo "error: --no-push must run on the configured production branch $BRANCH." >&2
+  exit 1
+fi
+"$JOURNEY_PYTHON" -c 'from PIL import Image' || {
+  echo "error: set PACERMIND_JOURNEY_PYTHON to a Python environment with Pillow." >&2
+  exit 1
 }
-
-say "Checking clean working tree"
-require_clean_worktree
 
 say "Updating local $BRANCH from $REMOTE/$BRANCH"
 git fetch "$REMOTE" "$BRANCH"
@@ -101,7 +111,7 @@ deadline=$((SECONDS + WAIT_DEVICE_SECONDS))
 while :; do
   DEVICE_LIST="$(xcrun devicectl list devices)"
   printf '%s\n' "$DEVICE_LIST"
-  if xcrun devicectl device info details --device "$DEVICE" >/dev/null 2>&1; then
+  if xcrun devicectl device info details --device "$DEVICE" --timeout 15 >/dev/null 2>&1; then
     break
   fi
 
@@ -122,15 +132,7 @@ while :; do
 done
 
 say "Syncing journey data for $YEAR"
-scripts/sync-journey-from-device.py --year "$YEAR" --device "$DEVICE"
-
-say "Preparing lightweight website data and maps"
-python3 scripts/build-web-assets.py
-
-say "Verifying generated files"
-node --check scripts/site.js
-python3 scripts/tests/check-site.py
-node -e "JSON.parse(require('fs').readFileSync('assets/data/journey.json','utf8')); console.log('journey json ok')"
+"$JOURNEY_PYTHON" scripts/sync-journey-from-device.py --year "$YEAR" --device "$DEVICE"
 
 SUMMARY="$(node - <<'NODE'
 const fs = require("fs");
@@ -154,7 +156,7 @@ printf '%s\n' "$SUMMARY"
 JOURNEY_CHANGED=1
 if git diff --quiet -- assets/data/journey.json; then
   JOURNEY_CHANGED=0
-elif python3 - <<'PY'
+elif "$JOURNEY_PYTHON" - <<'PY'
 import json
 import subprocess
 
@@ -167,11 +169,17 @@ raise SystemExit(0 if current == previous else 1)
 PY
 then
   git show HEAD:assets/data/journey.json > assets/data/journey.json
-  git show HEAD:assets/data/journey-summary.json > assets/data/journey-summary.json
   JOURNEY_CHANGED=0
 fi
 
 if [[ "$JOURNEY_CHANGED" -eq 1 ]]; then
+  say "Preparing lightweight website data and maps"
+  "$JOURNEY_PYTHON" scripts/build-web-assets.py --journey-only
+
+  say "Verifying generated files"
+  node --check scripts/site.js
+  "$JOURNEY_PYTHON" scripts/tests/check-site.py
+
   COMMIT_DATE="$(node - <<'NODE'
 const fs = require("fs");
 const data = JSON.parse(fs.readFileSync("assets/data/journey.json", "utf8"));
@@ -189,12 +197,9 @@ NODE
   git add index.html assets/data/journey.json assets/data/journey-summary.json assets/data/journey-routes.json assets/images/web/city-light.webp assets/images/web/city-dark.webp
   git commit -m "update journey data for $COMMIT_DATE"
 else
-  say "No new journey data; checking for unpublished commits"
+  say "No new or changed journey data; nothing to publish"
+  exit 0
 fi
-
-# build-web-assets.py also re-encodes screenshots, which are outside this publication.
-# They started clean (or came from the isolated checkout), so discard those outputs.
-git restore -- assets/images/web
 
 say "Rebasing once more before push"
 git fetch "$REMOTE" "$BRANCH"

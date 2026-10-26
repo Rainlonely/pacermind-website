@@ -1,6 +1,6 @@
 # PacerMind website
 
-Static bilingual website at https://pacermind.xyz. The site runs from ordinary static hosting; no npm build or backend is required. Public hosting moved to the existing Alibaba Cloud server on 2026-10-26 after website filing (沪ICP备2025147756号-3). HTTPS serves the apex domain; `www` redirects to it. See [deployment notes](deploy/README.md) for the current release, preview access, renewal and rollback.
+Static bilingual website at https://pacermind.xyz. The site runs from ordinary static hosting; no npm build or backend is required. Public hosting moved to the existing Alibaba Cloud server on 2026-10-26 after website filing (沪ICP备2025147756号-3). HTTPS serves the apex domain; `www` redirects to it. Pushes to `codex/pacermind-3-atlas-editor-review-20261008` automatically validate and publish static files through GitHub Actions. See [deployment notes](deploy/README.md) for branch scope, isolation, preview access, renewal and rollback.
 
 ## PacerMind 3.0 review branch
 

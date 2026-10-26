@@ -6,7 +6,11 @@ Pushes to **`codex/pacermind-3-atlas-editor-review-20261008`** run `.github/work
 
 The workflow runs JavaScript syntax, static assets, 20 core plan tests, schema checks, deployment safety tests, and the Chromium browser/form checks before packaging. Only committed public files are included. It skips superseded pushes and serializes deployments; an in-progress release is never cancelled by a newer push.
 
-A dedicated `pacermind-web-deploy` account receives the archive through a forced SSH command. GitHub has a separate key (`WEBSITE_DEPLOY_KEY`) and a trusted pinned host key (`WEBSITE_KNOWN_HOSTS`); no root SSH key or cloud API credential is given to Actions. The account has no sudo rights. Its home/authorized-keys file and `/usr/local/lib/pacermind-website/receive.py` are root-owned. SSH forwarding, PTYs and arbitrary commands are disabled for this key. The receiver runs at lower CPU/I/O priority and can write only the website's `auto` tree.
+A dedicated `pacermind-web-deploy` account receives the archive through a forced SSH command on **port 2222**. The existing management SSH port 22 remains restricted to its original fixed source IPs; GitHub-hosted runners cannot use that management port. GitHub has a separate key (`WEBSITE_DEPLOY_KEY`) and a trusted pinned host key (`WEBSITE_KNOWN_HOSTS`); no root SSH key or cloud API credential is given to Actions. The account has no sudo rights. Its home/authorized-keys file and `/usr/local/lib/pacermind-website/receive.py` are root-owned. SSH forwarding, PTYs and arbitrary commands are disabled for this key. The receiver runs at lower CPU/I/O priority and can write only the website's `auto` tree.
+
+The deployment listener is a separate `pacermind-website-deploy-ssh.service`, configured by `sshd-deploy.conf` and `pacermind-website-deploy-ssh.service` in this directory. It accepts only the deployment account and public-key authentication; root login, passwords and forwarding are disabled. The account has an unusable `*` password hash. PAM is disabled on this dedicated listener so session children remain inside its verified cgroup, capped at 25% of one CPU, 256 MiB and 32 tasks. Its filesystem sandbox is read-only except for the automatic website tree and its own runtime directory. The original SSH daemon and Nginx are unchanged.
+
+One additional ECS security-group ingress rule allows TCP 2222 for this listener; that security group contains only the target instance. Existing ingress rules, including port 22 restrictions, were preserved. No cloud API credential is stored in GitHub. The rule is backed up in the automation evidence directory. To disable automation, remove the dedicated authorized key/GitHub secrets, stop and disable only this listener, and revoke only its TCP 2222 ingress rule.
 
 Server layout:
 
@@ -18,7 +22,7 @@ Server layout:
 
 The receiver limits compressed and expanded archive size, rejects paths outside the public-file allowlist, rejects links and duplicate entries, verifies every SHA256 hash and the filing footer, then switches the symlink. HTTPS checks use production Host/SNI over loopback with normal certificate validation. Failed checks automatically restore the previous symlink without advancing successful deployment state. The workflow also checks the public HTTPS revision after publishing.
 
-**Content deployments never reload/restart Nginx, modify Nginx configs, change DNS, renew certificates, restart containers or touch the AI/OAuth/merchant services.** Nginx configuration or receiver changes in Git are not installed by this workflow; they require a separate operator action. Keep the workflow name/file stable so its run-number sequence remains monotonic.
+**Content deployments never reload/restart Nginx, modify Nginx configs, change DNS, renew certificates, restart containers or touch the AI/OAuth/merchant services.** Nginx, SSH listener, systemd or receiver changes in Git are not installed by this workflow; they require a separate operator action. Keep the workflow name/file stable so its run-number sequence remains monotonic.
 
 Automation setup evidence and the pre-change service/config baseline are stored at `/var/www/pacermind-website/deployments/automation-20261026` (root only). The initial manual site remained active while the account and pipeline were being configured.
 

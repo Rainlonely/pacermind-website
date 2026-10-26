@@ -93,7 +93,7 @@ jobs:
           trap 'rm -f "$key_path" "$hosts_path"' EXIT
           printf '%s\n' "$WEBSITE_DEPLOY_KEY" > "$key_path"
           printf '%s\n' "$WEBSITE_KNOWN_HOSTS" > "$hosts_path"
-          ssh -T -i "$key_path" -o IdentitiesOnly=yes -o BatchMode=yes \
+          ssh -T -p 2222 -i "$key_path" -o IdentitiesOnly=yes -o BatchMode=yes \
             -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$hosts_path" \
             -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=3 \
             pacermind-web-deploy@101.132.63.172 deploy < "$RUNNER_TEMP/website.tar.gz"

@@ -1,10 +1,10 @@
 # PacerMind website
 
-Static bilingual website at https://pacermind.xyz. The site runs from ordinary static hosting; no npm build or backend is required. The existing repository previously documented GitHub Pages, but hosting for the 3.0 release is still undecided.
+Static bilingual website at https://pacermind.xyz. The site runs from ordinary static hosting; no npm build or backend is required. Public hosting moved to the existing Alibaba Cloud server on 2026-10-26 after website filing (沪ICP备2025147756号-3). HTTPS serves the apex domain; `www` redirects to it. See [deployment notes](deploy/README.md) for the current release, preview access, renewal and rollback.
 
 ## PacerMind 3.0 review branch
 
-The 3.0 preparation homepage, browser-local plan editor and published-notes entrance are documented in [REVIEW-3.0.md](REVIEW-3.0.md). This implementation has not been published. The new editor needs no backend or build step and sends no plan content to a server.
+The 3.0 homepage, browser-local plan editor and published-notes entrance are documented in [REVIEW-3.0.md](REVIEW-3.0.md), which records their original review context. The website is now deployed; the editor remains labelled as a preview and needs no backend or build step. It sends no plan content to a server.
 
 ## Preview and check
 

@@ -240,7 +240,20 @@ const key = 'pacermind-plan-draft-v1';
         }
         scrollTo(0, 0);
       });
-      await p.waitForTimeout(300);
+      // The screenshot strip scrolls horizontally; bring its last cards into
+      // view too so native lazy loading can request every screenshot.
+      for (const img of await p.locator('.iphone-preview-strip img').all()) {
+        await img.scrollIntoViewIfNeeded();
+      }
+      await p.locator('.iphone-preview-strip').evaluateAll(strips => strips.forEach(el => {
+        el.scrollLeft = 0;
+      }));
+      await p.evaluate(() => scrollTo(0, 0));
+      // Remote previews may load images over an SSH tunnel. Wait for actual
+      // completion, then keep the naturalWidth assertion to catch broken files.
+      await p.waitForFunction(() => [...document.images].every(img => img.complete), null, {
+        timeout: 30000
+      });
       assert.equal(await p.locator('img').evaluateAll(els => els.every(el => el.complete && el.naturalWidth > 0)), true);
       assert.equal(await p.locator('[data-skip]').isVisible(), false);
     }

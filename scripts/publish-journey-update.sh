@@ -194,7 +194,7 @@ NODE
 )"
 
   say "Committing journey data for $COMMIT_DATE"
-  git add index.html assets/data/journey.json assets/data/journey-summary.json assets/data/journey-routes.json assets/images/web/city-light.webp assets/images/web/city-dark.webp
+  git add index.html assets/data/journey.json assets/data/journey-summary.json assets/data/journey-routes.json assets/data/journal-index.json assets/data/journal assets/images/web/city-light.webp assets/images/web/city-dark.webp
   git commit -m "update journey data for $COMMIT_DATE"
 else
   say "No new or changed journey data; nothing to publish"

@@ -2,7 +2,7 @@
 """Prepare website assets from published journey data; no device access needed.
 Run with Pillow, fonttools[woff]. --refresh-maps refreshes attributed Mapbox base maps.
 """
-import argparse, io, json, math, re, urllib.request
+import argparse, hashlib, io, json, math, re, urllib.request
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFilter
 ROOT = Path(__file__).resolve().parents[1]
@@ -10,6 +10,34 @@ OUT = ROOT / 'assets/images/web'
 CENTER = [121.475, 31.23]
 ZOOM = 11.3
 SIZE = (1280, 900)
+
+def prepare_calendar(data):
+    """Small deterministic month files; never ship the phone database to a browser."""
+    directory = ROOT / 'assets/data/journal'
+    directory.mkdir(parents=True,exist_ok=True)
+    months = {}
+    fields = ('id','date','title','type','distanceKm','duration','avgPace','note')
+    for run in data['runs']:
+        month = run['date'][:7]
+        item = {key:run.get(key,'') for key in fields}
+        points = run.get('coordinates',[])
+        stride = max(1,math.ceil(len(points)/140))
+        item['coordinates'] = points[::stride]
+        if points and item['coordinates'][-1] != points[-1]: item['coordinates'].append(points[-1])
+        months.setdefault(month,[]).append(item)
+    for month,runs in months.items():
+        (directory/f'{month}.json').write_text(json.dumps({'version':1,'month':month,'runs':runs},ensure_ascii=False,separators=(',',':'))+'\n')
+    # Keep previously published years; replace this year's files from the source.
+    year = str(data['hero']['year'])
+    for path in directory.glob(f'{year}-??.json'):
+        if path.stem not in months: path.unlink()
+    index = []
+    for path in sorted(directory.glob('????-??.json'),reverse=True):
+        raw = path.read_bytes()
+        month = json.loads(raw)
+        index.append({'month':path.stem,'url':f'assets/data/journal/{path.name}?v={hashlib.sha256(raw).hexdigest()[:12]}',
+                      'runs':len(month['runs'])})
+    (ROOT/'assets/data/journal-index.json').write_text(json.dumps({'version':1,'updatedAt':data['updatedAt'],'months':index},ensure_ascii=False,separators=(',',':'))+'\n')
 
 def projected(lon, lat):
     scale = 512 * 2 ** ZOOM
@@ -25,7 +53,7 @@ def prepare_journey():
     html = page.read_text()
     for attr, key in [('runs','runs'),('distance','distanceKm'),('years','years')]:
         value = format(round(float(data['stats'].get(key,0))), ',')
-        html = re.sub(r'(<strong data-stat-' + attr + r'>).*?(</strong>)', lambda m: m[1] + value + m[2], html, flags=re.S)
+        html = re.sub(r'(<strong\s+data-stat-' + attr + r'\s*>).*?(</strong\s*>)', lambda m: m[1] + value + m[2], html, flags=re.S)
     page.write_text(html)
     features = []
     for r in data['runs']:
@@ -38,6 +66,7 @@ def prepare_journey():
         features.append({'type':'Feature','properties':{},'geometry':{'type':'LineString','coordinates':[[round(p[1],5),round(p[0],5)] for p in sampled]}})
     geo = {'type':'FeatureCollection','features':features}
     (ROOT/'assets/data/journey-routes.json').write_text(json.dumps(geo,separators=(',',':'))+'\n')
+    prepare_calendar(data)
     return geo
 
 def main():

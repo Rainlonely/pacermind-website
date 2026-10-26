@@ -73,6 +73,7 @@
     <link rel="stylesheet" href="assets/styles/main.css?v=20260918" />
     <link rel="stylesheet" href="assets/styles/website.css?v=20260918-5" />
     <link rel="stylesheet" href="assets/styles/atlas.css?v=20261009-iphone" />
+    <link rel="stylesheet" href="assets/styles/journey-calendar.css?v=20261026" />
     <link
       rel="preload"
       href="assets/fonts/BarlowCondensed-Bold.woff2"
@@ -399,11 +400,11 @@
           </div>
           <div class="stats-strip">
             <div>
-              <strong data-stat-runs>2,226</strong
+              <strong data-stat-runs>2,277</strong
               ><span data-i18n="journey.stats.runs">Runs</span>
             </div>
             <div>
-              <strong data-stat-distance>20,543</strong
+              <strong data-stat-distance>21,019</strong
               ><span data-i18n="journey.stats.distance">Kilometers</span>
             </div>
             <div>
@@ -412,6 +413,7 @@
             </div>
           </div>
           <div class="journey-layout">
+            <div class="journey-map-column">
             <div class="journey-map-panel">
               <picture class="city-poster"
                 ><source
@@ -428,8 +430,12 @@
               <div
                 id="journey-map"
                 class="live-map"
-                aria-label="Interactive running map of Shanghai"
+                aria-label="Running routes by day"
               ></div>
+              <svg class="memory-route-svg" data-memory-route role="img" aria-label="Recorded running route"></svg>
+              <span class="memory-map-heading" data-i18n="journey.memoryLabel">ROUTES &amp; MEMORIES</span>
+              <span class="memory-offline-caption" data-i18n="journey.routeOutline">Recorded route outline · open the street map for context</span>
+              <aside class="journal-memory-bubble" data-memory-bubble hidden></aside>
               <button
                 type="button"
                 class="map-activate"
@@ -445,6 +451,10 @@
                 >
               </div>
             </div>
+            <div class="memory-calendar" data-journey-calendar aria-busy="true">
+              <p class="memory-calendar-loading" data-i18n="journey.calendarLoading">Loading your running calendar…</p>
+            </div>
+            </div>
             <div class="journal-panel">
               <div class="journal-heading">
                 <span class="eyebrow" data-i18n="journey.recent"
@@ -454,6 +464,8 @@
               <p class="journal-original" data-i18n="journey.original">
                 Notes in the runner’s original language.
               </p>
+              <div class="journal-selection" data-journal-selection></div>
+              <p class="memory-announcement" data-memory-announcement aria-live="polite"></p>
               <div data-run-list>
                 <p data-i18n="journey.loading">
                   The routes tell the story. Recent notes will appear here.
@@ -618,6 +630,7 @@
     <script src="scripts/translations.js?v=20260918" defer></script>
     <script src="scripts/globe-intro.js?v=20261015" defer></script>
     <script src="scripts/hero-landmarks.js?v=20260918" defer></script>
-    <script src="scripts/site.js?v=20261015-globe" defer></script>
+    <script src="scripts/journey-calendar.js?v=20261026-mapdiagnostic" defer></script>
+    <script src="scripts/site.js?v=20261026-mapdiagnostic" defer></script>
   </body>
 </html>

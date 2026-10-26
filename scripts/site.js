@@ -82,6 +82,9 @@
     "journey.recent": "最近的跑步",
     "journey.original": "日记保留跑者书写时的原文。",
     "journey.loading": "路线记得每一步，最近的笔记将在这里呈现。",
+    "journey.calendarLoading": "正在整理跑步月历…",
+    "journey.memoryLabel": "路线与回忆",
+    "journey.routeOutline": "真实路线轮廓 · 可打开街道地图查看周边",
     "journey.more": "查看更多跑步 ↓",
     "companion.eyebrow": "离下一次出发，更近一点",
     "companion.title": "准备好，就出发。",
@@ -238,6 +241,10 @@
     document.querySelector("[data-updated-at]").textContent =
       localized("Updated ", "更新于 ") +
       String(journey.updatedAt || "").slice(0, 10);
+    if (calendarController?.hasData) {
+      calendarController.refreshLanguage();
+      return;
+    }
     const runs = journey.runs || [];
     document.querySelector("[data-run-list]").innerHTML = runs
       .slice(0, expanded ? 10 : 3)
@@ -255,6 +262,7 @@
       .join("");
     const more = document.querySelector("[data-more-runs]");
     more.hidden = expanded || runs.length <= 3;
+    calendarController?.setSummary(journey);
   }
   document.querySelector("[data-more-runs]").addEventListener("click", () => {
     expanded = true;
@@ -287,6 +295,16 @@
     );
     observer.observe(element);
   }
+  const calendarController = window.PMJourneyCalendar?.mount({
+    loadJson: json,
+    language: () => lang,
+    createMap: async () => {
+      const [config] = await Promise.all([json("assets/data/mapbox-config.json"), library()]);
+      const map = makeMap("journey-map", config, false, false);
+      try { await ready(map); return map; }
+      catch (error) { map.remove(); throw error; }
+    },
+  });
   async function loadJourney() {
     try {
       journey = await json("assets/data/journey-summary.json");
@@ -354,7 +372,7 @@
         clearTimeout(timeout);
         libraryPromise = null;
         script.remove();
-        reject(new Error("Map unavailable"));
+        reject(new Error("Map library download failed"));
       };
       document.head.append(script);
     });
@@ -386,7 +404,7 @@
       map.on("error", (e) => {
         if (e.error?.status === 401 || e.error?.status === 403) {
           clearTimeout(timeout);
-          reject(new Error("Map unavailable"));
+          reject(new Error(`Map access rejected (${e.error.status})`));
         }
       });
     });
@@ -593,6 +611,15 @@
   ) {
     near(stage, () => playIntro(), "0px");
   }
+  darkMode.addEventListener("change", () => {
+    finishIntro();
+    if (heroMap) {
+      heroMap.remove();
+      heroMap = null;
+      document.querySelector("#hero-map").classList.remove("is-ready");
+    }
+  });
+  if (calendarController) return;
   const routePanel = document.querySelector(".journey-map-panel");
   const routePoster = routePanel.querySelector(".city-poster");
   const routeControls = routePanel.querySelector(".route-view-controls");
@@ -671,12 +698,6 @@
     }
   });
   darkMode.addEventListener("change", () => {
-    finishIntro();
-    if (heroMap) {
-      heroMap.remove();
-      heroMap = null;
-      document.querySelector("#hero-map").classList.remove("is-ready");
-    }
     if (journeyMap) {
       journeyMap.remove();
       journeyMap = null;

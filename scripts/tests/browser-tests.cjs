@@ -254,7 +254,7 @@ const key = 'pacermind-plan-draft-v1';
       await p.waitForFunction(() => [...document.images].every(img => img.complete), null, {
         timeout: 30000
       });
-      assert.equal(await p.locator('img').evaluateAll(els => els.every(el => el.complete && el.naturalWidth > 0)), true);
+      assert.deepEqual(await p.locator('img').evaluateAll(els => els.filter(el => !el.complete || !el.naturalWidth).map(el => el.getAttribute('src'))), []);
       assert.equal(await p.locator('[data-skip]').isVisible(), false);
     }
     if (name === 'notes.html') {

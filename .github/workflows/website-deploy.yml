@@ -37,11 +37,12 @@ jobs:
       - name: Validate website, plans and deployment safety
         run: |
           for source in scripts/*.js scripts/*.mjs scripts/tests/*.cjs; do node --check "$source"; done
-          node --test scripts/tests/plan-core.test.mjs
+          node --test scripts/tests/plan-core.test.mjs scripts/tests/journey-calendar.test.cjs
           python scripts/tests/check-site.py
           python scripts/tests/check-plan-contract.py
           python deploy/test_receive.py
           python scripts/tests/test-journey-publish.py
+          python scripts/tests/test-journey-calendar-assets.py
           git diff --check
       - name: Check browser behavior
         env:
@@ -62,6 +63,7 @@ jobs:
               raise SystemExit('Preview did not start')
           PY
           node scripts/tests/browser-tests.cjs
+          node scripts/tests/journey-calendar-browser.cjs
           node scripts/tests/form-controls.cjs
       - name: Skip obsolete pushes
         id: latest

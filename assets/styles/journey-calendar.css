@@ -1,0 +1,68 @@
+/* Route memories are separate from the story being read. */
+.journey-map-column { min-width:0; display:grid; gap:14px; }
+.journey-map-column .journey-map-panel { height:340px; border-radius:18px; background:var(--color-surface); touch-action:pan-y; }
+.memory-route-svg { position:absolute; inset:0; width:100%; height:100%; z-index:1; pointer-events:none; opacity:0; background-color:var(--color-surface); background-image:radial-gradient(var(--color-line) .7px, transparent .7px); background-size:22px 22px; }
+.has-memory-route .memory-route-svg { opacity:1; }
+.has-memory-route .city-poster { opacity:0; }
+.memory-route-base,.memory-route-trace { fill:none; stroke:var(--color-route); stroke-linecap:round; stroke-linejoin:round; }
+.memory-route-base { stroke-width:7px; opacity:.09; }
+.memory-route-trace { stroke-width:3px; }
+.memory-street-ready .memory-route-svg { opacity:0; }
+.journey-map-column .live-map { z-index:2; }
+.memory-map-heading { position:absolute; z-index:3; top:25px; left:18px; color:var(--color-ink-soft); font-size:10px; font-weight:600; letter-spacing:1.2px; pointer-events:none; }
+.memory-offline-caption { position:absolute; bottom:12px; left:16px; z-index:3; color:var(--color-ink-soft); font-size:10px; pointer-events:none; }
+.memory-street-ready .memory-map-heading,.memory-street-ready .memory-offline-caption { display:none; }
+.has-memory-route>.map-credit { display:none; }
+.journey-map-column .map-activate { left:auto; right:12px; top:12px; z-index:5; min-height:44px; padding:8px 13px; font-size:11px; border-radius:30px; }
+.journey-map-column .journey-map-status { bottom:10px; left:10px; right:10px; z-index:5; margin:0; font-size:11px; line-height:1.6; }
+.journal-memory-bubble { position:absolute; z-index:4; width:224px; max-width:calc(100% - 24px); padding:12px 14px 5px; color:var(--color-ink); background:var(--color-surface); border:1px solid var(--color-line); border-radius:15px; box-shadow:0 8px 28px #00000012; }
+.journal-memory-bubble[hidden] { display:none; }
+.journal-memory-bubble::after { content:""; position:absolute; bottom:-6px; left:23px; width:10px; height:10px; background:var(--color-surface); border-right:1px solid var(--color-line); border-bottom:1px solid var(--color-line); transform:rotate(45deg); }
+.journal-memory-bubble>span { font-size:10px; color:var(--color-ink-soft); font-family:Barlow,var(--font-sans); letter-spacing:.3px; }
+.journal-memory-bubble p { margin:6px 0 0; font-size:13px; line-height:1.75; overflow-wrap:anywhere; }
+.journal-memory-bubble button { position:relative; min-height:36px; padding:5px 0; border:0; background:none; color:var(--color-route); font:600 11px/1.5 var(--font-sans); text-align:left; }
+.memory-calendar { min-height:336px; padding:17px 18px 12px; border:1px solid var(--color-line); border-radius:18px; background:var(--color-surface); }
+.memory-calendar[aria-busy="true"] { opacity:.75; }
+.memory-calendar-loading { color:var(--color-ink-soft); font-size:13px; }
+.memory-calendar-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:15px; }
+.memory-calendar-heading .eyebrow { font-size:10px; letter-spacing:.8px; }
+.memory-calendar-heading h3 { margin:7px 0 0; color:var(--color-ink); font-family:Barlow,var(--font-sans); font-size:23px; font-weight:600; line-height:1.3; }
+.memory-month-nav { display:flex; gap:3px; }
+.memory-month-nav button { min-width:44px; min-height:44px; padding:6px; border:0; border-radius:8px; background:none; color:var(--color-ink); font-size:18px; }
+.memory-month-nav button:disabled { opacity:.3; cursor:default; }
+.memory-weekdays,.memory-days { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:2px; }
+.memory-weekdays { margin-bottom:5px; color:var(--color-ink-soft); font-size:10px; text-align:center; }
+.memory-days button,.memory-empty { height:40px; min-width:0; }
+.memory-days button { position:relative; display:flex; align-items:center; justify-content:center; padding:0 0 3px; border:0; border-radius:9px; color:var(--color-ink); background:none; font:500 13px/1 Barlow,var(--font-sans); }
+.memory-days button:disabled { color:var(--color-ink-soft); opacity:.6; cursor:default; }
+.memory-day-dot { position:absolute; width:3px; height:3px; bottom:6px; left:calc(50% - 1.5px); background:var(--color-route); border-radius:50%; }
+.memory-days button[aria-pressed="true"] { color:var(--color-route); box-shadow:inset 0 0 0 1px var(--color-route); }
+.memory-days button.is-previewing { color:var(--color-paper); background:var(--color-route); box-shadow:none; }
+.memory-days button.is-previewing .memory-day-dot { background:currentColor; }
+.memory-calendar-footer { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:10px; padding-top:8px; border-top:1px solid var(--color-line); }
+.memory-calendar-footer p { max-width:205px; margin:0; color:var(--color-ink-soft); font-size:11px; line-height:1.7; }
+.memory-calendar-footer button,.memory-calendar>button { flex-shrink:0; min-height:44px; padding:6px 0; border:0; background:none; color:var(--color-route); font:600 11px/1.5 var(--font-sans); }
+.memory-calendar button:focus-visible,.journal-memory-bubble button:focus-visible { outline:2px solid var(--color-route); outline-offset:2px; }
+.journal-selection { margin:18px 0 20px; padding:0 0 22px; border-bottom:1px solid var(--color-line); }
+.journal-selection:empty { display:none; }
+.journal-selection h3 { margin:0 0 8px; font-family:Barlow,var(--font-sans); font-size:clamp(28px,3vw,40px); font-weight:500; line-height:1.3; color:var(--color-ink); }
+.journal-selection>span { color:var(--color-ink-soft); font-size:11px; }
+.memory-story { padding:0 0 24px; margin-top:24px; }
+.memory-story h3 { font-size:16px; font-weight:600; }
+.memory-story .memory-original { margin-top:15px; font-size:15px; line-height:2; color:var(--color-ink); white-space:pre-line; overflow-wrap:anywhere; }
+.journal-panel { scroll-margin-top:100px; min-width:0; }
+.memory-announcement { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+@media (min-width:1000px) and (min-height:850px) { .journey-map-column { position:sticky; top:95px; } }
+@media (hover:hover) and (pointer:fine) { .memory-days button:not(:disabled):not([aria-pressed="true"]):not(.is-previewing):hover { color:var(--color-route); background:var(--color-route-soft); } }
+@media (max-width:760px) {
+  .journey-map-column .journey-map-panel { height:280px; }
+  .memory-calendar { padding:15px 12px 10px; }
+  .memory-days button,.memory-empty { height:44px; }
+  .memory-day-dot { bottom:7px; }
+  .memory-calendar-heading .eyebrow { font-size:10px; }
+  .journal-memory-bubble { width:204px; padding:10px 12px 3px; }
+  .journal-memory-bubble p { font-size:12px; line-height:1.7; }
+  .journal-memory-bubble button { min-height:44px; }
+  .journal-selection { margin-top:16px; }
+}
+@media (prefers-reduced-motion:reduce) { .journal-memory-bubble,.memory-route-svg { transition:none; animation:none; } }

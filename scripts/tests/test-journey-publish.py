@@ -45,6 +45,7 @@ class PublisherTests(unittest.TestCase):
             (seed / 'scripts/build-web-assets.py').write_text(
                 "from pathlib import Path\n"
                 "for name in ['assets/data/journey-summary.json','assets/data/journey-routes.json',"
+                "'assets/data/journal-index.json','assets/data/journal/2026-10.json',"
                 "'assets/images/web/city-light.webp','assets/images/web/city-dark.webp']:\n"
                 " Path(name).parent.mkdir(parents=True,exist_ok=True)\n"
                 " Path(name).write_text('synthetic derived asset')\n")

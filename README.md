@@ -81,3 +81,18 @@ Landmark zoom thresholds and sign styling mirror the iOS renderer (countries 0�
 cities 1.4–9.4, lights fade at 7.4–8.4). Missing English cache entries use translated
 names from the same cached Chinese location. Update URL versions in site.js when
 publishing another export. Never check raw device caches into this repository.
+
+
+## Journey calendar
+
+The journal map previews a recorded day on calendar hover or keyboard focus. Clicking
+(or tapping) pins its complete original notes in the reading panel. Playback draws
+routes and cycles date bubbles while keeping the selected writing stable; it stops
+when the section leaves view, the tab hides, or Escape is pressed. Reduced motion
+shows complete routes immediately. The calendar loads `journal-index.json` and only
+the chosen month from `assets/data/journal/`; it never fetches the full journey archive.
+Street maps use the existing Mapbox configuration, with an explicitly labelled route
+outline as the offline fallback. `build-web-assets.py --journey-only` derives these
+month files, and the daily publishing wrapper stages them alongside the summary.
+Run `node --test scripts/tests/journey-calendar.test.cjs` and, against a local server,
+`node scripts/tests/journey-calendar-browser.cjs` to check calendar behavior.

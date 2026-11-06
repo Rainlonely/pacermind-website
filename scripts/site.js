@@ -119,12 +119,11 @@
     ]),
   );
   const translations = window.PM_TRANSLATIONS || {};
-  let lang = store.get("pacermind-lang");
-  if (!["en", "zh"].includes(lang))
-    lang = navigator.language.toLowerCase().startsWith("zh") ? "zh" : "en";
+  const attributeSources = [...document.querySelectorAll('[aria-label],img[alt]')].filter(el => !el.lang?.startsWith('zh')).flatMap(el => ['aria-label','alt'].filter(a=>el.hasAttribute(a)).map(a=>[el,a,el.getAttribute(a)]));
+  let lang = window.PM_I18N.lang;
   let journey = null,
     expanded = false;
-  const localized = (en, cn) => (lang === "zh" ? cn : en);
+  const localized = (en, cn) => window.PM_I18N.text(en, cn);
   function statusText(el, en, cn) {
     el.dataset.statusEn = en;
     el.dataset.statusZh = cn;
@@ -138,27 +137,28 @@
     toggle?.setAttribute("aria-expanded", "false");
   }
   function applyLanguage() {
+    lang = window.PM_I18N.lang;
     const dictionary = {
-      ...translations.shared?.[lang],
+      ...homeEnglish,
+      ...translations.shared?.en,
       ...(page === "home"
-        ? lang === "zh"
-          ? zh
-          : homeEnglish
-        : translations[page]?.[lang]),
+        ? homeEnglish
+        : translations[page]?.en),
     };
-    document.documentElement.lang = lang === "zh" ? "zh-Hans" : "en";
+    document.documentElement.lang = lang;
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       if (dictionary[el.dataset.i18n])
-        el.innerHTML = dictionary[el.dataset.i18n];
+        el.innerHTML = localized(dictionary[el.dataset.i18n], zh[el.dataset.i18n] || translations[page]?.zh?.[el.dataset.i18n] || translations.shared?.zh?.[el.dataset.i18n]);
     });
     buttons.forEach((button) => {
-      const active = button.dataset.lang === lang;
+      const active = window.PM_I18N.language(button.dataset.lang) === lang;
       button.classList.toggle("is-active", active);
       button.setAttribute("aria-pressed", String(active));
     });
-    document.querySelectorAll('a[href*="apps.apple.com/"]').forEach((link) => {
-      link.href = `https://apps.apple.com/${lang === "zh" ? "cn" : "us"}/app/pacermind/id6754869376`;
-    });
+    attributeSources.forEach(([el,attr,value])=>el.setAttribute(attr,localized(value)));
+    const pageName = {home: 'PacerMind 3.0', planner: 'Plan editor', notes: 'Notes', privacy: 'Privacy Policy', support: 'Support'}[page];
+    if(pageName) document.title = page === "home" ? "PacerMind 3.0" : `${localized(pageName)} · PacerMind`;
+    window.PM_I18N.refresh();
     toggle?.setAttribute(
       "aria-label",
       localized("Toggle navigation", "展开或收起导航"),
@@ -172,11 +172,7 @@
   }
   buttons.forEach((button) =>
     button.addEventListener("click", () => {
-      lang = button.dataset.lang;
-      store.set("pacermind-lang", lang);
-      applyLanguage();
-      if (page === "home" && heroMap && heroData && heroMap.getSource("pm-place-cities"))
-        window.PMHeroLandmarks.language(heroMap, heroData, lang);
+      window.PM_I18N.select(window.PM_I18N.language(button.dataset.lang));
     }),
   );
   toggle?.addEventListener("click", () => {
@@ -191,6 +187,10 @@
       closeMenu();
       if (page === "home") finishIntro();
     }
+  });
+  document.addEventListener("pm:locale", applyLanguage);
+  if (page === "home") document.addEventListener("pm:locale", () => {
+    if (heroMap && heroData && heroMap.getSource("pm-place-cities")) window.PMHeroLandmarks.language(heroMap, heroData, lang.startsWith("zh") ? "zh" : "en");
   });
   applyLanguage();
   if (page !== "home") return;
@@ -221,7 +221,7 @@
     const d = new Date(`${String(value).slice(0, 10)}T12:00:00`);
     return Number.isNaN(d.getTime())
       ? ""
-      : new Intl.DateTimeFormat(lang === "zh" ? "zh-CN" : "en-US", {
+      : new Intl.DateTimeFormat(window.PM_I18N.locale, {
           month: "short",
           day: "numeric",
         }).format(d);
@@ -234,7 +234,7 @@
       ["[data-stat-years]", "years"],
     ]) {
       document.querySelector(selector).textContent = new Intl.NumberFormat(
-        lang === "zh" ? "zh-CN" : "en-US",
+        window.PM_I18N.locale,
         { maximumFractionDigits: 0 },
       ).format(stats[key] || 0);
     }
@@ -257,7 +257,7 @@
         );
         const excerptLength = /[\u3400-\u9fff]/.test(note) ? 65 : 125;
         const long = note.length > excerptLength + 15;
-        return `<article class="run-item"><div><h3>${escape(date(run.date))} · ${escape(run.title || type[lang === "zh" ? 1 : 0])}</h3><div class="run-meta"><span>${escape(run.duration)}</span><span>${escape(run.avgPace)} /km</span><span>${type[lang === "zh" ? 1 : 0]}</span></div></div><strong class="run-distance">${Number(run.distanceKm || 0).toFixed(1)} <small>km</small></strong><p>${escape(long ? note.slice(0, excerptLength) + "…" : note)}</p>${long ? `<details><summary>${localized("Read original note", "阅读完整笔记")}</summary><p>${escape(note)}</p></details>` : ""}</article>`;
+        return `<article class="run-item"><div><h3>${escape(date(run.date))} · ${escape(run.title || localized(...type))}</h3><div class="run-meta"><span>${escape(run.duration)}</span><span>${escape(run.avgPace)} /km</span><span>${localized(...type)}</span></div></div><strong class="run-distance">${Number(run.distanceKm || 0).toFixed(1)} <small>km</small></strong><p>${escape(long ? note.slice(0, excerptLength) + "…" : note)}</p>${long ? `<details><summary>${localized("Read original note", "阅读完整笔记")}</summary><p>${escape(note)}</p></details>` : ""}</article>`;
       })
       .join("");
     const more = document.querySelector("[data-more-runs]");
@@ -524,7 +524,7 @@
       await ready(heroMap);
       if (run !== generation) return;
       clearTimeout(introTimer);
-      window.PMHeroLandmarks.add(heroMap, data, darkMode.matches, lang);
+      window.PMHeroLandmarks.add(heroMap, data, darkMode.matches, lang.startsWith("zh") ? "zh" : "en");
       routeLoad.then((routes) => {
         if (routes && run === generation && heroMap) addRoutes(heroMap, routes);
       });

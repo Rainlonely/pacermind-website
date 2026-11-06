@@ -31,6 +31,7 @@ jobs:
           "$RUNNER_TEMP/pacermind-ci/node_modules/.bin/playwright" install --with-deps chromium webkit
       - name: Syntax, core, schema and static checks
         run: |
+          node --check scripts/i18n.js
           node --check scripts/site.js
           node --check scripts/translations.js
           node --check scripts/planner.mjs
@@ -38,6 +39,8 @@ jobs:
           node --check scripts/plan-copy.mjs
           node --check scripts/notes.mjs
           node --test scripts/tests/plan-core.test.mjs
+          python scripts/tests/check-locales.py
+          python deploy/test_region.py
           python scripts/tests/check-site.py
           python scripts/tests/check-plan-contract.py
           git diff --check
@@ -60,3 +63,4 @@ jobs:
           PY
           PACERMIND_PLAYWRIGHT_MODULE="$RUNNER_TEMP/pacermind-ci/node_modules/playwright" node scripts/tests/browser-tests.cjs
           PACERMIND_PLAYWRIGHT_MODULE="$RUNNER_TEMP/pacermind-ci/node_modules/playwright" PACERMIND_FORM_BROWSERS=chromium,webkit node scripts/tests/form-controls.cjs
+          PACERMIND_PLAYWRIGHT_MODULE="$RUNNER_TEMP/pacermind-ci/node_modules/playwright" node scripts/tests/i18n-browser.cjs

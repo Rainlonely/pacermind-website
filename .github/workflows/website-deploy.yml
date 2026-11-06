@@ -43,6 +43,8 @@ jobs:
         run: |
           for source in scripts/*.js scripts/*.mjs scripts/tests/*.cjs; do node --check "$source"; done
           node --test scripts/tests/plan-core.test.mjs scripts/tests/journey-calendar.test.cjs
+          python scripts/tests/check-locales.py
+          python deploy/test_region.py
           python scripts/tests/check-site.py
           python scripts/tests/check-plan-contract.py
           python deploy/test_receive.py
@@ -67,6 +69,7 @@ jobs:
           else:
               raise SystemExit('Preview did not start')
           PY
+          node scripts/tests/i18n-browser.cjs
           node scripts/tests/browser-tests.cjs
           node scripts/tests/journey-calendar-browser.cjs
           node scripts/tests/form-controls.cjs

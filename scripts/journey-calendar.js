@@ -64,9 +64,9 @@
       selected: '', preview: '', playing: false, loading: false, visible: false, ready: false };
     let loadVersion = 0, mapVersion = 0, map = null, mapPromise = null;
     let playTimer = 0, hoverTimer = 0, drawFrame = 0, animations = [], autoStarted = false;
-    const t = (en, cn) => language() === 'zh' ? cn : en;
+    const t = (en, cn) => window.PM_I18N ? window.PM_I18N.text(en, cn) : language() === 'zh' ? cn : en;
     mapButton.textContent = t('Show street map ↗', '查看街道地图 ↗');
-    const locale = () => language() === 'zh' ? 'zh-CN' : 'en-US';
+    const locale = () => window.PM_I18N?.locale || (language() === 'zh' ? 'zh-CN' : 'en-US');
     const dayText = value => new Intl.DateTimeFormat(locale(), {
       month: 'long', day: 'numeric', timeZone: 'UTC',
     }).format(new Date(value + 'T12:00:00Z'));
@@ -95,8 +95,7 @@
     function renderCalendar() {
       if (!state.index) return;
       const months = state.index.months, position = months.findIndex(m => m.month === state.month);
-      const week = language() === 'zh' ? ['一', '二', '三', '四', '五', '六', '日']
-        : ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+      const week = Array.from({length:7},(_,i)=>new Intl.DateTimeFormat(locale(),{weekday:'narrow',timeZone:'UTC'}).format(new Date(Date.UTC(2026,0,5+i))));
       host.innerHTML = `<div class="memory-calendar-heading"><div><span class="eyebrow">${t('A month of running', '把日子，跑成回忆')}</span><h3>${esc(monthText(state.month))}</h3></div><div class="memory-month-nav"><button type="button" data-month-step="1" aria-label="${t('Previous month', '上个月')}" ${position === months.length - 1 ? 'disabled' : ''}>←</button><button type="button" data-month-step="-1" aria-label="${t('Next month', '下个月')}" ${position === 0 ? 'disabled' : ''}>→</button></div></div><div class="memory-weekdays" aria-hidden="true">${week.map(w => `<span>${w}</span>`).join('')}</div><div class="memory-days" role="group" aria-label="${esc(monthText(state.month))}">${monthCells(state.month).map(date => {
         if (!date) return '<span class="memory-empty" aria-hidden="true"></span>';
         const runs = state.days.get(date), day = Number(date.slice(8));

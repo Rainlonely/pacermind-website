@@ -85,7 +85,7 @@ window.PM_TRANSLATIONS = {
       "privacy.section11.title": "11. Policy Updates",
       "privacy.section11.text":
         "We may update this policy as PacerMind changes. Material changes will be reflected on this page, together with the latest revision date below.",
-      "privacy.lastUpdated": "Last updated: August 25, 2026",
+      "privacy.lastUpdated": "Last updated: November 6, 2026",
     },
     zh: {
       "privacy.eyebrow": "隐私政策",
@@ -143,7 +143,7 @@ window.PM_TRANSLATIONS = {
       "privacy.section11.title": "11. 政策更新",
       "privacy.section11.text":
         "我们可能会随着 PacerMind 的变化更新本政策。重大变更将体现在本页面，并以下方最新修订日期为准。",
-      "privacy.lastUpdated": "最后更新：2026 年 8 月 25 日",
+      "privacy.lastUpdated": "最后更新：2026 年 11 月 6 日",
     },
   },
   support: {

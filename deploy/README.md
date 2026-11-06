@@ -109,3 +109,44 @@ For a durable content rollback, revert the unwanted website commit on the produc
 For a complete hosting rollback, restore the website DNS values and statuses from `dns-before.json`: old GitHub A, old `www` CNAME and the four enabled GitHub AAAA records. Leave unrelated records unchanged. Keep the Alibaba Cloud site running during the DNS TTL window. Disable only `/etc/nginx/sites-enabled/pacermind.xyz` after traffic has returned to the verified old host; validate Nginx and reload gracefully. Never replace other virtual hosts, restart Docker or restart AI services.
 
 The original private release lacks the new filing footer, so restoring that content is a temporary operational recovery step, not the desired steady state.
+
+## Multilingual website / optional country lookup (not installed)
+
+The multilingual work uses local translation catalogs in `assets/locales/` and a
+footer with independent country/region and language controls. A saved choice wins;
+otherwise the browser language renders immediately and a same-origin `/api/region`
+lookup may select a country default. Lookup timeout/failure preserves the browser
+language. User input prevents a late automatic lookup from changing an editor.
+Chinese scripts are separate (`zh-Hans`, `zh-Hant`); Portuguese shares translated
+copy, with Brazilian/Portuguese number/date formatting and storefronts.
+
+Static content alone supports all languages and manual selection. IP detection
+requires a separately installed service; the existing deployment workflow does
+**not** install it or change Nginx. No production setup has been performed for this
+feature. The prepared files are `region-server.py`, `nginx-region.conf`, and
+`pacermind-website-region.service`.
+
+When separately deploying the service, an operator must:
+
+1. Supply a licensed, current MMDB country database, e.g. GeoLite2-Country, at
+   `/var/lib/GeoIP/GeoLite2-Country.mmdb` (readable by the service). Follow its
+   provider's license, attribution and update requirements; no database, account,
+   license key or automatic download is bundled here.
+2. Create `/opt/pacermind-website-region` as a Python venv and install `maxminddb`.
+   Install the script root-owned under `/usr/local/lib/pacermind-website/` and the
+   systemd unit under `/etc/systemd/system/`. It binds only 127.0.0.1:4181 and does
+   not log requests or contact external services. A missing database returns null.
+3. Back up the website Nginx configuration. Include the supplied location snippet
+   inside **only** the apex HTTPS server block. Its X-Real-IP header is overwritten
+   from the direct connection, never trusted from the caller. If a proxy/CDN is
+   introduced later, configure trusted proxy addresses separately first.
+4. Start the dedicated unit, run `nginx -t`, and reload Nginx only after approval.
+   Verify no-store JSON, spoofed forwarding headers, IPv4/IPv6, missing database,
+   and browser fallback. No DNS or other service changes are needed.
+
+Remove the optional location and stop the dedicated unit to disable IP selection;
+static language controls remain functional. A database update needs a service
+restart to reopen the MMDB. Keep updates and licensing outside public Git.
+
+Implementation references: [Nginx proxy headers](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header),
+[MaxMind Python reader](https://github.com/maxmind/MaxMind-DB-Reader-python).

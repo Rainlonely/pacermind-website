@@ -96,3 +96,48 @@ outline as the offline fallback. `build-web-assets.py --journey-only` derives th
 month files, and the daily publishing wrapper stages them alongside the summary.
 Run `node --test scripts/tests/journey-calendar.test.cjs` and, against a local server,
 `node scripts/tests/journey-calendar-browser.cjs` to check calendar behavior.
+
+## Website languages (local implementation, not released)
+
+Eight catalogs in `assets/locales/` cover English, Simplified/Traditional Chinese,
+Japanese, Korean, German, French and Portuguese. `scripts/i18n.js` owns language
+selection, country defaults and the footer; every page uses the same preference.
+Changing country chooses its default language and App Store storefront, and the
+language control can then override it. A stored choice wins over IP/browser
+selection. Browser storage denial and an unavailable country endpoint are safe
+fallbacks. The header also provides a compact selector for all eight languages.
+
+Pages remain static HTML with English fallback without JavaScript. Catalogs load
+from the same site, with no translation API. Running notes, entered plans, original
+screenshots and place-name source data keep their original language (map place
+names have existing Chinese/English variants). Portuguese uses one copy catalog
+with pt-PT/pt-BR formatting according to region. This change does not introduce
+separate SEO URLs for each language.
+
+For a copy change, update the English source and all eight catalog entries;
+English text is the lookup key, with whitespace and `<br>` serialization normalized.
+Translate full legal paragraphs without changing their commitments. `translations.js`
+remains the source for shared/legal/support English, and HTML supplies homepage copy.
+The new website-region privacy paragraph describes only the optional lookup and
+local preferences; the App policy's substantive terms are unchanged.
+
+Run `python3 scripts/tests/check-locales.py`, `python3 deploy/test_region.py` and
+`node scripts/tests/i18n-browser.cjs` in addition to the existing checks. The browser
+test uses the existing Playwright environment variables and mocks country lookup.
+See `deploy/README.md` for the optional local MMDB service. No IP lookup service or
+Nginx configuration has been installed as part of this implementation.
+
+## Localized iPhone promotional cards
+
+The original nine Chinese cards remain in `assets/images/iphone-20261009/`. At the
+owner’s request, localized promotional variants are generated with image-generation;
+they are not fresh device captures. Minor map/UI rendering differences were accepted
+after a German sample review. Card 01 changes only the headline; small map labels
+remain in their original language. `preview-localizations.js` switches only complete
+sets listed in `assets/data/preview-localizations.json`, falling back to originals.
+
+PNG masters and App Store exports stay under `outputs/` (excluded by the production
+packager). `scripts/package-preview-images.sh LOCALE` sizes exports to 1179 × 2556
+and creates 450/900 px WebP files. `scripts/build-preview-manifest.py` exposes complete
+sets after visual review. The App Store work targets the editable iOS 3.6 iPhone
+screenshot localizations; it does not submit the version for review.

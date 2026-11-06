@@ -1,11 +1,12 @@
 import * as C from './plan-core.mjs';
 import { COPY, LABELS, ERRORS } from './plan-copy.mjs';
+await window.PM_I18N.ready;
 const root = document.querySelector('#planner');
 const dialog = document.querySelector('#editor-dialog');
 const confirmDialog = document.querySelector('#change-dialog');
 const storageKey = 'pacermind-plan-draft-v1';
 const writer = globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`;
-let lang = document.documentElement.lang.startsWith('zh') ? 'zh' : 'en';
+let lang = window.PM_I18N.lang;
 let draft = C.newDraft(),
   history = [],
   viewWeek = 1,
@@ -28,8 +29,10 @@ const e = v => String(v ?? '').replace(/[&<>"']/g, c => ({
   '"': '&quot;',
   "'": '&#39;'
 })[c]);
-const t = k => (COPY[k] || [k, k])[lang === 'zh' ? 1 : 0];
-const label = (kind, key) => (LABELS[kind]?.[key] || [key, key])[lang === 'zh' ? 1 : 0];
+const tr = (en, cn) => window.PM_I18N.text(en, cn);
+const t = k => tr(...(COPY[k] || [k,k]));
+const label = (kind, key) => tr(...(LABELS[kind]?.[key] || [key,key]));
+function localizedWorkout(id) { const workout=C.workoutFromTemplate(id,'en'); workout.title=tr(workout.title); return workout; }
 const button = (action, text, extra = '') => `<button type="button" data-action="${action}" ${extra}>${e(text)}</button>`;
 const options = (values, value, kind) => (kind === 'race' && !values.includes(value) ? `<option value="" selected>${e(t('pending'))}</option>` : '') + values.map(v => `<option value="${e(v)}" ${v === value ? 'selected' : ''}>${e(kind ? label(kind, v) : t(v))}</option>`).join('');
 function field(text, name, value, type = 'text', extra = '') {
@@ -75,7 +78,7 @@ function save() {
       savedAt,
       draft
     }));
-    notice(`${t('saved')} · ${new Date(savedAt).toLocaleTimeString(lang === 'zh' ? 'zh-CN' : 'en-GB')}`);
+    notice(`${t('saved')} · ${new Date(savedAt).toLocaleTimeString(window.PM_I18N.locale)}`);
   } catch {
     notice(t('saveFailed'));
   }
@@ -164,16 +167,16 @@ function summaryWorkout(w) {
   return `${range(a.distance, 'km')}${a.distanceUnknown ? ' + ?' : ''} · ${range(a.duration, 'min')}${a.durationUnknown ? ' + ?' : ''}${hasPace ? '' : ' · ' + t('noPace')}`;
 }
 function fmt(n) {
-  return Number(n).toLocaleString(lang === 'zh' ? 'zh-CN' : 'en-GB', {
+  return Number(n).toLocaleString(window.PM_I18N.locale, {
     maximumFractionDigits: 2
   });
 }
 function render() {
-  const nextLang = document.documentElement.lang.startsWith('zh') ? 'zh' : 'en';
+  const nextLang = window.PM_I18N.lang;
   if (nextLang !== lang) {
     for (const pair of Object.values(COPY)) {
-      const oldText = pair[lang === 'zh' ? 1 : 0];
-      if (status.startsWith(oldText)) { status = pair[nextLang === 'zh' ? 1 : 0] + status.slice(oldText.length); break; }
+      const oldText = window.PM_I18N.text(...pair, lang);
+      if (status.startsWith(oldText)) { status = window.PM_I18N.text(...pair, nextLang) + status.slice(oldText.length); break; }
     }
   }
   lang = nextLang;
@@ -183,7 +186,7 @@ function render() {
   let cursor = 0;
   const alerts = foreign ? `<div class="warning" role="alert"><p>${e(t('tabs'))}</p>${button('load-other', t('loadOther'))}${button('keep-this', t('keepThis'))}</div>` : pauseSave ? `<div class="warning" role="alert"><p>${e(t('corrupt'))}</p>${button('raw-backup', t('rawBackup'))}${button('fresh', t('fresh'))}</div>` : '';
   root.innerHTML = `<div class="editor-heading"><div><span class="eyebrow">${e(t('badge'))}</span><h1>${e(t('title'))}</h1><p class="editor-lead">${e(t('intro'))}</p></div><div class="local-note"><span class="small-label">PacerMind / 3.0</span><p>${e(t('local'))}</p></div></div>${alerts}<div class="draft-toolbar toolbar">${button('undo', t('undo'), history.length ? '' : 'disabled')}${button('backup', t('backup'))}<label class="file-button">${e(t('restore'))}<input type="file" id="restore-file" accept="application/json,.json"></label>${button('clear', t('clear'))}<span id="editor-status" role="status">${e(status || `${t('saved')}${savedAt ? ' · ' + new Date(savedAt).toLocaleTimeString() : ''}`)}</span></div>
- <section class="editor-panel" id="setup"><h2>${e(t('setup'))}</h2><div class="fields">${field(t('planTitle'), 'title', draft.title, 'text', 'maxlength="120"')}${field(t('start'), 'startDate', draft.startDate, 'date')}${select(t('weekStart'), 'weekStart', ['monday', 'sunday'], draft.weekStart)}${select(t('mode'), 'mode', ['single', 'long'], draft.mode === 'week' ? 'single' : 'long')}</div>${area(t('goal'), 'goal', draft.goal, 'maxlength="500" placeholder="' + e(lang === 'zh' ? '写下你的安排、偏好与尚未确定的内容。此文本不会自动转换。' : 'Write your schedule, preferences and unanswered questions. This text is not converted automatically.') + '"')}<p class="muted">${e(t('dateHint'))}</p><details><summary>${e(t('notes'))}</summary>${area(t('notes'), 'notes', draft.notes, 'maxlength="2000"')}</details>
+ <section class="editor-panel" id="setup"><h2>${e(t('setup'))}</h2><div class="fields">${field(t('planTitle'), 'title', draft.title, 'text', 'maxlength="120"')}${field(t('start'), 'startDate', draft.startDate, 'date')}${select(t('weekStart'), 'weekStart', ['monday', 'sunday'], draft.weekStart)}${select(t('mode'), 'mode', ['single', 'long'], draft.mode === 'week' ? 'single' : 'long')}</div>${area(t('goal'), 'goal', draft.goal, 'maxlength="500" placeholder="' + e(tr('Write your schedule, preferences and unanswered questions. This text is not converted automatically.', '写下你的安排、偏好与尚未确定的内容。此文本不会自动转换。')) + '"')}<p class="muted">${e(t('dateHint'))}</p><details><summary>${e(t('notes'))}</summary>${area(t('notes'), 'notes', draft.notes, 'maxlength="2000"')}</details>
  ${draft.mode === 'race' ? `<div class="race-fields fields">${field(t('raceName'), 'race.name', draft.race.name, 'text', 'maxlength="120"')}${field(t('raceDate'), 'race.date', draft.race.date, 'date')}${select(t('raceDistance'), 'race.distance', C.RACES, draft.race.distance, 'race')}${field(t('raceTime'), 'race.goalTimeSec', draft.race.goalTimeSec, 'text', 'inputmode="numeric"')}</div><h3>${e(t('phases'))} <span class="muted">${count} / 160 ${e(t('weeks'))}</span></h3><div class="phase-list">${draft.stages.map((s, i) => {
     const first = cursor;
     cursor += Number(s.weeks);
@@ -191,10 +194,10 @@ function render() {
   }).join('')}</div>${button('add-phase', t('addPhase'))}<p class="muted">${e(t('direction'))}</p>` : ''}</section>
  <section class="editor-panel" id="schedule"><div class="section-top"><h2>${e(t('schedule'))}</h2><div class="week-nav">${button('previous', '←', `aria-label="${e(t('previous'))}" ${viewWeek <= 1 ? 'disabled' : ''}`)}<label class="week-select">${e(t('week'))} <select id="view-week" aria-label="${e(t('week'))}">${Array.from({
     length: Math.max(1, Math.min(count, 160))
-  }, (_, i) => `<option value="${i + 1}" ${viewWeek === i + 1 ? 'selected' : ''}>${i + 1}</option>`).join('')}</select> / ${count}</label>${button('next', '→', `aria-label="${e(t('next'))}" ${viewWeek >= count ? 'disabled' : ''}`)}</div></div>${phase ? `<p class="phase-caption">${e(label('phase', phase.phase))} / ${e(label('role', phase.role))} · ${e(phase.focus || t('pending'))}</p>` : ''}<div class="schedule-layout"><aside class="template-library"><h3>${e(t('templates'))}</h3><p class="muted">${e(t('templateHint'))}</p>${C.TEMPLATES.map(template => `<button type="button" class="template ${selectedTemplate === template.id ? 'selected' : ''}" data-action="template" data-template="${template.id}" aria-pressed="${selectedTemplate === template.id}"><strong>${e(template.name[lang === 'zh' ? 1 : 0])}</strong><span>${e(template.hint[lang === 'zh' ? 1 : 0])}</span>${phase && C.PHASE_TEMPLATES[phase.phase].templates.includes(template.id) ? `<small>${e(label('phase', phase.phase))} · ${e(lang === 'zh' ? '结构提示' : 'structure hint')}</small>` : ''}</button>`).join('')}</aside><div class="day-list">${Array.from({
+  }, (_, i) => `<option value="${i + 1}" ${viewWeek === i + 1 ? 'selected' : ''}>${i + 1}</option>`).join('')}</select> / ${count}</label>${button('next', '→', `aria-label="${e(t('next'))}" ${viewWeek >= count ? 'disabled' : ''}`)}</div></div>${phase ? `<p class="phase-caption">${e(label('phase', phase.phase))} / ${e(label('role', phase.role))} · ${e(phase.focus || t('pending'))}</p>` : ''}<div class="schedule-layout"><aside class="template-library"><h3>${e(t('templates'))}</h3><p class="muted">${e(t('templateHint'))}</p>${C.TEMPLATES.map(template => `<button type="button" class="template ${selectedTemplate === template.id ? 'selected' : ''}" data-action="template" data-template="${template.id}" aria-pressed="${selectedTemplate === template.id}"><strong>${e(tr(...template.name))}</strong><span>${e(tr(...template.hint))}</span>${phase && C.PHASE_TEMPLATES[phase.phase].templates.includes(template.id) ? `<small>${e(label('phase', phase.phase))} · ${e(tr('structure hint', '结构提示'))}</small>` : ''}</button>`).join('')}</aside><div class="day-list">${Array.from({
     length: 7
   }, (_, i) => renderDay((viewWeek - 1) * 7 + i)).join('')}</div></div><p class="muted">${e(t('limit'))}</p>${Object.keys(draft.days).some(s => Number(s) >= count * 7) ? `<div class="warning"><p>${e(t('outsideHint'))}</p>${Object.keys(draft.days).filter(s => Number(s) >= count * 7).map(s => `<p>${e(C.dateAt(draft, s))} ${e(draft.days[s].workout?.title || t('rest'))} ${button('edit-day', t('edit'), `data-slot="${s}"`)} ${button('clear-day', t('resetDay'), `data-slot="${s}"`)}</p>`).join('')}</div>` : ''}</section>
- <section class="editor-panel" id="analysis"><h2>${e(t('review'))}</h2><p class="muted">${e(t('analysisHint'))}</p><label class="reference-label">${e(t('reference'))}<input id="reference" type="number" min="0" max="1000" value="${e(draft.reference ?? 10)}"></label><div id="analysis-result"></div><details><summary>${e(t('ruleTitle'))}</summary><p>${e(t('ruleDistance'))}</p><p>${e(t('ruleGrowth'))}</p><p>${e(t('qualityHint'))}</p><p>${e(t('taper'))}</p><p class="muted">${e(lang === 'zh' ? 'G1 参考来源：' : 'G1 references:')} <a href="https://pubmed.ncbi.nlm.nih.gov/17940147/" target="_blank" rel="noopener">PMID 17940147</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/34478518/" target="_blank" rel="noopener">PMID 34478518</a>.</p></details></section>
+ <section class="editor-panel" id="analysis"><h2>${e(t('review'))}</h2><p class="muted">${e(t('analysisHint'))}</p><label class="reference-label">${e(t('reference'))}<input id="reference" type="number" min="0" max="1000" value="${e(draft.reference ?? 10)}"></label><div id="analysis-result"></div><details><summary>${e(t('ruleTitle'))}</summary><p>${e(t('ruleDistance'))}</p><p>${e(t('ruleGrowth'))}</p><p>${e(t('qualityHint'))}</p><p>${e(t('taper'))}</p><p class="muted">${e(tr('G1 references:', 'G1 参考来源：'))} <a href="https://pubmed.ncbi.nlm.nih.gov/17940147/" target="_blank" rel="noopener">PMID 17940147</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/34478518/" target="_blank" rel="noopener">PMID 34478518</a>.</p></details></section>
  <section class="editor-panel" id="export"><h2>${e(t('export'))}</h2><p>${e(t('importSteps'))}</p><div class="fields export-fields">${field(t('from'), 'fromWeek', draft.fromWeek, 'number', 'min="1" max="160"')}${field(t('to'), 'toWeek', draft.toWeek, 'number', 'min="1" max="160"')}</div>${button('preview', t('preview'), 'class="primary"')}<div id="export-result">${preview ? '' : `<p class="muted">${e(t('stale'))}</p>`}</div><p class="muted">${e(t('backupOnly'))}</p></section>`;
   renderAnalysis();
   if (preview) renderPreview();
@@ -202,7 +205,7 @@ function render() {
 function renderDay(slot) {
   const day = draft.days[slot] || {};
   const date = C.dateAt(draft, slot);
-  const weekday = date ? new Date(`${date}T00:00:00Z`).toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-GB', {
+  const weekday = date ? new Date(`${date}T00:00:00Z`).toLocaleDateString(window.PM_I18N.locale, {
     weekday: 'short',
     timeZone: 'UTC'
   }) : `D${slot % 7 + 1}`;
@@ -213,12 +216,12 @@ function renderAnalysis() {
   const reference = Number(input?.value || 10);
   const data = C.analyze(draft, reference);
   const range = x => `${fmt(x[0])}${Math.abs(x[1] - x[0]) > .00001 ? '–' + fmt(x[1]) : ''}`;
-  document.querySelector('#analysis-result').innerHTML = `<div class="analysis-weeks">${data.weeks.map(w => `<article class="analysis-card"><div class="small-label">W${w.index} · ${e(w.start || '—')} ${w.phase ? ' / ' + e(label('phase', w.phase)) : ''}</div><div class="analysis-number">${range(w.distance)} <small>km</small></div><p>${e(t('known'))}${w.distanceDerived ? ' · ' + e(t('derived')) : ''}</p><dl><div><dt>${e(t('duration'))}</dt><dd>${range(w.duration)} min${w.durationUnknown ? ' + ?' : ''}</dd></div><div><dt>${e(t('unknown'))} (km / min)</dt><dd>${w.distanceUnknown} / ${w.durationUnknown}</dd></div><div><dt>${e(t('pendingDays'))}</dt><dd>${w.pendingDays}</dd></div><div><dt>${e(t('quality'))}</dt><dd>${w.qualityCount}</dd></div><div><dt>${e(t('recoveryLoad'))}</dt><dd>${fmt(w.recoveryKm)} km</dd></div><div><dt>${e(t('raceLoad'))}</dt><dd>${fmt(w.raceKm)} km${w.raceUnknown ? ' + ?' : ''}</dd></div><div><dt>${e(t('growth'))}</dt><dd>${w.change === null ? e(t('incomparable')) : `${fmt(w.change)}%${w.overReference ? ' · ' + e(t('over')) : ''}`}</dd></div></dl></article>`).join('')}</div><details><summary>${e(t('gaps'))}</summary><p>${e(t('gapHint'))}</p>${data.qualityGaps.map(g => `<p>${e(g.from)} → ${e(g.to)}: ${g.days} ${e(lang === 'zh' ? '天' : 'days')}</p>`).join('') || `<p>—</p>`}</details>`;
+  document.querySelector('#analysis-result').innerHTML = `<div class="analysis-weeks">${data.weeks.map(w => `<article class="analysis-card"><div class="small-label">W${w.index} · ${e(w.start || '—')} ${w.phase ? ' / ' + e(label('phase', w.phase)) : ''}</div><div class="analysis-number">${range(w.distance)} <small>km</small></div><p>${e(t('known'))}${w.distanceDerived ? ' · ' + e(t('derived')) : ''}</p><dl><div><dt>${e(t('duration'))}</dt><dd>${range(w.duration)} min${w.durationUnknown ? ' + ?' : ''}</dd></div><div><dt>${e(t('unknown'))} (km / min)</dt><dd>${w.distanceUnknown} / ${w.durationUnknown}</dd></div><div><dt>${e(t('pendingDays'))}</dt><dd>${w.pendingDays}</dd></div><div><dt>${e(t('quality'))}</dt><dd>${w.qualityCount}</dd></div><div><dt>${e(t('recoveryLoad'))}</dt><dd>${fmt(w.recoveryKm)} km</dd></div><div><dt>${e(t('raceLoad'))}</dt><dd>${fmt(w.raceKm)} km${w.raceUnknown ? ' + ?' : ''}</dd></div><div><dt>${e(t('growth'))}</dt><dd>${w.change === null ? e(t('incomparable')) : `${fmt(w.change)}%${w.overReference ? ' · ' + e(t('over')) : ''}`}</dd></div></dl></article>`).join('')}</div><details><summary>${e(t('gaps'))}</summary><p>${e(t('gapHint'))}</p>${data.qualityGaps.map(g => `<p>${e(g.from)} → ${e(g.to)}: ${g.days} ${e(tr('days', '天'))}</p>`).join('') || `<p>—</p>`}</details>`;
 }
 function renderPreview() {
   const out = document.querySelector('#export-result');
   if (!preview) return;
-  out.innerHTML = `<div class="${preview.valid ? 'snapshot-note' : 'warning'}"><p>${e(t(preview.valid ? 'ready' : 'blocked'))}</p>${preview.valid ? `<p>${e(preview.plan.start_date)} → ${e(preview.plan.end_date)} · ${preview.plan.days.length} ${e(lang === 'zh' ? '个已确认日期' : 'confirmed days')}${preview.route ? ` · ${preview.route.program.weeks.length} ${e(t('weeks'))} / r${preview.route.program.revision}` : ''}</p>` : `<ul class="issue-list">${preview.issues.slice(0, 250).map(issue => `<li>${button('issue', `${issue.code}: ${(ERRORS[issue.code] || ERRORS.schema)[lang === 'zh' ? 1 : 0]} · ${issue.path}`, `data-path="${e(issue.path)}"`)}</li>`).join('')}</ul>`}</div>${preview.valid ? `<div class="toolbar">${button('copy-json', t('copyJSON'), 'class="primary"')}${button('download-json', t('download'))}</div><label>App JSON · schema 2.0<textarea id="json-output" readonly spellcheck="false">${e(JSON.stringify(preview.plan, null, 2))}</textarea></label>` : ''}`;
+  out.innerHTML = `<div class="${preview.valid ? 'snapshot-note' : 'warning'}"><p>${e(t(preview.valid ? 'ready' : 'blocked'))}</p>${preview.valid ? `<p>${e(preview.plan.start_date)} → ${e(preview.plan.end_date)} · ${preview.plan.days.length} ${e(tr('confirmed days', '个已确认日期'))}${preview.route ? ` · ${preview.route.program.weeks.length} ${e(t('weeks'))} / r${preview.route.program.revision}` : ''}</p>` : `<ul class="issue-list">${preview.issues.slice(0, 250).map(issue => `<li>${button('issue', `${issue.code}: ${tr(...(ERRORS[issue.code] || ERRORS.schema))} · ${issue.path}`, `data-path="${e(issue.path)}"`)}</li>`).join('')}</ul>`}</div>${preview.valid ? `<div class="toolbar">${button('copy-json', t('copyJSON'), 'class="primary"')}${button('download-json', t('download'))}</div><label>App JSON · schema 2.0<textarea id="json-output" readonly spellcheck="false">${e(JSON.stringify(preview.plan, null, 2))}</textarea></label>` : ''}`;
 }
 function segmentForm(s, path, stage = false) {
   return `<div class="segment-card"><div class="fields">${stage ? '' : select(t('segment'), `${path}.kind`, ['work', 'recovery'], s.kind === 'rest' ? 'recovery' : 'work')}${select(t('metric'), `${path}.metric`, ['distance', 'duration'], s.metric === 'time' ? 'duration' : 'distance')}${field(t('amount'), `${path}.value`, s.value, 'text', 'inputmode="decimal"')}${select(t('unit'), `${path}.unit`, s.metric === 'time' ? ['min', 's', 'h'] : ['km', 'm', 'mi'], s.unit)}</div><div class="fields pace-fields">${field(t('paceFast'), `${path}.paceMin`, s.paceMin, 'text', 'placeholder="5:30"')}${field(t('paceSlow'), `${path}.paceMax`, s.paceMax, 'text', 'placeholder="6:00"')}${select(t('paceUnit'), `${path}.paceUnit`, ['km', 'mi'], s.paceUnit)}${field(t('rpe'), `${path}.rpe`, s.rpe, 'text', 'inputmode="numeric"')}${field(t('zone'), `${path}.hrZone`, s.hrZone)}</div>${stage ? button('remove-stage', t('remove'), `data-path="${path}"`) : button('remove-segment', t('remove'), `data-path="${path}"`)}</div>`;
@@ -230,7 +233,7 @@ function openDay(slot, add = false) {
       notice(t('conflict'));
       return;
     }
-    day.workout = C.workoutFromTemplate(selectedTemplate, lang);
+    day.workout = localizedWorkout(selectedTemplate);
   }
   editing = {
     slot,
@@ -381,7 +384,7 @@ root.addEventListener('click', ev => {
   if (a === 'transfer') {
     ask(`<h3>${e(t('destination'))}</h3><label>${e(t('week'))} / ${e(t('destination'))}<select id="destination">${Array.from({
       length: Math.min(C.horizon(draft) * 7, 1120)
-    }, (_, i) => `<option value="${i}">${e(C.dateAt(draft, i) || `D${i + 1}`)}${draft.days[i]?.workout || draft.days[i]?.rest ? ' · ' + e(t('conflict')) : ''}</option>`).join('')}</select></label><label class="checkbox"><input type="checkbox" id="copy-workout" checked> ${e(t('copy'))} (${e(t('move'))}: ${e(lang === 'zh' ? '取消勾选' : 'uncheck')})</label>`, () => {
+    }, (_, i) => `<option value="${i}">${e(C.dateAt(draft, i) || `D${i + 1}`)}${draft.days[i]?.workout || draft.days[i]?.rest ? ' · ' + e(t('conflict')) : ''}</option>`).join('')}</select></label><label class="checkbox"><input type="checkbox" id="copy-workout" checked> ${e(t('copy'))} (${e(t('move'))}: ${e(tr('uncheck', '取消勾选'))})</label>`, () => {
       const target = Number(confirmDialog.querySelector('#destination').value),
         copy = confirmDialog.querySelector('#copy-workout').checked;
       if (target === slot || draft.days[target]?.workout || draft.days[target]?.rest) {
@@ -514,7 +517,7 @@ dialog.addEventListener('click', ev => {
   }
   if (a === 'dialog-workout') {
     delete editing.day.rest;
-    editing.day.workout = C.workoutFromTemplate(selectedTemplate, lang);
+    editing.day.workout = localizedWorkout(selectedTemplate);
   }
   if (a === 'warmup' || a === 'cooldown') w[a] = C.segmentDraft('time');
   if (a === 'remove-stage') setAt(editing.day, b.dataset.path, null);

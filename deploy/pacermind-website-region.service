@@ -1,0 +1,24 @@
+[Unit]
+Description=PacerMind website country lookup (local database)
+After=network.target
+
+[Service]
+Type=simple
+DynamicUser=yes
+ExecStart=/opt/pacermind-website-region/bin/python /usr/local/lib/pacermind-website/region-server.py
+Environment=PACERMIND_COUNTRY_DB=/var/lib/GeoIP/GeoLite2-Country.mmdb
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+RestrictAddressFamilies=AF_INET AF_INET6
+IPAddressDeny=any
+IPAddressAllow=localhost
+MemoryMax=128M
+CPUQuota=10%
+TasksMax=8
+
+[Install]
+WantedBy=multi-user.target

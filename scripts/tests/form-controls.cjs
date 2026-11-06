@@ -75,7 +75,9 @@ async function checkFields(page, selector, zoom) {
           page.on('pageerror', err => errors.push(err.message));
           try {
             await page.goto(base + 'planner.html');
-            await page.getByRole('button', { name: lang === 'zh' ? '中文' : 'EN', exact: true }).click();
+            await page.locator('[data-locale-header]').selectOption(lang === 'zh' ? 'zh-Hans' : 'en');
+            await page.waitForFunction(l => window.PM_I18N.lang === l, lang === 'zh' ? 'zh-Hans' : 'en');
+            await page.locator('#planner h1').waitFor();
             await page.locator('#restore-file').setInputFiles(fixturePath);
             await page.locator('#change-dialog [data-action=confirm]').click();
             await page.evaluate(z => { document.documentElement.style.zoom = String(z); }, zoom);

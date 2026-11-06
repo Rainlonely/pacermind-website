@@ -1,0 +1,382 @@
+{
+  "version": 1,
+  "kind": "AI-localized promotional images based on original app screenshots",
+  "languages": {
+    "en": [
+      {
+        "small": "assets/images/iphone-localized/en/01-city-map-450.webp",
+        "large": "assets/images/iphone-localized/en/01-city-map-900.webp",
+        "title": "Make the city your own."
+      },
+      {
+        "small": "assets/images/iphone-localized/en/02-today-450.webp",
+        "large": "assets/images/iphone-localized/en/02-today-900.webp",
+        "title": "Head out today,"
+      },
+      {
+        "small": "assets/images/iphone-localized/en/03-memory-450.webp",
+        "large": "assets/images/iphone-localized/en/03-memory-900.webp",
+        "title": "with yesterday’s stories."
+      },
+      {
+        "small": "assets/images/iphone-localized/en/04-plan-list-450.webp",
+        "large": "assets/images/iphone-localized/en/04-plan-list-900.webp",
+        "title": "Your next run,"
+      },
+      {
+        "small": "assets/images/iphone-localized/en/05-plan-detail-450.webp",
+        "large": "assets/images/iphone-localized/en/05-plan-detail-900.webp",
+        "title": "at your own pace."
+      },
+      {
+        "small": "assets/images/iphone-localized/en/06-journey-450.webp",
+        "large": "assets/images/iphone-localized/en/06-journey-900.webp",
+        "title": "Every route,"
+      },
+      {
+        "small": "assets/images/iphone-localized/en/07-workout-detail-450.webp",
+        "large": "assets/images/iphone-localized/en/07-workout-detail-900.webp",
+        "title": "has details worth remembering."
+      },
+      {
+        "small": "assets/images/iphone-localized/en/08-profile-450.webp",
+        "large": "assets/images/iphone-localized/en/08-profile-900.webp",
+        "title": "Every mile behind you,"
+      },
+      {
+        "small": "assets/images/iphone-localized/en/09-records-450.webp",
+        "large": "assets/images/iphone-localized/en/09-records-900.webp",
+        "title": "makes you who you are."
+      }
+    ],
+    "zh-Hant": [
+      {
+        "small": "assets/images/iphone-localized/zh-Hant/01-city-map-450.webp",
+        "large": "assets/images/iphone-localized/zh-Hant/01-city-map-900.webp",
+        "title": "把城市，跑成自己的樣子。"
+      },
+      {
+        "small": "assets/images/iphone-localized/zh-Hant/02-today-450.webp",
+        "large": "assets/images/iphone-localized/zh-Hant/02-today-900.webp",
+        "title": "今天出發，"
+      },
+      {
+        "small": "assets/images/iphone-localized/zh-Hant/03-memory-450.webp",
+        "large": "assets/images/iphone-localized/zh-Hant/03-memory-900.webp",
+        "title": "也帶著昨天的故事。"
+      },
+      {
+        "small": "assets/images/iphone-localized/zh-Hant/04-plan-list-450.webp",
+        "large": "assets/images/iphone-localized/zh-Hant/04-plan-list-900.webp",
+        "title": "下一程，"
+      },
+      {
+        "small": "assets/images/iphone-localized/zh-Hant/05-plan-detail-450.webp",
+        "large": "assets/images/iphone-localized/zh-Hant/05-plan-detail-900.webp",
+        "title": "按自己的節奏。"
+      },
+      {
+        "small": "assets/images/iphone-localized/zh-Hant/06-journey-450.webp",
+        "large": "assets/images/iphone-localized/zh-Hant/06-journey-900.webp",
+        "title": "每一條路，"
+      },
+      {
+        "small": "assets/images/iphone-localized/zh-Hant/07-workout-detail-450.webp",
+        "large": "assets/images/iphone-localized/zh-Hant/07-workout-detail-900.webp",
+        "title": "都有值得記住的細節。"
+      },
+      {
+        "small": "assets/images/iphone-localized/zh-Hant/08-profile-450.webp",
+        "large": "assets/images/iphone-localized/zh-Hant/08-profile-900.webp",
+        "title": "一路跑來，"
+      },
+      {
+        "small": "assets/images/iphone-localized/zh-Hant/09-records-450.webp",
+        "large": "assets/images/iphone-localized/zh-Hant/09-records-900.webp",
+        "title": "成為現在的你。"
+      }
+    ],
+    "ja": [
+      {
+        "small": "assets/images/iphone-localized/ja/01-city-map-450.webp",
+        "large": "assets/images/iphone-localized/ja/01-city-map-900.webp",
+        "title": "この街を、自分だけの軌跡に。"
+      },
+      {
+        "small": "assets/images/iphone-localized/ja/02-today-450.webp",
+        "large": "assets/images/iphone-localized/ja/02-today-900.webp",
+        "title": "今日、走り出そう。"
+      },
+      {
+        "small": "assets/images/iphone-localized/ja/03-memory-450.webp",
+        "large": "assets/images/iphone-localized/ja/03-memory-900.webp",
+        "title": "昨日の物語も、一緒に。"
+      },
+      {
+        "small": "assets/images/iphone-localized/ja/04-plan-list-450.webp",
+        "large": "assets/images/iphone-localized/ja/04-plan-list-900.webp",
+        "title": "次のランへ。"
+      },
+      {
+        "small": "assets/images/iphone-localized/ja/05-plan-detail-450.webp",
+        "large": "assets/images/iphone-localized/ja/05-plan-detail-900.webp",
+        "title": "自分のペースで。"
+      },
+      {
+        "small": "assets/images/iphone-localized/ja/06-journey-450.webp",
+        "large": "assets/images/iphone-localized/ja/06-journey-900.webp",
+        "title": "どの道にも、"
+      },
+      {
+        "small": "assets/images/iphone-localized/ja/07-workout-detail-450.webp",
+        "large": "assets/images/iphone-localized/ja/07-workout-detail-900.webp",
+        "title": "覚えておきたい瞬間がある。"
+      },
+      {
+        "small": "assets/images/iphone-localized/ja/08-profile-450.webp",
+        "large": "assets/images/iphone-localized/ja/08-profile-900.webp",
+        "title": "走ってきた日々が、"
+      },
+      {
+        "small": "assets/images/iphone-localized/ja/09-records-450.webp",
+        "large": "assets/images/iphone-localized/ja/09-records-900.webp",
+        "title": "今のあなたをつくる。"
+      }
+    ],
+    "ko": [
+      {
+        "small": "assets/images/iphone-localized/ko/01-city-map-450.webp",
+        "large": "assets/images/iphone-localized/ko/01-city-map-900.webp",
+        "title": "이 도시를 나만의 발자취로."
+      },
+      {
+        "small": "assets/images/iphone-localized/ko/02-today-450.webp",
+        "large": "assets/images/iphone-localized/ko/02-today-900.webp",
+        "title": "오늘도 달려요."
+      },
+      {
+        "small": "assets/images/iphone-localized/ko/03-memory-450.webp",
+        "large": "assets/images/iphone-localized/ko/03-memory-900.webp",
+        "title": "어제의 이야기도 함께."
+      },
+      {
+        "small": "assets/images/iphone-localized/ko/04-plan-list-450.webp",
+        "large": "assets/images/iphone-localized/ko/04-plan-list-900.webp",
+        "title": "다음 달리기는,"
+      },
+      {
+        "small": "assets/images/iphone-localized/ko/05-plan-detail-450.webp",
+        "large": "assets/images/iphone-localized/ko/05-plan-detail-900.webp",
+        "title": "나만의 페이스로."
+      },
+      {
+        "small": "assets/images/iphone-localized/ko/06-journey-450.webp",
+        "large": "assets/images/iphone-localized/ko/06-journey-900.webp",
+        "title": "모든 길에는,"
+      },
+      {
+        "small": "assets/images/iphone-localized/ko/07-workout-detail-450.webp",
+        "large": "assets/images/iphone-localized/ko/07-workout-detail-900.webp",
+        "title": "기억할 만한 순간이 있어요."
+      },
+      {
+        "small": "assets/images/iphone-localized/ko/08-profile-450.webp",
+        "large": "assets/images/iphone-localized/ko/08-profile-900.webp",
+        "title": "지금까지 달려온 길이,"
+      },
+      {
+        "small": "assets/images/iphone-localized/ko/09-records-450.webp",
+        "large": "assets/images/iphone-localized/ko/09-records-900.webp",
+        "title": "오늘의 나를 만듭니다."
+      }
+    ],
+    "de": [
+      {
+        "small": "assets/images/iphone-localized/de/01-city-map-450.webp",
+        "large": "assets/images/iphone-localized/de/01-city-map-900.webp",
+        "title": "Mach die Stadt zu deiner Strecke."
+      },
+      {
+        "small": "assets/images/iphone-localized/de/02-today-450.webp",
+        "large": "assets/images/iphone-localized/de/02-today-900.webp",
+        "title": "Heute geht’s los,"
+      },
+      {
+        "small": "assets/images/iphone-localized/de/03-memory-450.webp",
+        "large": "assets/images/iphone-localized/de/03-memory-900.webp",
+        "title": "mit den Geschichten von gestern."
+      },
+      {
+        "small": "assets/images/iphone-localized/de/04-plan-list-450.webp",
+        "large": "assets/images/iphone-localized/de/04-plan-list-900.webp",
+        "title": "Dein nächster Lauf,"
+      },
+      {
+        "small": "assets/images/iphone-localized/de/05-plan-detail-450.webp",
+        "large": "assets/images/iphone-localized/de/05-plan-detail-900.webp",
+        "title": "in deinem Rhythmus."
+      },
+      {
+        "small": "assets/images/iphone-localized/de/06-journey-450.webp",
+        "large": "assets/images/iphone-localized/de/06-journey-900.webp",
+        "title": "Jede Strecke,"
+      },
+      {
+        "small": "assets/images/iphone-localized/de/07-workout-detail-450.webp",
+        "large": "assets/images/iphone-localized/de/07-workout-detail-900.webp",
+        "title": "Details, die in Erinnerung bleiben."
+      },
+      {
+        "small": "assets/images/iphone-localized/de/08-profile-450.webp",
+        "large": "assets/images/iphone-localized/de/08-profile-900.webp",
+        "title": "All die gelaufenen Wege,"
+      },
+      {
+        "small": "assets/images/iphone-localized/de/09-records-450.webp",
+        "large": "assets/images/iphone-localized/de/09-records-900.webp",
+        "title": "machen dich zu dem, der du bist."
+      }
+    ],
+    "fr": [
+      {
+        "small": "assets/images/iphone-localized/fr/01-city-map-450.webp",
+        "large": "assets/images/iphone-localized/fr/01-city-map-900.webp",
+        "title": "Faites de la ville votre parcours."
+      },
+      {
+        "small": "assets/images/iphone-localized/fr/02-today-450.webp",
+        "large": "assets/images/iphone-localized/fr/02-today-900.webp",
+        "title": "Partez aujourd’hui,"
+      },
+      {
+        "small": "assets/images/iphone-localized/fr/03-memory-450.webp",
+        "large": "assets/images/iphone-localized/fr/03-memory-900.webp",
+        "title": "avec les souvenirs d’hier."
+      },
+      {
+        "small": "assets/images/iphone-localized/fr/04-plan-list-450.webp",
+        "large": "assets/images/iphone-localized/fr/04-plan-list-900.webp",
+        "title": "Votre prochaine course,"
+      },
+      {
+        "small": "assets/images/iphone-localized/fr/05-plan-detail-450.webp",
+        "large": "assets/images/iphone-localized/fr/05-plan-detail-900.webp",
+        "title": "à votre rythme."
+      },
+      {
+        "small": "assets/images/iphone-localized/fr/06-journey-450.webp",
+        "large": "assets/images/iphone-localized/fr/06-journey-900.webp",
+        "title": "Chaque parcours,"
+      },
+      {
+        "small": "assets/images/iphone-localized/fr/07-workout-detail-450.webp",
+        "large": "assets/images/iphone-localized/fr/07-workout-detail-900.webp",
+        "title": "a ses détails à retenir."
+      },
+      {
+        "small": "assets/images/iphone-localized/fr/08-profile-450.webp",
+        "large": "assets/images/iphone-localized/fr/08-profile-900.webp",
+        "title": "Tous ces kilomètres parcourus,"
+      },
+      {
+        "small": "assets/images/iphone-localized/fr/09-records-450.webp",
+        "large": "assets/images/iphone-localized/fr/09-records-900.webp",
+        "title": "font de vous qui vous êtes."
+      }
+    ],
+    "pt": [
+      {
+        "small": "assets/images/iphone-localized/pt/01-city-map-450.webp",
+        "large": "assets/images/iphone-localized/pt/01-city-map-900.webp",
+        "title": "Faça da cidade o seu percurso."
+      },
+      {
+        "small": "assets/images/iphone-localized/pt/02-today-450.webp",
+        "large": "assets/images/iphone-localized/pt/02-today-900.webp",
+        "title": "Saia para correr hoje,"
+      },
+      {
+        "small": "assets/images/iphone-localized/pt/03-memory-450.webp",
+        "large": "assets/images/iphone-localized/pt/03-memory-900.webp",
+        "title": "com as histórias de ontem."
+      },
+      {
+        "small": "assets/images/iphone-localized/pt/04-plan-list-450.webp",
+        "large": "assets/images/iphone-localized/pt/04-plan-list-900.webp",
+        "title": "A próxima corrida,"
+      },
+      {
+        "small": "assets/images/iphone-localized/pt/05-plan-detail-450.webp",
+        "large": "assets/images/iphone-localized/pt/05-plan-detail-900.webp",
+        "title": "no seu ritmo."
+      },
+      {
+        "small": "assets/images/iphone-localized/pt/06-journey-450.webp",
+        "large": "assets/images/iphone-localized/pt/06-journey-900.webp",
+        "title": "Cada percurso,"
+      },
+      {
+        "small": "assets/images/iphone-localized/pt/07-workout-detail-450.webp",
+        "large": "assets/images/iphone-localized/pt/07-workout-detail-900.webp",
+        "title": "tem detalhes que merecem ficar."
+      },
+      {
+        "small": "assets/images/iphone-localized/pt/08-profile-450.webp",
+        "large": "assets/images/iphone-localized/pt/08-profile-900.webp",
+        "title": "Cada quilômetro percorrido,"
+      },
+      {
+        "small": "assets/images/iphone-localized/pt/09-records-450.webp",
+        "large": "assets/images/iphone-localized/pt/09-records-900.webp",
+        "title": "faz de você quem é."
+      }
+    ],
+    "es": [
+      {
+        "small": "assets/images/iphone-localized/es/01-city-map-450.webp",
+        "large": "assets/images/iphone-localized/es/01-city-map-900.webp",
+        "title": "Haz de la ciudad tu recorrido."
+      },
+      {
+        "small": "assets/images/iphone-localized/es/02-today-450.webp",
+        "large": "assets/images/iphone-localized/es/02-today-900.webp",
+        "title": "Sal a correr hoy,"
+      },
+      {
+        "small": "assets/images/iphone-localized/es/03-memory-450.webp",
+        "large": "assets/images/iphone-localized/es/03-memory-900.webp",
+        "title": "con las historias de ayer."
+      },
+      {
+        "small": "assets/images/iphone-localized/es/04-plan-list-450.webp",
+        "large": "assets/images/iphone-localized/es/04-plan-list-900.webp",
+        "title": "Tu próxima carrera,"
+      },
+      {
+        "small": "assets/images/iphone-localized/es/05-plan-detail-450.webp",
+        "large": "assets/images/iphone-localized/es/05-plan-detail-900.webp",
+        "title": "a tu ritmo."
+      },
+      {
+        "small": "assets/images/iphone-localized/es/06-journey-450.webp",
+        "large": "assets/images/iphone-localized/es/06-journey-900.webp",
+        "title": "Cada ruta,"
+      },
+      {
+        "small": "assets/images/iphone-localized/es/07-workout-detail-450.webp",
+        "large": "assets/images/iphone-localized/es/07-workout-detail-900.webp",
+        "title": "tiene detalles para recordar."
+      },
+      {
+        "small": "assets/images/iphone-localized/es/08-profile-450.webp",
+        "large": "assets/images/iphone-localized/es/08-profile-900.webp",
+        "title": "Todo lo que has corrido,"
+      },
+      {
+        "small": "assets/images/iphone-localized/es/09-records-450.webp",
+        "large": "assets/images/iphone-localized/es/09-records-900.webp",
+        "title": "te convierte en quien eres."
+      }
+    ]
+  }
+}

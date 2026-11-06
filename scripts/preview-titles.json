@@ -1,0 +1,432 @@
+[
+  {
+    "language": "en",
+    "name": "02-today",
+    "title": "Head out today,",
+    "first": false
+  },
+  {
+    "language": "en",
+    "name": "03-memory",
+    "title": "with yesterday’s stories.",
+    "first": false
+  },
+  {
+    "language": "en",
+    "name": "04-plan-list",
+    "title": "Your next run,",
+    "first": false
+  },
+  {
+    "language": "en",
+    "name": "05-plan-detail",
+    "title": "at your own pace.",
+    "first": false
+  },
+  {
+    "language": "en",
+    "name": "06-journey",
+    "title": "Every route,",
+    "first": false
+  },
+  {
+    "language": "en",
+    "name": "07-workout-detail",
+    "title": "has details worth remembering.",
+    "first": false
+  },
+  {
+    "language": "en",
+    "name": "08-profile",
+    "title": "Every mile behind you,",
+    "first": false
+  },
+  {
+    "language": "en",
+    "name": "09-records",
+    "title": "makes you who you are.",
+    "first": false
+  },
+  {
+    "language": "zh-Hant",
+    "name": "01-city-map",
+    "title": "把城市，跑成自己的樣子。",
+    "first": true
+  },
+  {
+    "language": "zh-Hant",
+    "name": "02-today",
+    "title": "今天出發，",
+    "first": false
+  },
+  {
+    "language": "zh-Hant",
+    "name": "03-memory",
+    "title": "也帶著昨天的故事。",
+    "first": false
+  },
+  {
+    "language": "zh-Hant",
+    "name": "04-plan-list",
+    "title": "下一程，",
+    "first": false
+  },
+  {
+    "language": "zh-Hant",
+    "name": "05-plan-detail",
+    "title": "按自己的節奏。",
+    "first": false
+  },
+  {
+    "language": "zh-Hant",
+    "name": "06-journey",
+    "title": "每一條路，",
+    "first": false
+  },
+  {
+    "language": "zh-Hant",
+    "name": "07-workout-detail",
+    "title": "都有值得記住的細節。",
+    "first": false
+  },
+  {
+    "language": "zh-Hant",
+    "name": "08-profile",
+    "title": "一路跑來，",
+    "first": false
+  },
+  {
+    "language": "zh-Hant",
+    "name": "09-records",
+    "title": "成為現在的你。",
+    "first": false
+  },
+  {
+    "language": "ja",
+    "name": "01-city-map",
+    "title": "この街を、自分だけの軌跡に。",
+    "first": true
+  },
+  {
+    "language": "ja",
+    "name": "02-today",
+    "title": "今日、走り出そう。",
+    "first": false
+  },
+  {
+    "language": "ja",
+    "name": "03-memory",
+    "title": "昨日の物語も、一緒に。",
+    "first": false
+  },
+  {
+    "language": "ja",
+    "name": "04-plan-list",
+    "title": "次のランへ。",
+    "first": false
+  },
+  {
+    "language": "ja",
+    "name": "05-plan-detail",
+    "title": "自分のペースで。",
+    "first": false
+  },
+  {
+    "language": "ja",
+    "name": "06-journey",
+    "title": "どの道にも、",
+    "first": false
+  },
+  {
+    "language": "ja",
+    "name": "07-workout-detail",
+    "title": "覚えておきたい瞬間がある。",
+    "first": false
+  },
+  {
+    "language": "ja",
+    "name": "08-profile",
+    "title": "走ってきた日々が、",
+    "first": false
+  },
+  {
+    "language": "ja",
+    "name": "09-records",
+    "title": "今のあなたをつくる。",
+    "first": false
+  },
+  {
+    "language": "ko",
+    "name": "01-city-map",
+    "title": "이 도시를 나만의 발자취로.",
+    "first": true
+  },
+  {
+    "language": "ko",
+    "name": "02-today",
+    "title": "오늘도 달려요.",
+    "first": false
+  },
+  {
+    "language": "ko",
+    "name": "03-memory",
+    "title": "어제의 이야기도 함께.",
+    "first": false
+  },
+  {
+    "language": "ko",
+    "name": "04-plan-list",
+    "title": "다음 달리기는,",
+    "first": false
+  },
+  {
+    "language": "ko",
+    "name": "05-plan-detail",
+    "title": "나만의 페이스로.",
+    "first": false
+  },
+  {
+    "language": "ko",
+    "name": "06-journey",
+    "title": "모든 길에는,",
+    "first": false
+  },
+  {
+    "language": "ko",
+    "name": "07-workout-detail",
+    "title": "기억할 만한 순간이 있어요.",
+    "first": false
+  },
+  {
+    "language": "ko",
+    "name": "08-profile",
+    "title": "지금까지 달려온 길이,",
+    "first": false
+  },
+  {
+    "language": "ko",
+    "name": "09-records",
+    "title": "오늘의 나를 만듭니다.",
+    "first": false
+  },
+  {
+    "language": "de",
+    "name": "01-city-map",
+    "title": "Mach die Stadt zu deiner Strecke.",
+    "first": true
+  },
+  {
+    "language": "de",
+    "name": "02-today",
+    "title": "Heute geht’s los,",
+    "first": false
+  },
+  {
+    "language": "de",
+    "name": "03-memory",
+    "title": "mit den Geschichten von gestern.",
+    "first": false
+  },
+  {
+    "language": "de",
+    "name": "04-plan-list",
+    "title": "Dein nächster Lauf,",
+    "first": false
+  },
+  {
+    "language": "de",
+    "name": "05-plan-detail",
+    "title": "in deinem Rhythmus.",
+    "first": false
+  },
+  {
+    "language": "de",
+    "name": "06-journey",
+    "title": "Jede Strecke,",
+    "first": false
+  },
+  {
+    "language": "de",
+    "name": "08-profile",
+    "title": "All die gelaufenen Wege,",
+    "first": false
+  },
+  {
+    "language": "de",
+    "name": "09-records",
+    "title": "machen dich zu dem, der du bist.",
+    "first": false
+  },
+  {
+    "language": "fr",
+    "name": "01-city-map",
+    "title": "Faites de la ville votre parcours.",
+    "first": true
+  },
+  {
+    "language": "fr",
+    "name": "02-today",
+    "title": "Partez aujourd’hui,",
+    "first": false
+  },
+  {
+    "language": "fr",
+    "name": "03-memory",
+    "title": "avec les souvenirs d’hier.",
+    "first": false
+  },
+  {
+    "language": "fr",
+    "name": "04-plan-list",
+    "title": "Votre prochaine course,",
+    "first": false
+  },
+  {
+    "language": "fr",
+    "name": "05-plan-detail",
+    "title": "à votre rythme.",
+    "first": false
+  },
+  {
+    "language": "fr",
+    "name": "06-journey",
+    "title": "Chaque parcours,",
+    "first": false
+  },
+  {
+    "language": "fr",
+    "name": "07-workout-detail",
+    "title": "a ses détails à retenir.",
+    "first": false
+  },
+  {
+    "language": "fr",
+    "name": "08-profile",
+    "title": "Tous ces kilomètres parcourus,",
+    "first": false
+  },
+  {
+    "language": "fr",
+    "name": "09-records",
+    "title": "font de vous qui vous êtes.",
+    "first": false
+  },
+  {
+    "language": "pt",
+    "name": "01-city-map",
+    "title": "Faça da cidade o seu percurso.",
+    "first": true
+  },
+  {
+    "language": "pt",
+    "name": "02-today",
+    "title": "Saia para correr hoje,",
+    "first": false
+  },
+  {
+    "language": "pt",
+    "name": "03-memory",
+    "title": "com as histórias de ontem.",
+    "first": false
+  },
+  {
+    "language": "pt",
+    "name": "04-plan-list",
+    "title": "A próxima corrida,",
+    "first": false
+  },
+  {
+    "language": "pt",
+    "name": "05-plan-detail",
+    "title": "no seu ritmo.",
+    "first": false
+  },
+  {
+    "language": "pt",
+    "name": "06-journey",
+    "title": "Cada percurso,",
+    "first": false
+  },
+  {
+    "language": "pt",
+    "name": "07-workout-detail",
+    "title": "tem detalhes que merecem ficar.",
+    "first": false
+  },
+  {
+    "language": "pt",
+    "name": "08-profile",
+    "title": "Cada quilômetro percorrido,",
+    "first": false
+  },
+  {
+    "language": "pt",
+    "name": "09-records",
+    "title": "faz de você quem é.",
+    "first": false
+  },
+  {
+    "language": "es",
+    "name": "01-city-map",
+    "title": "Haz de la ciudad tu recorrido.",
+    "first": true
+  },
+  {
+    "language": "es",
+    "name": "02-today",
+    "title": "Sal a correr hoy,",
+    "first": false
+  },
+  {
+    "language": "es",
+    "name": "03-memory",
+    "title": "con las historias de ayer.",
+    "first": false
+  },
+  {
+    "language": "es",
+    "name": "04-plan-list",
+    "title": "Tu próxima carrera,",
+    "first": false
+  },
+  {
+    "language": "es",
+    "name": "05-plan-detail",
+    "title": "a tu ritmo.",
+    "first": false
+  },
+  {
+    "language": "es",
+    "name": "06-journey",
+    "title": "Cada ruta,",
+    "first": false
+  },
+  {
+    "language": "es",
+    "name": "07-workout-detail",
+    "title": "tiene detalles para recordar.",
+    "first": false
+  },
+  {
+    "language": "es",
+    "name": "08-profile",
+    "title": "Todo lo que has corrido,",
+    "first": false
+  },
+  {
+    "language": "es",
+    "name": "09-records",
+    "title": "te convierte en quien eres.",
+    "first": false
+  },
+  {
+    "language": "en",
+    "name": "01-city-map",
+    "title": "Make the city your own."
+  },
+  {
+    "language": "de",
+    "name": "07-workout-detail",
+    "title": "Details, die in Erinnerung bleiben."
+  }
+]

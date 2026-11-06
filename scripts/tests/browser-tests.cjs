@@ -67,19 +67,15 @@ const key = 'pacermind-plan-draft-v1';
   assert.equal(app.days[0].workout.blocks[0].segments[0].target.pace.min, 5.5);
   assert.equal(app.days[1].rest, true);
   checks++;
-  await page.getByRole('button', {
-    name: '中文',
-    exact: true
-  }).click();
+  await page.locator('[data-locale-header]').selectOption('zh-Hans');
+  await page.waitForFunction(() => window.PM_I18N.lang === 'zh-Hans');
   assert.equal(await page.locator('[name="title"]').inputValue(), 'Synthetic UI plan');
   await page.reload();
   assert.equal(await page.locator('[name="title"]').inputValue(), 'Synthetic UI plan');
   assert.equal(await page.locator('.day-card[data-slot="0"] h3').innerText(), 'Synthetic distance run');
   checks++;
-  await page.getByRole('button', {
-    name: 'EN',
-    exact: true
-  }).click();
+  await page.locator('[data-locale-header]').selectOption('en');
+  await page.waitForFunction(() => window.PM_I18N.lang === 'en');
   await page.locator('.day-card[data-slot="0"] [data-action="transfer"]').click();
   await page.locator('#destination').selectOption('1');
   await page.locator('#change-dialog [data-action="confirm"]').click();
@@ -162,10 +158,8 @@ const key = 'pacermind-plan-draft-v1';
   }
   await page.locator('[name="title"]').fill(fixture.title);
   await page.locator('[name="title"]').press('Tab');
-  await page.getByRole('button', {
-    name: '中文',
-    exact: true
-  }).click();
+  await page.locator('[data-locale-header]').selectOption('zh-Hans');
+  await page.waitForFunction(() => window.PM_I18N.lang === 'zh-Hans');
   if (screenshots) {
     fs.mkdirSync(screenshots, {
       recursive: true
@@ -224,14 +218,10 @@ const key = 'pacermind-plan-draft-v1';
   const freshCtx = await context();
   for (const name of ['index.html', 'notes.html', 'support.html', 'privacy.html']) {
     const p = await open(freshCtx, name);
-    await p.getByRole('button', {
-      name: '中文',
-      exact: true
-    }).click();
-    await p.getByRole('button', {
-      name: 'EN',
-      exact: true
-    }).click();
+    await p.locator('[data-locale-header]').selectOption('zh-Hans');
+  await p.waitForFunction(() => window.PM_I18N.lang === 'zh-Hans');
+    await p.locator('[data-locale-header]').selectOption('en');
+  await p.waitForFunction(() => window.PM_I18N.lang === 'en');
     if (name === 'index.html') {
       await p.evaluate(async () => {
         for (let y = 0; y < document.body.scrollHeight; y += 650) {
@@ -269,10 +259,8 @@ const key = 'pacermind-plan-draft-v1';
     });
     assert.equal(await p.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
     if (screenshots && ['index.html', 'notes.html'].includes(name)) {
-      await p.getByRole('button', {
-        name: '中文',
-        exact: true
-      }).click();
+      await p.locator('[data-locale-header]').selectOption('zh-Hans');
+  await p.waitForFunction(() => window.PM_I18N.lang === 'zh-Hans');
       await p.screenshot({
         path: path.join(screenshots, name.replace('.html', '') + '-mobile-zh.png'),
         fullPage: true
@@ -281,10 +269,8 @@ const key = 'pacermind-plan-draft-v1';
         width: 1440,
         height: 1000
       });
-      await p.getByRole('button', {
-        name: 'EN',
-        exact: true
-      }).click();
+      await p.locator('[data-locale-header]').selectOption('en');
+  await p.waitForFunction(() => window.PM_I18N.lang === 'en');
       await p.screenshot({
         path: path.join(screenshots, name.replace('.html', '') + '-desktop-en.png'),
         fullPage: true

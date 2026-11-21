@@ -53,9 +53,9 @@ window.PM_TRANSLATIONS = {
         "This access is performed by the PacerMind app installed on your device. Rainlonely Studio does not remotely access this data. The app uses it to provide local features, unless you choose to use an AI feature or connect a third-party service as described below.",
       "privacy.section4.title": "4. AI Features, Sharing, and Consent",
       "privacy.section4.text":
-        "Some PacerMind features use third-party large language model providers to generate training feedback, summaries, plans, or insights. Currently, AI services in mainland China are provided through Qwen, and AI services outside mainland China are provided through OpenAI GPT models. When you use an AI feature, the necessary workout context, health and fitness metrics, derived training summaries, notes, or prompt content may be sent to Rainlonely Studio infrastructure and the relevant provider solely to generate the requested response. We request your permission in-app before this AI transfer occurs, and you can decline or revoke consent later in Settings.",
+        "For training plans, insights and AI share captions, the request may include workout and health metrics, training summaries, notes and text you enter. PacerMind’s servers send the request to OpenRouter. Plans and insights use OpenAI models. Workout insights can fall back to Google Gemini. AI captions use Gemini, with Qwen as a fallback. For Simplified or Traditional Chinese content, PacerMind may use Alibaba Cloud Model Studio (Bailian) with a DeepSeek model if the main route is unavailable.",
       "privacy.section4.extra":
-        "We may change model providers, model versions, or routing logic from time to time, including for quality, reliability, availability, compliance, or cost reasons. These changes may occur without prior notice, but our purpose remains to provide the best practical feedback experience for users while applying the protections described in this policy.",
+        "We ask for your explicit permission in the app before sending this data. You can decline or withdraw permission in Settings. If a new recipient needs your data, we will ask for your permission before sending it.",
       "privacy.section5.title": "5. Optional Anonymous Product Analytics",
       "privacy.section5.text":
         "Only after you explicitly opt in, PacerMind uses PostHog Cloud in the United States to understand feature adoption and improve the product. We send basic app lifecycle events and a limited set of product milestones, such as completing onboarding, connecting a workout source, completing a first import, opening workout or plan details, generating an insight or plan, and completing a share. Event properties are restricted to coarse categories such as source, insight type, plan context, and share format. PostHog may also process a randomly generated anonymous identifier and technical context such as app version, device model, operating-system version, locale, time zone, and network information necessarily received with a request. PacerMind marks every analytics event to disable GeoIP location enrichment.",
@@ -111,9 +111,9 @@ window.PM_TRANSLATIONS = {
         "这些访问由安装在你设备上的 PacerMind App 完成。Rainlonely Studio 不会远程访问这些数据。App 使用这些信息来提供本地功能；除非你选择使用 AI 功能或连接下文所述的第三方服务。",
       "privacy.section4.title": "4. AI 功能、数据共享与授权",
       "privacy.section4.text":
-        "PacerMind 的部分功能会使用第三方大语言模型服务来生成训练反馈、总结、计划或洞察。目前，中国大陆地区的 AI 服务由 Qwen 提供，中国大陆以外地区的 AI 服务由 OpenAI GPT 模型提供。当你使用 AI 功能时，为生成你请求的结果，必要的训练上下文、健康与体能指标、衍生训练摘要、笔记或提示内容可能会发送给 Rainlonely Studio 的服务基础设施和相应模型服务商。发生这类 AI 数据传输前，我们会在应用内先征得你的许可；你可以拒绝，也可以之后在设置中撤销授权。",
+        "生成训练计划、洞察或 AI 分享文案时，请求可能包含运动与健康指标、训练摘要、笔记和你输入的文字。 PacerMind 服务器会将请求发送给 OpenRouter。计划和洞察使用 OpenAI 模型，单次运动洞察可改用 Google Gemini。AI 分享文案使用 Gemini，备用模型为通义千问（Qwen）。简体或繁体中文内容在主线路不可用时，可经阿里云百炼调用 DeepSeek 模型。",
       "privacy.section4.extra":
-        "我们可能会根据反馈质量、稳定性、可用性、合规要求或成本等因素，不时调整模型服务商、模型版本或调用路由。这类调整可能不会提前通知用户，但目的始终是在适用本政策所述保护措施的前提下，为用户提供尽可能好的反馈体验。",
+        "发送这些数据前，App 会先请你明确同意。 你可以拒绝，也可以随时在设置中撤销授权。如需向新的接收方发送数据，我们会先征得你的同意。",
       "privacy.section5.title": "5. 可选的匿名产品统计",
       "privacy.section5.text":
         "只有在你明确同意后，PacerMind 才会使用位于美国的 PostHog Cloud 来了解功能采用情况并改进产品。我们会发送基础应用生命周期事件和一组受限的产品里程碑，例如完成引导、连接训练来源、完成首次导入、打开训练或计划详情、生成洞察或计划，以及完成分享。事件属性仅限于来源、洞察类型、计划场景和分享格式等粗粒度类别。PostHog 还可能处理随机生成的匿名标识符，以及应用版本、设备型号、操作系统版本、语言区域、时区和处理网络请求时必然接收的网络信息等技术上下文。PacerMind 会在每个统计事件中明确关闭 GeoIP 位置富化。",
